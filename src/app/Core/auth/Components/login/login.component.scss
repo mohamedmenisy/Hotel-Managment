@@ -1,0 +1,76 @@
+.example-form-field {
+  width: 200px;
+  background-color: black !important;
+}
+h1{
+font-weight: 500;
+font-size: 30px;
+margin-left: 17px;
+line-height: 100%;
+letter-spacing: 0%;
+margin-bottom: 10px;
+}
+p{
+margin-left: 17px !important;
+margin-left: 5px;
+font-weight: 400;
+font-size: 16px;
+
+line-height: 100%;
+letter-spacing: 0%;
+span{
+    color:  #152C5B;
+;
+}
+}
+.imglogin{
+    width: 735px;
+height: 650px !important;
+
+opacity: 1;
+top: 49px;
+left: 710px;
+border-radius: 15px;
+
+}
+.login{
+    background: #FFFFFF !important;
+
+}
+.buttonlogin{
+    width: 429px;
+height: 50px;
+background: #3252DF;
+
+opacity: 1;
+top: 625px;
+left: 123px;
+border-radius: 4px;
+
+}
+
+::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+  background-color: transparent !important;
+}
+
+::ng-deep .mdc-text-field__input {
+  color: #ffff !important;
+}
+
+::ng-deep .mdc-floating-label {
+  color: black !important;
+}
+
+::ng-deep .mdc-text-field__input::placeholder {
+  color: #ffff !important;
+}
+
+::ng-deep .custom-icon {
+  color: #ffff !important;
+}
+::ng-deep input.mat-mdc-input-element:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px transparent inset !important;
+  -webkit-text-fill-color: white !important;
+  caret-color: white !important;
+  transition: background-color 9999s ease-in-out 0s !important;
+}

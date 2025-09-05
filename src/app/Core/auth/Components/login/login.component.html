@@ -1,1 +1,48 @@
-<p>login works!</p>
+
+<section class="login"><div class="container mx-auto  ">
+  <div class="flex flex-wrap -mx-4  justify-center items-center h-screen">
+    
+ 
+    <div class="w-full md:w-1/2 ">
+        <h1>Sign in</h1>
+        <p>If you don’t have an account register  You can  <span>Register here !</span></p>
+      <div class=" text-white p-4 rounded">
+      <form class="example-form flex flex-col gap-4 " [formGroup]="loginForm" (ngSubmit)="lohin(loginForm)">
+  <mat-form-field class="example-full-width ">
+    <mat-label>Email</mat-label>
+    <input type="email" matInput  formControlName="email" [errorStateMatcher]="matcher"
+           placeholder="Ex. pat@example.com">
+            <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+    <mat-icon>close</mat-icon>
+  </button>
+     <mat-hint>Errors appear instantly!</mat-hint>
+    <mat-error *ngIf="email.hasError('email') && !email.hasError('required')">
+      Please enter a valid email address
+    </mat-error>
+    <mat-error *ngIf="email.hasError('required')">
+      Email is <strong>required</strong>
+    </mat-error> 
+  </mat-form-field>
+    <mat-form-field>
+    <mat-label>Enter your password</mat-label>
+    <input matInput [type]="hide ? 'password' : 'text'"  formControlName="password">
+    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+      <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+    </button>
+  </mat-form-field>
+  <div class="text-center">
+    <button type="submit" class="buttonlogin">login</button>
+  </div>
+</form>
+      </div>
+    </div>
+
+   
+    <div class="w-full md:w-1/2 ">
+      <div class=" text-white p-4 rounded">
+       <img src="../../../../../assets/Images/login.png" class="imglogin"  alt="">
+      </div>
+    </div>
+
+  </div>
+</div></section>
