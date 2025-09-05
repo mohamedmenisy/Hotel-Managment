@@ -6,6 +6,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import { AuthService } from '../../Services/auth.service';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-change-password',
@@ -20,7 +21,7 @@ export class ChangePasswordComponent {
   hide = true;
   hidenewPass = true;
   hideCofirmPass = true;
-  constructor(private _auth:AuthService,private _snackBar:MatSnackBar){}
+  constructor(private _auth:AuthService,private _snackBar:MatSnackBar,private _router:Router){}
   changePasswordForm:FormGroup = new FormGroup({
     oldPassword:new FormControl(null,[Validators.required,Validators.pattern(this.PasswordPattent)]),
     newPassword:new FormControl(null,[Validators.required,Validators.pattern(this.PasswordPattent)]),
@@ -58,5 +59,7 @@ export class ChangePasswordComponent {
       },
     })
   }
-
+  back(){
+    this._router.navigate(["/auth/login"])
+  }
 }
