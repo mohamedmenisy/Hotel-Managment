@@ -42,3 +42,32 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+.mainColor{
+  color: #3252DF;
+}
+
+//global style for inputs
+.input-form {
+ 
+  .mat-mdc-form-field {
+    width: 100%; // الافتراضي موبايل
+    @media (min-width: 768px) { // من أول md
+      width: 80%;
+    }
+  }
+
+  .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+    background-color: #F5F6F8 !important;
+  }
+
+  .mat-icon {
+    margin-right: 20px;
+  }
+
+  .mat-mdc-unelevated-button.mat-primary {
+    width: 100% !important; // الافتراضي موبايل
+    @media (min-width: 768px) { // من أول md
+      width: 80% !important;
+    }
+  }
+}
