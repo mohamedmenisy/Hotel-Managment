@@ -1,13 +1,13 @@
 
 <section class="login"><div class="container mx-auto  ">
   <div class="flex flex-wrap -mx-4  justify-center items-center h-screen">
-    
- 
+
+
     <div class="w-full md:w-1/2 ">
         <h1>Sign in</h1>
         <p>If you don’t have an account register  You can  <span>Register here !</span></p>
       <div class=" text-white p-4 rounded">
-      <form class="example-form flex flex-col gap-4 " [formGroup]="loginForm" (ngSubmit)="lohin(loginForm)">
+      <form class="example-form flex flex-col gap-4 " [formGroup]="loginForm" (ngSubmit)="login(loginForm)">
   <mat-form-field class="example-full-width ">
     <mat-label>Email</mat-label>
     <input type="email" matInput  formControlName="email" [errorStateMatcher]="matcher"
@@ -15,13 +15,12 @@
             <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
     <mat-icon>close</mat-icon>
   </button>
-     <mat-hint>Errors appear instantly!</mat-hint>
-    <mat-error *ngIf="email.hasError('email') && !email.hasError('required')">
-      Please enter a valid email address
-    </mat-error>
-    <mat-error *ngIf="email.hasError('required')">
-      Email is <strong>required</strong>
-    </mat-error> 
+       @if(loginForm.get('email')?.hasError('required') && loginForm.get('email')?.touched){
+        <mat-error >Email is required</mat-error>
+      }
+        @if(loginForm.get('email')?.hasError('email') && loginForm.get('email')?.touched){
+        <mat-error >enter a valid Email</mat-error>
+      }
   </mat-form-field>
     <mat-form-field>
     <mat-label>Enter your password</mat-label>
@@ -29,6 +28,12 @@
     <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
       <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
     </button>
+     @if(loginForm.get('password')?.hasError('required') && loginForm.get('password')?.touched){
+        <mat-error >Old password is required</mat-error>
+      }
+     @if(loginForm.get('oldPassword')?.hasError('pattern') && loginForm.get('oldPassword')?.touched){
+         <mat-error >{{passwordError}}</mat-error>
+        }
   </mat-form-field>
   <div class="text-center">
     <button type="submit" class="buttonlogin">login</button>
@@ -37,7 +42,7 @@
       </div>
     </div>
 
-   
+
     <div class="w-full md:w-1/2 ">
       <div class=" text-white p-4 rounded">
        <img src="../../../../../assets/Images/login.png" class="imglogin"  alt="">
