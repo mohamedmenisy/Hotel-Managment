@@ -48,7 +48,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 //global style for inputs
 .input-form {
- 
+
   .mat-mdc-form-field {
     width: 100%; // الافتراضي موبايل
     @media (min-width: 768px) { // من أول md
@@ -70,4 +70,18 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
       width: 80% !important;
     }
   }
+}
+
+/* success snackbar */
+.success-snackbar .mdc-snackbar__surface {
+  background-color: #4caf50 !important;
+  color: #fff !important;
+  z-index: 99999999999999999999999;
+}
+
+/* error snackbar */
+.error-snackbar .mdc-snackbar__surface {
+  background-color: #f44336 !important;
+  color: #fff !important;
+  z-index: 99999999999999999999999;
 }
