@@ -1,76 +1,197 @@
-.example-form-field {
-  width: 200px;
-  background-color: black !important;
-}
-h1{
-font-weight: 500;
-font-size: 30px;
-margin-left: 17px;
-line-height: 100%;
-letter-spacing: 0%;
-margin-bottom: 10px;
-}
-p{
-margin-left: 17px !important;
-margin-left: 5px;
-font-weight: 400;
-font-size: 16px;
+.login-container {
+  height: 100vh;
+  position: relative;
+  display: flex;
+  background: #fff;
 
-line-height: 100%;
-letter-spacing: 0%;
-span{
-    color:  #152C5B;
-;
-}
-}
-.imglogin{
-    width: 735px;
-height: 650px !important;
+  /*  Logo */
+  .logo {
+    position: absolute;
+    top: 20px;
+    left: 40px;
+    font-size: 26px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
 
-opacity: 1;
-top: 49px;
-left: 710px;
-border-radius: 15px;
+    .stay {
+      color: #3f51b5; // أزرق
+    }
 
+    .cation {
+      color: #222; // أسود غامق
+    }
+  }
+
+  /*  Left Section */
+  .login-left {
+    flex: 0.45;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    .form-section {
+      max-width: 100%;
+      margin-top: 60px; // عشان الـ logo فوق
+
+      h2 {
+        font-size: 25px;
+        font-weight: 500;
+        margin-bottom: 20px;
+      }
+
+      p {
+        font-size: 14px;
+        margin-bottom: 8px;
+        color: #444;
+      }
+
+      .input-form {
+        mat-form-field {
+          width: 80%;
+          margin-bottom: 15px;
+        }
+      }
+
+      .send-btn {
+        width: 80%;
+        margin-top: 20px;
+        background-color: #3252df;
+        color: white;
+        font-weight: bold;
+        box-shadow: rgba(50, 82, 223, 0.3) 0px 8px 24px;
+        padding: 12px 0;
+        font-size: 15px;
+        border-radius: 6px;
+      }
+
+      /*  Login Link */
+      .login-link {
+        margin-top: 15px;
+
+        a {
+          font-weight: bold;
+          text-decoration: none;
+        }
+      }
+    }
+  }
+
+  /*  Right Section */
+  .login-right {
+    flex: 0.55;
+    margin: 20px;
+    border-radius: 12px;
+    position: relative;
+    background: url('../../../../../assets/Images/login.png') no-repeat center center;
+    background-size: cover;
+    overflow: hidden;
+
+    .overlay-text {
+      position: absolute;
+      bottom: 40px;
+      left: 30px;
+      color: white;
+
+      h2 {
+        font-size: 28px;
+        font-weight: bold;
+      }
+
+      p {
+        font-size: 14px;
+        margin-top: 5px;
+      }
+    }
+  }
 }
-.login{
-    background: #FFFFFF !important;
 
+@media (max-width: 992px) {
+  .login-container {
+    flex-direction: column;
+
+    .login-left {
+      flex: unset;
+      width: 100%;
+      padding: 25px;
+      order: 2;
+
+      .form-section {
+        margin-top: 20px;
+
+        h2 {
+          font-size: 22px;
+        }
+
+        .send-btn {
+          width: 100%;
+        }
+      }
+    }
+
+    .login-right {
+      flex: unset;
+      width: 100%;
+      height: 300px;
+      margin: 0;
+      border-radius: 0;
+      order: 1;
+
+      .overlay-text {
+        bottom: 20px;
+        left: 20px;
+
+        h2 {
+          font-size: 20px;
+        }
+
+        p {
+          font-size: 12px;
+        }
+      }
+    }
+  }
 }
-.buttonlogin{
-    width: 429px;
-height: 50px;
-background: #3252DF;
 
-opacity: 1;
-top: 625px;
-left: 123px;
-border-radius: 4px;
+@media (max-width: 576px) {
+  .login-container {
+    .logo {
+      top: 15px;
+      left: 20px;
+      font-size: 22px;
+    }
 
-}
+    .login-left {
+      padding: 20px;
 
-::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) {
-  background-color: transparent !important;
-}
+      .form-section {
+        h2 {
+          font-size: 20px;
+        }
 
-::ng-deep .mdc-text-field__input {
-  color: #ffff !important;
-}
+        .send-btn {
+          font-size: 14px;
+          padding: 10px 0;
+        }
+      }
+    }
 
-::ng-deep .mdc-floating-label {
-  color: black !important;
-}
+    .login-right {
+      height: 220px;
 
-::ng-deep .mdc-text-field__input::placeholder {
-  color: #ffff !important;
-}
+      .overlay-text {
+        bottom: 15px;
+        left: 15px;
 
-::ng-deep .custom-icon {
-  color: #ffff !important;
-}
-::ng-deep input.mat-mdc-input-element:-webkit-autofill {
-  -webkit-box-shadow: 0 0 0px 1000px transparent inset !important;
-  -webkit-text-fill-color: white !important;
-  caret-color: white !important;
-  transition: background-color 9999s ease-in-out 0s !important;
+        h2 {
+          font-size: 18px;
+        }
+
+        p {
+          font-size: 11px;
+        }
+      }
+    }
+  }
 }

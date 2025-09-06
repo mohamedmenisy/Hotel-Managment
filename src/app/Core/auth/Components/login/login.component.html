@@ -1,53 +1,74 @@
-
-<section class="login"><div class="container mx-auto  ">
-  <div class="flex flex-wrap -mx-4  justify-center items-center h-screen">
-
-
-    <div class="w-full md:w-1/2 ">
-        <h1>Sign in</h1>
-        <p>If you don’t have an account register  You can  <span>Register here !</span></p>
-      <div class=" text-white p-4 rounded">
-      <form class="example-form flex flex-col gap-4 " [formGroup]="loginForm" (ngSubmit)="login(loginForm)">
-  <mat-form-field class="example-full-width ">
-    <mat-label>Email</mat-label>
-    <input type="email" matInput  formControlName="email" [errorStateMatcher]="matcher"
-           placeholder="Ex. pat@example.com">
-            <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
-    <mat-icon>close</mat-icon>
-  </button>
-       @if(loginForm.get('email')?.hasError('required') && loginForm.get('email')?.touched){
-        <mat-error >Email is required</mat-error>
-      }
-        @if(loginForm.get('email')?.hasError('email') && loginForm.get('email')?.touched){
-        <mat-error >enter a valid Email</mat-error>
-      }
-  </mat-form-field>
-    <mat-form-field>
-    <mat-label>Enter your password</mat-label>
-    <input matInput [type]="hide ? 'password' : 'text'"  formControlName="password">
-    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-      <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-    </button>
-     @if(loginForm.get('password')?.hasError('required') && loginForm.get('password')?.touched){
-        <mat-error >Old password is required</mat-error>
-      }
-     @if(loginForm.get('oldPassword')?.hasError('pattern') && loginForm.get('oldPassword')?.touched){
-         <mat-error >{{passwordError}}</mat-error>
-        }
-  </mat-form-field>
-  <div class="text-center">
-    <button type="submit" class="buttonlogin">login</button>
-  </div>
-</form>
-      </div>
+<div class="login-container">
+  <!-- Left Section -->
+  <div class="login-left">
+    <!-- Logo -->
+    <div class="logo">
+      <span class="stay">Stay</span><span class="cation">cation.</span>
     </div>
 
+    <!-- Form Section -->
+    <div class="form-section">
+      <h2>Sign in</h2>
+      <p class="login-link">
+        If you don’t have an account register <br>
+        <a routerLink="/auth/register">You can Register here !</a>
+      </p>
 
-    <div class="w-full md:w-1/2 ">
-      <div class=" text-white p-4 rounded">
-       <img src="../../../../../assets/Images/login.png" class="imglogin"  alt="">
-      </div>
+      <form [formGroup]="loginForm" (ngSubmit)="login(loginForm)" class="input-form">
+        <!-- Email -->
+        <!-- ✅ Email -->
+        <div class="input-form">
+          <mat-label class="block">Enter your email</mat-label>
+          <mat-form-field appearance="outline" class="full-width">
+            <input matInput type="email" placeholder="Please type here ..."
+              formControlName="email" />
+
+            @if(loginForm.get('email')?.hasError('required') && loginForm.get('email')?.touched){
+            <mat-error>Email is required</mat-error>
+            }
+            @if(loginForm.get('email')?.hasError('email') && loginForm.get('email')?.touched){
+            <mat-error>Please enter a valid email</mat-error>
+            }
+          </mat-form-field>
+        </div>
+
+
+
+        <!-- ✅  Password -->
+        <div class="input-form">
+          <mat-label class="block">Enter new password</mat-label>
+          <mat-form-field appearance="outline" class="full-width">
+            <input matInput [type]="hide ? 'password' : 'text'" placeholder="Enter your new password ..."
+              formControlName="password" />
+            <button mat-icon-button matSuffix (click)="hide = !hide"
+              [attr.aria-label]="'Hide new password'" [attr.aria-pressed]="hide">
+              <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
+            </button>
+
+            @if(loginForm.get('password')?.hasError('required') && loginForm.get('password')?.touched){
+            <mat-error>Password is required</mat-error>
+            }
+            @if(loginForm.get('password')?.hasError('pattern') && loginForm.get('password')?.touched){
+            <mat-error>{{passwordError}}</mat-error>
+            }
+          </mat-form-field>
+        </div>
+
+
+
+        <!-- Submit Button -->
+        <button mat-flat-button class="send-btn" type="submit" [disabled]="loginForm.invalid">
+         Login
+        </button>
+      </form>
     </div>
-
   </div>
-</div></section>
+
+  <!-- Right Section -->
+  <div class="login-right">
+    <div class="overlay-text">
+      <h2>Sign in to Roamhome</h2>
+      <p>Home As Unique As You</p>
+    </div>
+  </div>
+</div>
