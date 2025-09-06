@@ -1,1 +1,173 @@
-<p>register works!</p>
+<div class="reset-container">
+  <!-- Left Section -->
+  <div class="reset-left">
+    <!-- Logo -->
+    <div class="logo">
+      <span class="stay">Stay</span><span class="cation">cation.</span>
+    </div>
+
+    <!-- Form Section -->
+    <div class="form-section">
+      <h2>Sign Up</h2>
+      <p class="login-link">
+        You can
+        <a routerLink="/auth/login">Login here !</a>
+      </p>
+
+      <form [formGroup]="bookingForm" (ngSubmit)="onSubmit()" class="input-form">
+        <!-- User Name -->
+        <div class="input-form">
+          <mat-label class="block">User Name</mat-label>
+          <mat-form-field appearance="outline" class="full-width">
+            <input
+              matInput
+              type="text"
+              placeholder="Please type here ..."
+              formControlName="userName"
+            />
+            @if (bookingForm.get('userName')?.hasError('required') && bookingForm.get('userName')?.touched) {
+              <mat-error>User name is required</mat-error>
+            }
+            @if (bookingForm.get('userName')?.hasError('minlength') && bookingForm.get('userName')?.touched) {
+              <mat-error>User name must be at least 6 characters</mat-error>
+            }
+          </mat-form-field>
+        </div>
+
+        <!-- Email -->
+        <div class="input-form">
+          <mat-label class="block">Enter your email</mat-label>
+          <mat-form-field appearance="outline" class="full-width">
+            <input
+              matInput
+              type="email"
+              placeholder="Please type here ..."
+              formControlName="email"
+            />
+            @if (bookingForm.get('email')?.hasError('required') && bookingForm.get('email')?.touched) {
+              <mat-error>Email is required</mat-error>
+            }
+            @if (bookingForm.get('email')?.hasError('email') && bookingForm.get('email')?.touched) {
+              <mat-error>Please enter a valid email</mat-error>
+            }
+          </mat-form-field>
+        </div>
+
+        <div class="row-inputs">
+          <!-- Phone Number -->
+          <div class="half-width">
+            <mat-label class="block">Phone Number</mat-label>
+            <mat-form-field appearance="outline" class="full-width">
+              <input
+                matInput
+                type="text"
+                placeholder="Enter your phone number ..."
+                formControlName="phone"
+              />
+              @if (bookingForm.get('phone')?.hasError('required') && bookingForm.get('phone')?.touched) {
+                <mat-error>Phone number is required</mat-error>
+              }
+              @if (bookingForm.get('phone')?.hasError('min') && bookingForm.get('phone')?.touched) {
+                <mat-error>Phone number must be at least 10 digits</mat-error>
+              }
+            </mat-form-field>
+          </div>
+
+          <!-- Country -->
+          <div class="half-width">
+            <mat-label class="block">Country</mat-label>
+            <mat-form-field appearance="outline" class="full-width">
+              <input
+                matInput
+                type="text"
+                placeholder="Enter your country ..."
+                formControlName="country"
+              />
+              @if (bookingForm.get('country')?.hasError('required') && bookingForm.get('country')?.touched) {
+                <mat-error>Country is required</mat-error>
+              }
+              @if (bookingForm.get('country')?.hasError('minlength') && bookingForm.get('country')?.touched) {
+                <mat-error>Country name must be at least 2 characters</mat-error>
+              }
+            </mat-form-field>
+          </div>
+        </div>
+
+        <!-- Password -->
+        <div class="input-form">
+          <mat-label class="block">Enter password</mat-label>
+          <mat-form-field appearance="outline" class="full-width">
+            <input
+              matInput
+              [type]="hideNewPassword ? 'password' : 'text'"
+              placeholder="Enter your password ..."
+              formControlName="password"
+            />
+            <button
+              mat-icon-button
+              matSuffix
+              type="button"
+              (click)="hideNewPassword = !hideNewPassword"
+              [attr.aria-label]="'Hide password'"
+              [attr.aria-pressed]="hideNewPassword"
+            >
+              <mat-icon>{{ hideNewPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+            </button>
+
+            @if (bookingForm.get('password')?.hasError('required') && bookingForm.get('password')?.touched) {
+              <mat-error>Password is required</mat-error>
+            }
+            @if (bookingForm.get('password')?.hasError('minlength') && bookingForm.get('password')?.touched) {
+              <mat-error>Password must be at least 6 characters</mat-error>
+            }
+          </mat-form-field>
+        </div>
+
+        <!-- Confirm Password -->
+        <div class="input-form">
+          <mat-label class="block">Confirm password</mat-label>
+          <mat-form-field appearance="outline" class="full-width">
+            <input
+              matInput
+              [type]="hideConfirmPassword ? 'password' : 'text'"
+              placeholder="Confirm your password ..."
+              formControlName="confirmPassword"
+            />
+            <button
+              mat-icon-button
+              matSuffix
+              type="button"
+              (click)="hideConfirmPassword = !hideConfirmPassword"
+              [attr.aria-label]="'Hide confirm password'"
+              [attr.aria-pressed]="hideConfirmPassword"
+            >
+              <mat-icon>{{ hideConfirmPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+            </button>
+
+            @if (bookingForm.get('confirmPassword')?.hasError('required') && bookingForm.get('confirmPassword')?.touched) {
+              <mat-error>Confirm Password is required</mat-error>
+            }
+
+            <!-- ✅ Password mismatch error -->
+            @if (bookingForm.hasError('passwordMismatch') && bookingForm.get('confirmPassword')?.touched) {
+              <mat-error>Passwords do not match</mat-error>
+            }
+          </mat-form-field>
+        </div>
+
+        <!-- Submit Button -->
+        <button mat-flat-button class="send-btn" type="submit"    >
+          Sign Up
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Right Section -->
+  <div class="reset-right">
+    <div class="overlay-text">
+      <h2>Sign-Up To Roamhome</h2>
+      <p>Home As Unique As You</p>
+    </div>
+  </div>
+</div>
