@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
+import { ReactiveFormsModule, FormGroup, FormControl, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
@@ -28,20 +28,26 @@ export class ResetPasswordComponent {
 
 
   constructor(private auth: AuthService, private s: MatSnackBar, private r: Router) { }
-
-  hideEmail = true;
-  hideOtp = true;
   hideNewPassword = true;
   hideConfirmPassword = true;
-
+  PasswordPattern:RegExp =/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{1,10}$/;
+  passwordError:string="Password must contain uppercase, lowercase, number, symbol (max 10 chars)"
   private Data: IresetPassword[] = [];
 
+  passwordMatchValidator = (control: AbstractControl): ValidationErrors | null => {
+  const newpassword = control.get('newPassword')?.value;
+  const confirmPassword = control.get('confirmPassword')?.value;
+  return newpassword === confirmPassword ? null : { passwordMismatch: true };
+};
   resetForm = new FormGroup({
-    email: new FormControl('', [Validators.required, Validators.email]),
-    otp: new FormControl('', [Validators.required, Validators.minLength(4)]),
-    newPassword: new FormControl('', [Validators.required, Validators.minLength(6)]),
-    confirmPassword: new FormControl('', [Validators.required])
-  });
+    email: new FormControl(null, [Validators.required, Validators.email]),
+    otp: new FormControl(null, [Validators.required, Validators.minLength(4)]),
+    newPassword:new FormControl(null,[Validators.required,Validators.pattern(this.PasswordPattern)]),
+    confirmPassword: new FormControl(null, [Validators.required])
+  },{ validators: this.passwordMatchValidator});
+
+
+
 
   onSubmit() {
   if (this.resetForm.valid) {

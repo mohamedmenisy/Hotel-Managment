@@ -34,7 +34,7 @@ export class LoginComponent {
     this._AuthService.login(data.value).subscribe({
       next:(res)=>{
       localStorage.setItem('token',res.Token);
-       this._snackBar.open('Your password has been changed successfully 🎉',"", {
+       this._snackBar.open('Login successfully 🎉',"", {
           duration: 3000,
           horizontalPosition: "end",
           verticalPosition: "top",

@@ -16,16 +16,16 @@ import { Router } from '@angular/router';
   styleUrl: './change-password.component.scss'
 })
 export class ChangePasswordComponent {
-  PasswordPattent:RegExp =/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{1,10}$/;
+  PasswordPattern:RegExp =/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{1,10}$/;
   passwordError:string="Password must contain uppercase, lowercase, number, symbol (max 10 chars)"
   hide = true;
   hidenewPass = true;
   hideCofirmPass = true;
   constructor(private _auth:AuthService,private _snackBar:MatSnackBar,private _router:Router){}
   changePasswordForm:FormGroup = new FormGroup({
-    oldPassword:new FormControl(null,[Validators.required,Validators.pattern(this.PasswordPattent)]),
-    newPassword:new FormControl(null,[Validators.required,Validators.pattern(this.PasswordPattent)]),
-    confirmPassword:new FormControl(null,[Validators.required,Validators.pattern(this.PasswordPattent)]),
+    oldPassword:new FormControl(null,[Validators.required,Validators.pattern(this.PasswordPattern)]),
+    newPassword:new FormControl(null,[Validators.required,Validators.pattern(this.PasswordPattern)]),
+    confirmPassword:new FormControl(null,[Validators.required,Validators.pattern(this.PasswordPattern)]),
   },{ validators: this.passwordMatchValidator});
 
   passwordMatchValidator(control: AbstractControl): ValidationErrors | null {
