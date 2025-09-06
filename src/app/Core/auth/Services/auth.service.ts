@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { IChangePasswordData, IchangePasswordResponse } from '../Interfaces/ichange-password';
 import { IforgotPassword } from '../Interfaces/iforgot-password';
 import { IresetPassword } from '../Interfaces/ireset-password';
+import { Iregister } from '../Interfaces/iregister';
 @Injectable({
   providedIn: 'root'
 })
@@ -21,10 +22,16 @@ export class AuthService {
 
 
   ChangePassword(data:IChangePasswordData):Observable<IchangePasswordResponse>{
-   return this._http.post<IchangePasswordResponse>("users",data);
+   return this._http.post<IchangePasswordResponse>("users/change-password",data);
   }
 
     login(data:any):Observable<any>{
     return this._http.post('users/login',data)
   }
+
+
+    Book(data:any):Observable<Iregister>{
+    return this._http.post<Iregister>('users',data)
+  }
+
 }
