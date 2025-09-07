@@ -8,8 +8,8 @@
     position: absolute;
     top: 20px;
     left: 40px;
-    font-size: 26px;
-    font-weight: 600;
+    font-size: 20px;
+    font-weight: 400;
     display: flex;
     align-items: center;
 
@@ -54,30 +54,16 @@
       .row-inputs {
         display: flex;
         justify-content: space-between;
-        width: 80%;
+        width: 100%;
 
         gap: 20px;
 
         .half-width {
-          width: 48%;
-
-          mat-form-field {
-            width: 100%;
-          }
+          width: 50%;
         }
       }
 
-      .send-btn {
-        width: 80%;
-        margin-top: 10px;
-        background-color: #3252df;
-        color: white;
-        font-weight: bold;
-        box-shadow: rgba(50, 82, 223, 0.3) 0px 8px 24px;
-        padding: 12px 0;
-        font-size: 15px;
-        border-radius: 6px;
-      }
+
 
       .login-link {
         margin-top: 15px;

@@ -46,18 +46,20 @@ export class RegisterComponent {
     {
       userName: new FormControl<string>('', [Validators.required, Validators.minLength(6)]),
       email: new FormControl<string>('', [Validators.required, Validators.email]),
-      phone: new FormControl<number | null>(null, [Validators.required, Validators.min(10)]),
+      phoneNumber: new FormControl<number | null>(null, [Validators.required, Validators.min(10)]),
       country: new FormControl<string>('', [Validators.required, Validators.minLength(2)]),
       password: new FormControl<string>('', [Validators.required, Validators.minLength(6)]),
       confirmPassword: new FormControl<string>('', [Validators.required]),
+      role: new FormControl<string>('user', [Validators.required]),
+      profileImage: new FormControl(''),
     },
     { validators: this.passwordMatchValidator }
   );
 
   onSubmit() {
+
     if (this.bookingForm.valid) {
       const formValue: Iregister = this.bookingForm.value as Iregister;
-      console.log('Form Data:', formValue);
 
       this.auth.Book(formValue).subscribe({
         next: (response) => {

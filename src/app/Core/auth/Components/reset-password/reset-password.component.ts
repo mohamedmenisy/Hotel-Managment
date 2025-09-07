@@ -35,14 +35,14 @@ export class ResetPasswordComponent {
   private Data: IresetPassword[] = [];
 
   passwordMatchValidator = (control: AbstractControl): ValidationErrors | null => {
-  const newpassword = control.get('newPassword')?.value;
+  const newpassword = control.get('password')?.value;
   const confirmPassword = control.get('confirmPassword')?.value;
   return newpassword === confirmPassword ? null : { passwordMismatch: true };
 };
   resetForm = new FormGroup({
     email: new FormControl(null, [Validators.required, Validators.email]),
-    otp: new FormControl(null, [Validators.required, Validators.minLength(4)]),
-    newPassword:new FormControl(null,[Validators.required,Validators.pattern(this.PasswordPattern)]),
+    seed: new FormControl(null, [Validators.required, Validators.minLength(4)]),
+    password:new FormControl(null,[Validators.required,Validators.pattern(this.PasswordPattern)]),
     confirmPassword: new FormControl(null, [Validators.required])
   },{ validators: this.passwordMatchValidator});
 

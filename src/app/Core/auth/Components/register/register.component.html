@@ -62,12 +62,12 @@
                 matInput
                 type="text"
                 placeholder="Enter your phone number ..."
-                formControlName="phone"
+                formControlName="phoneNumber"
               />
-              @if (bookingForm.get('phone')?.hasError('required') && bookingForm.get('phone')?.touched) {
+              @if (bookingForm.get('phoneNumber')?.hasError('required') && bookingForm.get('phoneNumber')?.touched) {
                 <mat-error>Phone number is required</mat-error>
               }
-              @if (bookingForm.get('phone')?.hasError('min') && bookingForm.get('phone')?.touched) {
+              @if (bookingForm.get('phoneNumber')?.hasError('min') && bookingForm.get('phoneNumber')?.touched) {
                 <mat-error>Phone number must be at least 10 digits</mat-error>
               }
             </mat-form-field>
@@ -156,7 +156,7 @@
         </div>
 
         <!-- Submit Button -->
-        <button mat-flat-button class="send-btn" type="submit"    >
+        <button  class="auth-button" type="submit"    >
           Sign Up
         </button>
       </form>

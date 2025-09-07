@@ -9,8 +9,8 @@
     position: absolute;
     top: 20px;
     left: 40px;
-    font-size: 26px;
-    font-weight: 600;
+    font-size: 20px;
+    font-weight: 500;
     display: flex;
     align-items: center;
 
@@ -52,23 +52,10 @@
           width: 80%;
           margin-bottom: unset;
         }
-        .forgot-pass{
-          width: 80%;
-          font-size: 13px;
-        }
+
       }
 
-      .send-btn {
-        width: 80%;
-        margin-top: 10px;
-        background-color: #3252df;
-        color: white;
-        font-weight: bold;
-        box-shadow: rgba(50, 82, 223, 0.3) 0px 8px 24px;
-        padding: 12px 0;
-        font-size: 15px;
-        border-radius: 6px;
-      }
+
 
       /*  Login Link */
       .login-link {
@@ -198,4 +185,8 @@
       }
     }
   }
+}
+.forgot-pass{
+  font-size: 13px;
+  margin-bottom: 5px;
 }
