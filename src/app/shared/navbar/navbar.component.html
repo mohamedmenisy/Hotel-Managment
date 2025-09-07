@@ -2,16 +2,16 @@
 <div class="grid grid-cols-12 items-center ">
 <div class="col-span-8">
 <div class="input-item">
-<input type="text" class="form-control" placeholder="Search...">
-<mat-icon>search</mat-icon>
+<input type="text"  placeholder="Search...">
+<mat-icon class="icon">search</mat-icon>
 </div>
 
 </div>
 <div class="col-span-4 text-end">
 
     <div class="flex align-center justify-end">
-                    <div >
-                <button class="maticon" matIconButton [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                    <div>
+                    <button class="maticon" matIconButton [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
                       <div class="flex items-center justify-evenly" >
                           @if (userImg != null) {
                         <img  src="https://upskilling-egypt.com:3003/{{userImg}}" class="userImg" alt="">
@@ -21,7 +21,7 @@
                         }
                         @if (isMobileSize) {
                             <div class="text-start">
-                            <span  class="ms-2 me-4 fs-6 lead block">{{userName?userName : 'mohamed'}}</span>
+                            <span  class="ms-2 me-4  lead block">{{userName?userName : 'mohamed'}}</span>
                             </div>
                              <div >
                              <mat-icon class="flex items-center">keyboard_arrow_down</mat-icon>

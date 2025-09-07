@@ -16,41 +16,38 @@
 
 .side-nav-Opened{
     width: 16rem;
+
 }
 .logo{
-     display: flex;
+    display: flex;
     align-items: center;
+    justify-content: center;
     padding: 0.938rem 0.938rem 0 0.938rem;
     width: 100%;
+       .open{
+                display: block;
+                width: 60px;
+
+            }
+            .close{
+                display: none;
+                width: 60px;
+            }
+
 }
-.logo .img-larg{
-    width: 150px;
+.logo .closenav{
+    background-color: red;
+}
+.logo img{
+    width: 60px;
     margin:  auto;
     img{
         width: 100%;
         cursor: pointer;
     }
 }
-.logo .img-small{
-    width: 60px;
-    margin:0 auto 25px ;
-    img{
-        width: 100%;
-        cursor: pointer;
-    }
-}
-.logo-text{
-    margin-left: 10px;
-    font-size: 20px;
-    font-weight: bold;
-    text-align: center;
 
-}
-.fa-xmark{
-    margin-left: auto;
-    font-size: 20px;
-    cursor: pointer;
-}
+
 
 .sidenav-nav{
     list-style:none ;
@@ -59,6 +56,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 0;
     cursor: pointer;
     .sidenav-nav-item{
         width: 100%;
@@ -66,15 +64,15 @@
         .sidenav-nav-link{
             display: flex;
             align-items: center;
-
             height: 2.4rem;
+            padding-left: 10px;
             color: #fff;
             text-decoration: none;
             transition: all .3s ease;
             font-weight: 600;
             width: 100%;
             .sidenav-nav-icon{
-                font-size: 16px;
+                font-size: 20px;
                 width: 2rem;
                 min-width: 2rem;
                 margin: 0 0.5rem;
@@ -88,7 +86,6 @@
         }
         .sidenav-nav-link.active-link:hover{
             background: rgba(26, 27, 30, 0.17);
-            box-shadow: 0 .125rem .375rem 0 rgba(#00924d1a, 0.3);
             color: #fff !important;
         }
 
@@ -97,7 +94,7 @@
 }
 .active-link{
     position: relative;
-    background-color: #00924d1a;
+    background-color: rgba(26, 27, 30, 0.17);
     color: #fff !important;
     &::before{
              content: "";
@@ -118,4 +115,28 @@ hr{
 }
 .mainColor{
     color: #0D6EFD;
+}
+.sideNav:not(.side-nav-Opened) .sidenav-nav-link {
+  justify-content: center;
+  padding: 0;
+  .logo img{
+    display: none;
+  }
+}
+.sideNav.side-nav-Opened {
+    .logo{
+        display: flex;
+        align-items: center;
+        justify-content: end;
+         padding: 0.938rem 0.938rem 0 0.938rem;
+        width: 100%;
+        .closeButton{
+            color: white;
+        }
+    }
+
+}
+
+.sideNav:not(.side-nav-Opened) .sidenav-nav-icon {
+  margin: 0;
 }
