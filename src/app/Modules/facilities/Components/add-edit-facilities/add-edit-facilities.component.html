@@ -1,1 +1,35 @@
-<p>add-edit-facilities works!</p>
+<div class="facility-form">
+
+  <!-- Header -->
+  <div class="form-header">
+    <h3>{{ facilityId > 0 ? 'Edit Facility' : 'Add Facility' }}</h3>
+    <button type="button" class="close-btn" aria-label="Close">
+      <span>&times;</span>
+    </button>
+  </div>
+
+  <!-- Form -->
+  <form [formGroup]="FacitiyForm" (ngSubmit)="FacilityAdder()" novalidate>
+    <div class="form-body">
+      <input
+        type="text"
+        class="form-control custom-input"
+        formControlName="name"
+        placeholder="Name"
+      />
+
+      <!-- Error -->
+      <div class="error" *ngIf="FacitiyForm.get('name')?.touched && FacitiyForm.get('name')?.invalid">
+        <small *ngIf="FacitiyForm.get('name')?.errors?.['required']">Name is required.</small>
+        <small *ngIf="FacitiyForm.get('name')?.errors?.['minlength']">Minimum 10 characters.</small>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="form-footer">
+      <button type="submit" class="btn-save" [disabled]="FacitiyForm.invalid">
+        {{ facilityId > 0 ? 'Update' : 'Save' }}
+      </button>
+    </div>
+  </form>
+</div>
