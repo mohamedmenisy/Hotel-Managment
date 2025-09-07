@@ -43,7 +43,7 @@ export class ResetPasswordComponent {
     email: new FormControl(null, [Validators.required, Validators.email]),
     seed: new FormControl(null, [Validators.required, Validators.minLength(4)]),
     password:new FormControl(null,[Validators.required,Validators.pattern(this.PasswordPattern)]),
-    confirmPassword: new FormControl(null, [Validators.required])
+    confirmPassword: new FormControl(null, [Validators.required,Validators.pattern(this.PasswordPattern)])
   },{ validators: this.passwordMatchValidator});
 
 
@@ -57,7 +57,7 @@ export class ResetPasswordComponent {
         this.auth.onReset(formValue).subscribe({
           next: (response) => {
             console.log('API Success Response:', response);
-            this.s.open('You Can Login With The Updated Password', "Password Reset", {
+            this.s.open('You Can Login With The Updated Password', "", {
               duration: 3000,
               horizontalPosition: "end",
               verticalPosition: "top",
@@ -67,7 +67,7 @@ export class ResetPasswordComponent {
           },
           error: (error) => {
             console.error('API Error:', error);
-            this.s.open("an error occurred", "Oops",
+            this.s.open("an error occurred", "",
               {
                 duration: 3000,
                 horizontalPosition: "end",

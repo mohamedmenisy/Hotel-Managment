@@ -30,7 +30,7 @@ export class AuthService {
   }
 
 
-    Book(data:any):Observable<Iregister>{
+    onRegister(data:any):Observable<Iregister>{
     return this._http.post<Iregister>('users',data)
   }
 

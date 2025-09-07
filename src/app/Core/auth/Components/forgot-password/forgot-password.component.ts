@@ -47,8 +47,7 @@ export class ForgotPasswordComponent {
 
       this.auth.onForget(formValue).subscribe({
         next: (response) => {
-          console.log('API Success Response:', response);
-          this.s.open('Check Your Inbox For The Verification Code', "Email Sent", {
+          this.s.open('Check Your Inbox For The Verification Code', "", {
             duration: 3000,
             horizontalPosition: "end",
             verticalPosition: "top",
@@ -58,7 +57,7 @@ export class ForgotPasswordComponent {
         },
         error: (error) => {
           console.error('API Error:', error);
-          this.s.open("an error occurred", "Oops",
+          this.s.open("an error occurred", "",
             {
               duration: 3000,
               horizontalPosition: "end",

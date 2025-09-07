@@ -33,7 +33,11 @@ export class LoginComponent {
   login(data:FormGroup){
     this._AuthService.login(data.value).subscribe({
       next:(res)=>{
-      localStorage.setItem('token',res.Token);
+        console.log(res);
+
+      localStorage.setItem('token',res.data.token);
+      localStorage.setItem('role',res.data.user.role);
+      localStorage.setItem('userName',res.data.user.userName);
        this._snackBar.open('Login successfully 🎉',"", {
           duration: 3000,
           horizontalPosition: "end",

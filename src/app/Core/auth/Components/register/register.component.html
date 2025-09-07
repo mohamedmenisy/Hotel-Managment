@@ -14,7 +14,23 @@
         <a routerLink="/auth/login">Login here !</a>
       </p>
 
-      <form [formGroup]="bookingForm" (ngSubmit)="onSubmit()" class="input-form">
+      <form [formGroup]="bookingForm" (ngSubmit)="onSubmit(bookingForm)" class="input-form">
+        <!-- image -->
+        <div class="inpit-form flex justify-center">
+          <div>
+            <ngx-dropzone (change)="onSelect($event)" class="circle-dropzone">
+            <div class="placeholder" *ngIf="files.length === 0">
+              User Image
+            </div>
+          <ngx-dropzone-image-preview class="circle-preview" ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files" [file]="f" [removable]="true" (removed)="onRemove(f)">
+          </ngx-dropzone-image-preview>
+          </ngx-dropzone>
+            @if(imgSrc == null &&  bookingForm.get('profileImage')?.touched){
+              <mat-error class="text-center">Profile Image is required</mat-error>
+            }
+          </div>
+        </div>
+
         <!-- User Name -->
         <div class="input-form">
           <mat-label class="block">User Name</mat-label>
@@ -92,9 +108,22 @@
             </mat-form-field>
           </div>
         </div>
+         <div class="input-form">
+          <mat-label class="block">Enter Role</mat-label>
+            <mat-form-field appearance="outline" >
+            <mat-select placeholder="select a role" formControlName="role">
+              <mat-option value="admin">Admin</mat-option>
+              <mat-option value="user">User</mat-option>
+            </mat-select>
+            @if(bookingForm.get('role')?.hasError('required') && bookingForm.get('role')?.touched){
+              <mat-error >Role is required</mat-error>
+              }
+          </mat-form-field>
+        </div>
 
-        <!-- Password -->
-        <div class="input-form">
+        <div class="row-inputs">
+      <!-- Password -->
+        <div class="half-width">
           <mat-label class="block">Enter password</mat-label>
           <mat-form-field appearance="outline" class="full-width">
             <input
@@ -114,17 +143,17 @@
               <mat-icon>{{ hideNewPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
             </button>
 
-            @if (bookingForm.get('password')?.hasError('required') && bookingForm.get('password')?.touched) {
-              <mat-error>Password is required</mat-error>
+            @if(bookingForm.get('password')?.hasError('required') && bookingForm.get('password')?.touched){
+            <mat-error >new password is required</mat-error>
             }
-            @if (bookingForm.get('password')?.hasError('minlength') && bookingForm.get('password')?.touched) {
-              <mat-error>Password must be at least 6 characters</mat-error>
+            @if(bookingForm.get('password')?.hasError('pattern') && bookingForm.get('password')?.touched){
+            <mat-error >{{passwordError}}</mat-error>
             }
           </mat-form-field>
         </div>
 
         <!-- Confirm Password -->
-        <div class="input-form">
+        <div class="half-width">
           <mat-label class="block">Confirm password</mat-label>
           <mat-form-field appearance="outline" class="full-width">
             <input
@@ -144,15 +173,15 @@
               <mat-icon>{{ hideConfirmPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
             </button>
 
-            @if (bookingForm.get('confirmPassword')?.hasError('required') && bookingForm.get('confirmPassword')?.touched) {
-              <mat-error>Confirm Password is required</mat-error>
-            }
-
-            <!-- ✅ Password mismatch error -->
-            @if (bookingForm.hasError('passwordMismatch') && bookingForm.get('confirmPassword')?.touched) {
-              <mat-error>Passwords do not match</mat-error>
-            }
+               @if(bookingForm.get('confirmPassword')?.hasError('required') && bookingForm.get('confirmPassword')?.touched){
+              <mat-error >Confirm password is required</mat-error>
+              }
+               @if(bookingForm.errors?.['passwordMismatch'] && !bookingForm.get('confirmPassword')?.hasError('required') && bookingForm.get('confirmPassword')?.touched){
+                <mat-error >Password Not Matched</mat-error>
+                }
           </mat-form-field>
+        </div>
+
         </div>
 
         <!-- Submit Button -->
