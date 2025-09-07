@@ -5,7 +5,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import { AuthService } from '../../Services/auth.service';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-login',
@@ -18,7 +18,7 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 })
 
 export class LoginComponent {
-  constructor(private _AuthService:AuthService,private _snackBar:MatSnackBar){}
+  constructor(private _AuthService:AuthService,private _snackBar:MatSnackBar,private _router:Router){}
   PasswordPattent:RegExp =/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{1,10}$/;
   passwordError:string="Password must contain uppercase, lowercase, number, symbol (max 10 chars)"
    hide = true;
@@ -33,17 +33,10 @@ export class LoginComponent {
   login(data:FormGroup){
     this._AuthService.login(data.value).subscribe({
       next:(res)=>{
-        console.log(res);
-
       localStorage.setItem('token',res.data.token);
       localStorage.setItem('role',res.data.user.role);
       localStorage.setItem('userName',res.data.user.userName);
-       this._snackBar.open('Login successfully 🎉',"", {
-          duration: 3000,
-          horizontalPosition: "end",
-          verticalPosition: "top",
-          panelClass: ['success-snackbar']
-        });
+
       },
       error:(err)=>{
          this._snackBar.open("an error occurred","",
@@ -52,8 +45,19 @@ export class LoginComponent {
                   horizontalPosition: "end",
                   verticalPosition: "top",
                   panelClass: ['error-snackbar']
-                }
+              }
         );
+      },
+      complete:()=>{
+        this._snackBar.open('Login successfully 🎉',"", {
+        duration: 3000,
+        horizontalPosition: "end",
+        verticalPosition: "top",
+        panelClass: ['success-snackbar']
+        });
+        if(localStorage.getItem('role') == 'admin'){
+          this._router.navigate(["/dashboard"])
+        }
       }
     });
   }
