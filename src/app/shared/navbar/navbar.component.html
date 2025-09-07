@@ -1,0 +1,63 @@
+<nav>
+<div class="grid grid-cols-12 items-center ">
+<div class="col-span-8">
+<div class="input-item">
+<input type="text" class="form-control" placeholder="Search...">
+<mat-icon>search</mat-icon>
+</div>
+
+</div>
+<div class="col-span-4 text-end">
+
+    <div class="flex align-center justify-end">
+                    <div >
+                <button class="maticon" matIconButton [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                      <div class="flex items-center justify-evenly" >
+                          @if (userImg != null) {
+                        <img  src="https://upskilling-egypt.com:3003/{{userImg}}" class="userImg" alt="">
+                        }@else{
+
+                            <img  src="/assets/Images/Profile.svg" class="userImg" alt="">
+                        }
+                        @if (isMobileSize) {
+                            <div class="text-start">
+                            <span  class="ms-2 me-4 fs-6 lead block">{{userName?userName : 'mohamed'}}</span>
+                            </div>
+                             <div >
+                             <mat-icon class="flex items-center">keyboard_arrow_down</mat-icon>
+                            </div>
+                        }
+
+
+                      </div>
+                </button>
+                    <mat-menu #menu="matMenu" class="my-custom-menu mt-3">
+                        <a mat-menu-item routerLink="/dashboard/profile">
+                            <mat-icon>account_circle</mat-icon>
+                            <span>Profile</span>
+                        </a>
+                        <button mat-menu-item >
+                            <mat-icon>key</mat-icon>
+                            <span>Change Password</span>
+                        </button>
+                        <button mat-menu-item >
+                            <mat-icon>logout</mat-icon>
+                            <span>logout</span>
+                        </button>
+                    </mat-menu>
+                    </div>
+                    <!-- <div class="ms-3">
+                          <div >
+                            <button type="button" class="billbutton">
+                            <i class="fa-solid fa-bell"></i>
+                            <span class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
+                                <span class="visually-hidden">New alerts</span>
+                            </span>
+                            </button>
+                        </div>
+                    </div> -->
+    </div>
+
+</div>
+</div>
+</nav>

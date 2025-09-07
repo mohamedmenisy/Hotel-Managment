@@ -1,0 +1,50 @@
+nav{
+    background-color: #F8F9FB;
+    padding: 10px;
+    margin: 20px 0;
+    border-radius: 10px;
+}
+.input-item{
+    position: relative;
+}
+.input-item input{
+    border-radius: 20px;
+     outline: none;
+    border: none;
+    padding-left: 40px;
+}
+.input-item input:focus{
+    box-shadow: none;
+    outline: none;
+    border: none;
+}
+.input-item i {
+    display: block;
+    position: absolute;
+    left: 10px;
+    top:10px;
+    z-index: 999;
+}
+.maticon{
+background-color: transparent;
+border: none;
+}
+.billbutton{
+    background-color: transparent;
+    border: none;
+    position: relative;
+}
+.start-100{
+    left: 75% !important;
+}
+::ng-deep .my-custom-menu .mat-mdc-menu-content {
+
+  padding: 8px;
+  width: 260px !important;
+  list-style-type: none;
+}
+.userImg{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}

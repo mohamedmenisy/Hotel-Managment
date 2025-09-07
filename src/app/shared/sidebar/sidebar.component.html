@@ -1,0 +1,26 @@
+<nav class="sideNav" [ngClass]="SideBarOpened ? 'side-nav-Opened':''" >
+<div class="logo">
+
+    <button (click)="ToggleNav()" class="closeNav">
+    <mat-icon class="navicon">arrow_back_ios</mat-icon>
+    </button>
+
+</div>
+<div class="Nav-items">
+    <ul class="sidenav-nav p-0 mt-4">
+        @for (item of menu; track $index) {
+             <li class="sidenav-nav-item">
+            <a class="sidenav-nav-link" [ngClass]="SideBarOpened?'justify-content-start' : 'justify-content-center'" routerLink="{{item.menuLink}}" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:true}">
+                <mat-icon class="sidenav-nav-icon">{{item.icon}}</mat-icon>
+                @if (SideBarOpened) {
+
+                    <span class="sidenav-nav-text" @fadeInOut>{{item.title}}</span>
+                }
+            </a>
+         </li>
+
+        }
+
+    </ul>
+</div>
+</nav>
