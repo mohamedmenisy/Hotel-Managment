@@ -1,19 +1,23 @@
 <nav class="sideNav" [ngClass]="SideBarOpened ? 'side-nav-Opened':''" >
 <div class="logo">
-
-    <button (click)="ToggleNav()" class="closeNav">
-    <mat-icon class="navicon">arrow_back_ios</mat-icon>
-    </button>
-
+    @if (SideBarOpened)
+    {
+        <button (click)="closeSideNav()">
+            <mat-icon @fadeInOut  class="closeButton">close</mat-icon>
+        </button>
+    }
+    @else {
+        <img class="open" (click)="ToggleNav()" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsTAAALEwEAmpwYAAABl0lEQVR4nO3WMShFURzH8UNRLFgUA2UxYFKiFMUmZbFIRtmMb32j1SSrUrKSxUBhUDIog0FZMGEwIOWrf/0HdHkP99V99/w+ddZ3z/nd+3+/E4KIiIiIiIiIiEgmAcPALrAK1IXY8NkB0BoiDsBcAr0hFiR7BKZCxAGYN6AI1IQ8o7QNoDFEHIA5BTpCHlG+G2AgRByAeQbmQp7wN8tAbYg4ALMDNP3nwQ1AC9AOdAE9QL9fTceBSWDa1xwwDywCBa+nJX8TdoVdAzZ9bfnV9hA4Ac79cmMzfA88pRSAuQC6f3PoQTIgxQDMHTBWbgDr5C8A82pfZ6nDtwEv5DMAs1cqgCIZUaEARn86fD1wSz4DsK96vtTbnyVDUgzgGhj68fAGOCYbrBrHwwf/+K0j+18L5QKavfc7vff7vvT+hHf+jHf+gnd+wTvf1or3/rp3/rZ3/oF3/pl3/pV3/oNvdh8Y+WZff2F7qA95QNrzXm1Ie96rDZWY92oS1bwniWrek0Q170mimvckUc27iIiIiIiIiIiEynkH5kTVBIqldDcAAAAASUVORK5CYII=" alt="arrow">
+    }
 </div>
+
 <div class="Nav-items">
-    <ul class="sidenav-nav p-0 mt-4">
+    <ul class="sidenav-nav">
         @for (item of menu; track $index) {
              <li class="sidenav-nav-item">
             <a class="sidenav-nav-link" [ngClass]="SideBarOpened?'justify-content-start' : 'justify-content-center'" routerLink="{{item.menuLink}}" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:true}">
                 <mat-icon class="sidenav-nav-icon">{{item.icon}}</mat-icon>
                 @if (SideBarOpened) {
-
                     <span class="sidenav-nav-text" @fadeInOut>{{item.title}}</span>
                 }
             </a>

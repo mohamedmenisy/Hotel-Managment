@@ -98,3 +98,19 @@ width: 100% !important;
 padding: 12px !important;
 border-radius: 4px !important;
 }
+//sidebar
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: white;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #203FC7;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #203FC7;
+}

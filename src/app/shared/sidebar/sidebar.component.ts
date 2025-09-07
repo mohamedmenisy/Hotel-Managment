@@ -9,8 +9,6 @@ interface IMenu{
     title:string,
     icon:string,
     menuLink?:string,
-
-
 }
 @Component({
   selector: 'app-sidebar',
