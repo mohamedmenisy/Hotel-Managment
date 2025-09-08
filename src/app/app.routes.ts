@@ -5,6 +5,7 @@ import { HomeComponent } from './shared/home/home.component';
 import { NotFoundComponent } from './shared/not-found/not-found.component';
 import { authGuard } from './Core/Guards/auth.guard';
 import { adminGuard } from './Core/Guards/admin.guard';
+import { DeleteModalComponent } from './shared/delete-modal/delete-modal.component';
 
 export const routes: Routes = [
     {path:'',redirectTo:'auth',pathMatch:'full'},
@@ -14,5 +15,6 @@ export const routes: Routes = [
         {path:'home',component:HomeComponent},
         {path:'facilities',component:FacilitiesListComponent}
     ]},
-    {path:'**',component:NotFoundComponent}
+    {path:'**',component:NotFoundComponent},
+    
 ];
