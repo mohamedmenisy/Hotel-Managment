@@ -96,17 +96,17 @@ export class FacilitiesListComponent {
     this.getAllFacilites(this.pageIndex + 1, this.pageSize);
   }
 
-  viewFacility(id: string) {
-    const dialogRef = this.dialog.open(ViewFacilityComponent, {
+  viewFacility(row: any) {
+     this.dialog.open(ViewFacilityComponent, {
 
-      data: {
-        text: 'facilities',
-      },
+      data:row,
+        
+      
     });
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-      }
-    });
+    // dialogRef.afterClosed().subscribe((result) => {
+    //   if (result) {
+    //   }
+    // });
   }
 
   addFacility() {

@@ -15,25 +15,25 @@
 
     <!-- البيانات -->
     <div class="space-y-3 text-white">
-      <div class="flex justify-between bg-white bg-opacity-20 p-3 rounded-lg border border-white border-opacity-30">
+      <!-- <div class="flex justify-between bg-white bg-opacity-20 p-3 rounded-lg border border-white border-opacity-30">
         <span class="font-semibold">ID</span>
         <span>6870cc08ccc448ef859e742f</span>
-      </div>
+      </div> -->
       <div class="flex justify-between bg-white bg-opacity-20 p-3 rounded-lg border border-white border-opacity-30">
         <span class="font-semibold">name</span>
-        <span>MOKSHA</span>
+        <span>{{ data?.name }}</span>
       </div>
       <div class="flex justify-between bg-white bg-opacity-20 p-3 rounded-lg border border-white border-opacity-30">
         <span class="font-semibold">Created by</span>
-        <span>hamza</span>
+        <span>{{data.createdBy.userName}}</span>
       </div>
       <div class="flex justify-between bg-white bg-opacity-20 p-3 rounded-lg border border-white border-opacity-30">
         <span class="font-semibold">Created Date</span>
-        <span>2025-07-11 08:32:08</span>
+        <span>{{data.createdAt| date : "dd/MM/yyyy" }} </span>
       </div>
       <div class="flex justify-between bg-white bg-opacity-20 p-3 rounded-lg border border-white border-opacity-30">
         <span class="font-semibold">Last Update</span>
-        <span>2025-07-11 08:32:08</span>
+        <span> {{ data.updatedAt | date : "dd/MM/yyyy" }}</span>
       </div>
     </div>
 
