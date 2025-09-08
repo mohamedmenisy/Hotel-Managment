@@ -5,14 +5,26 @@ import { HomeComponent } from './shared/home/home.component';
 import { NotFoundComponent } from './shared/not-found/not-found.component';
 import { authGuard } from './Core/Guards/auth.guard';
 import { adminGuard } from './Core/Guards/admin.guard';
+import { AddEditFacilitiesComponent } from './Modules/facilities/Components/add-edit-facilities/add-edit-facilities.component';
 
 export const routes: Routes = [
-    {path:'',redirectTo:'auth',pathMatch:'full'},
-    {path:'auth',loadChildren:()=>import('./Core/auth/auth.module').then(m=>m.AuthModule)},
-    {path:'dashboard',canActivate:[authGuard,adminGuard] ,component:DashboardComponent,children:[
-        {path:'',redirectTo:'home',pathMatch:'full'},
-        {path:'home',component:HomeComponent},
-        {path:'facilities',component:FacilitiesListComponent}
-    ]},
-    {path:'**',component:NotFoundComponent}
+  { path: '', redirectTo: 'auth', pathMatch: 'full' },
+  {
+    path: 'auth',
+    loadChildren: () =>
+      import('./Core/auth/auth.module').then((m) => m.AuthModule),
+  },
+  {
+    path: 'dashboard',
+    canActivate: [authGuard, adminGuard],
+    component: DashboardComponent,
+    children: [
+      { path: '', redirectTo: 'home', pathMatch: 'full' },
+      { path: 'home', component: HomeComponent },
+      { path: 'facilities', component: FacilitiesListComponent },
+      { path: 'facilities/add', component: AddEditFacilitiesComponent },
+      { path: 'facilities/edit/:id', component: AddEditFacilitiesComponent },
+    ],
+  },
+  { path: '**', component: NotFoundComponent },
 ];

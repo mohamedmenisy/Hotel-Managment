@@ -1,7 +1,6 @@
-
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
-@use '@angular/material' as mat;
+@use "@angular/material" as mat;
 // Plus imports for other components in your app.
 
 // Include the common styles for Angular Material. We include this here so that you only
@@ -20,15 +19,17 @@ $hotel-warn: mat.define-palette(mat.$red-palette);
 
 // Create the theme object. A theme consists of configurations for individual
 // theming systems such as "color" or "typography".
-$hotel-theme: mat.define-light-theme((
-  color: (
-    primary: $hotel-primary,
-    accent: $hotel-accent,
-    warn: $hotel-warn,
-  ),
-  typography: mat.define-typography-config(),
-  density: 0
-));
+$hotel-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $hotel-primary,
+      accent: $hotel-accent,
+      warn: $hotel-warn,
+    ),
+    typography: mat.define-typography-config(),
+    density: 0,
+  )
+);
 
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
@@ -37,34 +38,39 @@ $hotel-theme: mat.define-light-theme((
 
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-.mainColor{
-  color: #3252DF;
+
+.mainColor {
+  color: #3252df;
 }
 
 //global style for inputs
 
-  .mat-mdc-form-field {
-    width: 100% !important;
-  }
+.mat-mdc-form-field {
+  width: 100% !important;
+}
 
-  .mdc-text-field--filled:not(.mdc-text-field--disabled) {
-    background-color: #F5F6F8 !important;
-  }
+.mdc-text-field--filled:not(.mdc-text-field--disabled) {
+  background-color: #f5f6f8 !important;
+}
 
-  .mat-icon {
-    margin-right: 20px;
-  }
+.mat-icon {
+  margin-right: 20px;
+}
 
-  .mat-mdc-unelevated-button.mat-primary {
-    width: 100% !important;
-
-  }
-
+.mat-mdc-unelevated-button.mat-primary {
+  width: 100% !important;
+}
 
 /* success snackbar */
 .success-snackbar .mdc-snackbar__surface {
@@ -80,23 +86,22 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   z-index: 99999999999999999999999;
 }
 
-
 //auth button
-.auth-button{
-background-color: #3252DF !important;
-color: white !important;
-box-shadow: rgba(50, 82, 223,0.3) 0px 8px 24px !important;
-width: 100% !important;
-padding: 12px !important;
-border-radius: 4px !important;
+.auth-button {
+  background-color: #3252df !important;
+  color: white !important;
+  box-shadow: rgba(50, 82, 223, 0.3) 0px 8px 24px !important;
+  width: 100% !important;
+  padding: 12px !important;
+  border-radius: 4px !important;
 }
-.auth-button:disabled{
-background-color: #3252dfde !important;
-color: white !important;
-box-shadow: rgba(50, 82, 223,0.3) 0px 8px 24px !important;
-width: 100% !important;
-padding: 12px !important;
-border-radius: 4px !important;
+.auth-button:disabled {
+  background-color: #3252dfde !important;
+  color: white !important;
+  box-shadow: rgba(50, 82, 223, 0.3) 0px 8px 24px !important;
+  width: 100% !important;
+  padding: 12px !important;
+  border-radius: 4px !important;
 }
 //sidebar
 ::-webkit-scrollbar {
@@ -108,9 +113,9 @@ border-radius: 4px !important;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #203FC7;
+  background: #203fc7;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #203FC7;
+  background: #203fc7;
 }
