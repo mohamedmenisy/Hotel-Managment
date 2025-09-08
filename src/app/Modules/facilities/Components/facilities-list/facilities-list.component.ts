@@ -1,28 +1,28 @@
-import { Component } from '@angular/core';
+import { Component, Inject, ViewChild } from '@angular/core';
+import {MatDialog
+} from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { DeleteModalComponent } from '../../../../shared/delete-modal/delete-modal.component';
 import { FacilitesService } from '../../Services/facilites.service';
-
-import { ViewChild } from '@angular/core';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { ViewFacilityComponent } from '../view-facility/view-facility.component';
+import { DatePipe } from '@angular/common';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatMenuModule } from '@angular/material/menu';
+import { AuthRoutingModule } from '../../../../Core/auth/auth-routing.module';
+import { IFacility, IApiResponse, IFacilitiesData } from '../../Interfaces/IFacility';
+import { MatSort, MatSortModule } from '@angular/material/sort';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import {
   MatPaginator,
   MatPaginatorModule,
   PageEvent,
 } from '@angular/material/paginator';
-import { MatSort, MatSortModule } from '@angular/material/sort';
-import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import {
-  IApiResponse,
-  IFacilitiesData,
-  IFacility,
-} from '../../Interfaces/IFacility';
-
-import { MatIconModule } from '@angular/material/icon';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatButtonModule } from '@angular/material/button';
-import { AuthRoutingModule } from '../../../../Core/auth/auth-routing.module';
-import { DatePipe } from '@angular/common';
-
+export interface DialogData {
+  animal: 'panda' | 'unicorn' | 'lion';
+}
 @Component({
   selector: 'app-facilities-list',
   standalone: true,
@@ -36,7 +36,8 @@ import { DatePipe } from '@angular/common';
     MatMenuModule,
     MatIconModule,
     AuthRoutingModule,
-    DatePipe
+    DatePipe,
+    MatSnackBarModule
   ],
   templateUrl: './facilities-list.component.html',
   styleUrl: './facilities-list.component.scss',
@@ -61,9 +62,14 @@ export class FacilitiesListComponent {
 
   facilites!: IFacility[];
 
-  constructor(private _FacilitesService: FacilitesService) {
-    this.getAllFacilites();
+    constructor(
+    public dialog: MatDialog,
+    public _FacilitesService: FacilitesService,
+    private _snackBar: MatSnackBar
+  ) {
+     this.getAllFacilites();
   }
+
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -91,18 +97,75 @@ export class FacilitiesListComponent {
     this.getAllFacilites(this.pageIndex + 1, this.pageSize);
   }
 
-  viewFacility(id: string) {
-    console.log('View facility with ID:', id);
-    // Implement navigation to the facility detail view if needed
+  // viewFacility(id: string) {
+  //   console.log('View facility with ID:', id);
+  //   // Implement navigation to the facility detail view if needed
+  // }
+
+  // editFacility(id: string) {
+  //   console.log('Edit facility with ID:', id);
+  //   // Implement navigation to the facility edit view if needed
+  // }
+
+  // deleteFacility(id: string) {
+  //   console.log('Delete facility with ID:', id);
+  //   // Implement facility deletion logic if needed
+  // }
+
+
+  openDialogDelete(id: number) {
+    const dialogRef = this.dialog.open(DeleteModalComponent, {
+      width: '640px',
+      height: '571px',
+      data: {
+        text: 'facilities',
+      },
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.deletefacilities(id);
+      }
+    });
   }
 
-  editFacility(id: string) {
-    console.log('Edit facility with ID:', id);
-    // Implement navigation to the facility edit view if needed
+
+    openDialogview() {
+    const dialogRef = this.dialog.open(ViewFacilityComponent, {
+      width: '640px',
+      height: '571px',
+      data: {
+        text: 'facilities',
+      },
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+
+      }
+    });
   }
 
-  deleteFacility(id: string) {
-    console.log('Delete facility with ID:', id);
-    // Implement facility deletion logic if needed
+  deletefacilities(id: number) {
+    this._FacilitesService.deletefacilities(id).subscribe({
+      next: (res) => {
+        console.log(res);
+      },
+      error: (error) => {     this._snackBar.open("an error occurred","",
+                {
+                  duration: 3000,
+                  horizontalPosition: "end",
+                  verticalPosition: "top",
+                  panelClass: ['error-snackbar']
+              })
+            console.log(error);
+
+            },
+      complete: () => {    this._snackBar.open('Delete successfully 🎉',"", {
+        duration: 3000,
+        horizontalPosition: "end",
+        verticalPosition: "top",
+        panelClass: ['success-snackbar']
+        });},
+    });
   }
+
 }

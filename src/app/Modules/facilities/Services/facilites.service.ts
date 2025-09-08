@@ -1,13 +1,19 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { IApiResponse, IFacilitiesData} from '../Interfaces/IFacility';
 import { Observable } from 'rxjs';
+import { IApiResponse, IFacilitiesData } from '../Interfaces/IFacility';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FacilitesService {
-  constructor(private _HttpClient: HttpClient) {}
+
+  constructor(private _HttpClient:HttpClient) { }
+    deletefacilities(id: number): Observable<any> {
+    return this._HttpClient.delete(`room-facilities/${id}`);
+  }
+
+
 
   getAllFacilites(
     page: number,

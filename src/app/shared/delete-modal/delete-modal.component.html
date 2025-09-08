@@ -1,1 +1,17 @@
-<p>delete-modal works!</p>
+<!-- <h2 mat-dialog-title>Favorite Animal</h2> -->
+ <div class="modelIcon flex justify-end p-4 " ><mat-icon class="cloce" (click)="onNoClick()">close</mat-icon></div>
+<mat-dialog-content>
+<div class="imgdialog ">
+    <img src="../../../assets/Images/Email.png"  class="img "  alt="">
+</div>
+  <div mat-dialog-content class="titel">
+            <h3>Delet this {{data.text}}?</h3>
+            <p>are you sure you want to delete this item <span class="text-info "></span>? if you are sure just click on delete it</p>
+           
+        </div>
+        
+</mat-dialog-content>
+ <div  class="flex justify-end pe-4 pb-4">
+                <!-- <button mat-button (click)="onNoClick()" class="btn clos">Close</button> -->
+                <button class="btn delet" mat-button (click)="onNoClickdelete()" >Delet</button>
+            </div>
