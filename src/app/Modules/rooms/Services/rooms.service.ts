@@ -1,4 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
@@ -8,6 +10,11 @@ import { Observable } from 'rxjs';
 })
 export class RoomsService  {
 
+  constructor(private _http:HttpClient) { }
+  createRoom(data:any):Observable<any>{
+    return this._http.post('rooms',data);
+  }
+}
   constructor(private _HttpClient:HttpClient) { }
     CreateFacility(data: any): Observable<any> {
     return this._HttpClient.post("room-facilities", data);
@@ -28,4 +35,3 @@ export class RoomsService  {
     );
   }
 }
-
