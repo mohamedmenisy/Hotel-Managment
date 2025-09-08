@@ -24,6 +24,11 @@ export const routes: Routes = [
       { path: 'facilities', component: FacilitiesListComponent },
       { path: 'facilities/add', component: AddEditFacilitiesComponent },
       { path: 'facilities/edit/:id', component: AddEditFacilitiesComponent },
+      {
+      path: 'rooms',
+      loadChildren: () =>
+          import('./Modules/rooms/rooms.module').then(m => m.RoomsModule)
+}
     ],
   },
   { path: '**', component: NotFoundComponent },
