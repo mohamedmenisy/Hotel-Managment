@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -8,5 +9,9 @@ import { Component } from '@angular/core';
   standalone:true,
 })
 export class NotFoundComponent {
+constructor(private _route:Router){}
+  back(){
 
+    this._route.navigate(["/dashboard"])
+  }
 }

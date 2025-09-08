@@ -1,8 +1,4 @@
-import {
-  IFacility,
-  IFacilitiesData,
-  IApiResponse,
-} from './../../interfaces/IFacility';
+import { IFacility ,IFacilitiesData , IApiResponse} from './../../Interfaces/IFacility';
 import { Component, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
@@ -102,7 +98,7 @@ export class FacilitiesListComponent {
 
   viewFacility(id: string) {
     const dialogRef = this.dialog.open(ViewFacilityComponent, {
-    
+
       data: {
         text: 'facilities',
       },

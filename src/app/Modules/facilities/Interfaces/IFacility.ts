@@ -21,3 +21,6 @@ export interface IUserSummary {
   _id: string;
   userName: string;
 }
+export interface IFaciltyModal {
+  name : string
+}

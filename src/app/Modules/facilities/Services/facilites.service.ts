@@ -1,21 +1,20 @@
-
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IFacilitiesData, IApiResponse } from './../interfaces/IFacility';
-import { Facilties } from '../interfaces/facilties';
+import { IFacilitiesData, IApiResponse ,IFaciltyModal } from './../Interfaces/IFacility';
+
 @Injectable({
   providedIn: 'root',
 })
 export class FacilitesService {
 
   constructor(private _HttpClient:HttpClient) { }
-    CreateFacility(data: any): Observable<Facilties> {
-    return this._HttpClient.post<Facilties>("room-facilities", data);
+    CreateFacility(data: any): Observable<IFaciltyModal> {
+    return this._HttpClient.post<IFaciltyModal>("room-facilities", data);
   }
 
-  EditFacility(id: string, data: any): Observable<Facilties> {
-    return this._HttpClient.put<Facilties>(`room-facilities/${id}`, data);
+  EditFacility(id: string, data: any): Observable<IFaciltyModal> {
+    return this._HttpClient.put<IFaciltyModal>(`room-facilities/${id}`, data);
   }
 
     deletefacilities(id: string): Observable<any> {
