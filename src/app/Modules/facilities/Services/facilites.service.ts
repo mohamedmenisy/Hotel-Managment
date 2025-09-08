@@ -10,11 +10,11 @@ import { Facilties } from '../interfaces/facilties';
 export class FacilitesService {
 
   constructor(private _HttpClient:HttpClient) { }
-    Creator(data: any): Observable<Facilties> {
+    CreateFacility(data: any): Observable<Facilties> {
     return this._HttpClient.post<Facilties>("room-facilities", data);
   }
 
-  Editor(id: number, data: any): Observable<Facilties> {
+  EditFacility(id: string, data: any): Observable<Facilties> {
     return this._HttpClient.put<Facilties>(`room-facilities/${id}`, data);
   }
 

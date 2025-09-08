@@ -23,6 +23,7 @@ import {
   MatPaginatorModule,
   PageEvent,
 } from '@angular/material/paginator';
+import { AddEditFacilitiesComponent } from '../add-edit-facilities/add-edit-facilities.component';
 export interface DialogData {
   animal: 'panda' | 'unicorn' | 'lion';
 }
@@ -101,8 +102,7 @@ export class FacilitiesListComponent {
 
   viewFacility(id: string) {
     const dialogRef = this.dialog.open(ViewFacilityComponent, {
-      width: '640px',
-      height: '571px',
+    
       data: {
         text: 'facilities',
       },
@@ -113,9 +113,38 @@ export class FacilitiesListComponent {
     });
   }
 
-  editFacility(id: string) {
-    console.log('Edit facility with ID:', id);
-    // Implement navigation to the facility edit view if needed
+  addFacility() {
+   const dialogRef = this.dialog.open(AddEditFacilitiesComponent, {
+      width: '640px',
+
+      data: {
+        title: 'Add Facility',
+        name:null,
+        id:null
+      },
+    });
+     dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+
+        this.getAllFacilites();
+      }
+    });
+  }
+  editFacility(id: string , name :string) {
+   const dialogRef = this.dialog.open(AddEditFacilitiesComponent, {
+      width: '640px',
+
+      data: {
+        title: 'Add Facility',
+        name:name,
+        id:id
+      },
+    });
+     dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.getAllFacilites();
+      }
+    });
   }
 
   deleteFacility(id: string) {

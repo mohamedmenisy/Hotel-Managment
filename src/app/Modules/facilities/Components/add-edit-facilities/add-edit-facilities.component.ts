@@ -1,18 +1,23 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FacilitesService } from '../../Services/facilites.service';
-import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatIconModule } from '@angular/material/icon';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
-
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
 @Component({
   selector: 'app-add-edit-facilities',
   standalone: true,
   imports: [
     CommonModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatIconModule,
+    MatInputModule,
+    MatFormFieldModule
   ],
   templateUrl: './add-edit-facilities.component.html',
   styleUrl: './add-edit-facilities.component.scss'
@@ -20,68 +25,72 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 export class AddEditFacilitiesComponent {
 
-  facilityId: number = 0
-
-  constructor(private F1: FacilitesService, private act: ActivatedRoute, private r: Router, private snack: MatSnackBar) {
-    this.facilityId = act.snapshot.params['id']
+  facilityId:any=null;
+  constructor(private _facilities: FacilitesService,@Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<AddEditFacilitiesComponent>, private snack: MatSnackBar) {
+    console.log(data);
+    if(data.id !=null){
+      this.facilityId = data.id;
+      this.FacitiyForm.get("name")?.setValue(data.name);
+    }
   }
 
   FacitiyForm = new FormGroup({
-    name: new FormControl('', [Validators.required, Validators.minLength(10)])
+    name: new FormControl('', [Validators.required, Validators.minLength(4)])
   });
 
 
-  Missions(d: FormGroup) {
+SubmitForm(data:FormGroup){
+  if(this.facilityId != null){
+  this._facilities.EditFacility(this.facilityId,data.value).subscribe({
+      next:(res)=>{
+          this.snack.open('Edit successfully 🎉', '', {
+          duration: 3000,
+          horizontalPosition: 'end',
+          verticalPosition: 'top',
+          panelClass: ['success-snackbar'],
+        });
+        this.onSubmit(true);
+      },
+      error:(err)=>{
+          this.snack.open('an error occurred', '', {
+          duration: 3000,
+          horizontalPosition: 'end',
+          verticalPosition: 'top',
+          panelClass: ['error-snackbar'],
+        });
+        this.onSubmit(false);
+      },
 
-    if (this.facilityId && this.facilityId > 0) { //Update Exist
+    });
+  }else{
+    this._facilities.CreateFacility(data.value).subscribe({
+      next:(res)=>{
+            this.snack.open('Added successfully 🎉', '', {
+          duration: 3000,
+          horizontalPosition: 'end',
+          verticalPosition: 'top',
+          panelClass: ['success-snackbar'],
+        });
+        this.onSubmit(true);
+      },
+      error:(err)=>{
+         this.snack.open('an error occurred', '', {
+          duration: 3000,
+          horizontalPosition: 'end',
+          verticalPosition: 'top',
+          panelClass: ['error-snackbar'],
+        });
+        this.onSubmit(false);
+      },
 
-      this.F1.Editor(this.facilityId, this.FacitiyForm.value).subscribe({
-        next: (Res) => {
-          console.log("Mission Accomplished !" + Res);
-          this.snack.open('Facility updated successfully!', 'Close', {
-            duration: 3000,
-            horizontalPosition: 'right',
-            verticalPosition: 'top',
-          });
-        },
-        error: (issue) => {
-          console.error("Aborting!" + issue);
-          this.snack.open('Update failed!', 'Close', {
-            duration: 3000,
-            panelClass: ['snackbar-error']
-          });
-        },
-        complete: () => { this.r.navigate(['/dashboard/facilities']); }, //Navigate to table
-
-      })
-    }
-
-    else {  // Create New
-
-      this.F1.Creator(this.FacitiyForm.value).subscribe({
-
-        next: (Res) => {
-          console.log("Mission Accomplished !" + Res);
-          this.snack.open('Facility created successfully!', 'Close', {
-            duration: 3000,
-            horizontalPosition: 'right',
-            verticalPosition: 'top',
-          });
-        },
-
-        error: (issue) => {
-          console.error("Aborting!" + issue);
-          this.snack.open('Creation failed!', 'Close', {
-            duration: 3000,
-            panelClass: ['snackbar-error']
-          });
-        },
-        complete: () => { this.r.navigate(['/dashboard/facilities']); }, //Navigate to table
-
-      })
-    }
-
-
+    });
   }
+}
 
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+  onSubmit(flag:boolean): void {
+    this.dialogRef.close(flag);
+  }
 }

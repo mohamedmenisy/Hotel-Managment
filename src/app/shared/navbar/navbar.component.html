@@ -36,11 +36,11 @@
                             <mat-icon>account_circle</mat-icon>
                             <span>Profile</span>
                         </a>
-                        <button mat-menu-item >
+                        <button mat-menu-item (click)="ChangePassword()">
                             <mat-icon>key</mat-icon>
                             <span>Change Password</span>
                         </button>
-                        <button mat-menu-item >
+                        <button mat-menu-item (click)="logout()">
                             <mat-icon>logout</mat-icon>
                             <span>logout</span>
                         </button>

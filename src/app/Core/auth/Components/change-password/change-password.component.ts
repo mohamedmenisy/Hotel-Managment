@@ -60,6 +60,6 @@ export class ChangePasswordComponent {
     })
   }
   back(){
-    this._router.navigate(["/auth/login"])
+    this._router.navigate(["/dashboard"])
   }
 }

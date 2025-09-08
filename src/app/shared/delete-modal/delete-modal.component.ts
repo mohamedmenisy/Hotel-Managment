@@ -3,7 +3,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { DialogData } from '../../Modules/facilities/Components/facilities-list/facilities-list.component';
 import {
   MatDialog,
- 
+
   MatDialogTitle,
   MatDialogContent,
 } from '@angular/material/dialog';
@@ -19,11 +19,11 @@ export class DeleteModalComponent{
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<DeleteModalComponent>,) {}
 
 
-  
+
    onNoClick(): void {
     this.dialogRef.close();
   }
-     onNoClickdelete(): void {
+  onNoClickdelete(): void {
     this.dialogRef.close(true);
   }
 }

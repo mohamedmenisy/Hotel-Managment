@@ -34,4 +34,10 @@ export class AuthService {
     return this._http.post<Iregister>('users',data)
   }
 
+  logout(){
+    localStorage.removeItem("token");
+    localStorage.removeItem("role");
+    localStorage.removeItem("userName");
+  }
+
 }

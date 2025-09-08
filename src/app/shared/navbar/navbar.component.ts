@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component } from '@angular/core';
 import { SideNavService } from '../Services/side-nav.service';
 import { AuthService } from '../../Core/auth/Services/auth.service';
@@ -12,7 +13,7 @@ import {MatButtonModule} from '@angular/material/button';
   imports:[MatIconModule,MatMenuModule,MatButtonModule]
 })
 export class NavbarComponent {
-  constructor(private sidnav:SideNavService,private _auth:AuthService) {}
+  constructor(private sidnav:SideNavService,private _auth:AuthService,private Router:Router) {}
   userName:string | null=null;
   userEmail:string | null=null;
   isMobileSize:boolean=false;
@@ -36,5 +37,12 @@ export class NavbarComponent {
     })
 
   }
+ChangePassword(){
+  this.Router.navigate(['/auth/change-password'])
+}
+logout(){
+  this._auth.logout();
+    this.Router.navigate(['/auth/login'])
 
+}
 }

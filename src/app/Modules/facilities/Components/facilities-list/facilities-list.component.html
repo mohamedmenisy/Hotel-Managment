@@ -12,7 +12,7 @@
   <div class="facilities-header__actions">
     <button
       class="btn-add px-4 py-2 hover:bg-blue-700 transition"
-      routerLink="/dashboard/facilities/add"
+      (click)="addFacility()"
     >
       Add New Facility
     </button>
@@ -75,7 +75,7 @@
             <mat-icon class="actions-color">visibility</mat-icon>
             <span>View</span>
           </button>
-          <button mat-menu-item (click)="editFacility(row._id)">
+          <button mat-menu-item (click)="editFacility(row._id,row.name)">
             <mat-icon class="actions-color">edit_square</mat-icon>
             <span>Edit</span>
           </button>
