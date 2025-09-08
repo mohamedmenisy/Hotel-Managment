@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 
 import { RoomsRoutingModule } from './rooms-routing.module';
 
-
 @NgModule({
   declarations: [],
   imports: [
