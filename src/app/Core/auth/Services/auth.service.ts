@@ -39,5 +39,7 @@ export class AuthService {
     localStorage.removeItem("role");
     localStorage.removeItem("userName");
   }
-
+ getCurrentUser(id:any): Observable<any>{
+  return this._http.get(`users/${id}`);
+  }
 }

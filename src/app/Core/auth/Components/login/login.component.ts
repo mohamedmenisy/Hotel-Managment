@@ -36,7 +36,7 @@ export class LoginComponent {
       localStorage.setItem('token',res.data.token);
       localStorage.setItem('role',res.data.user.role);
       localStorage.setItem('userName',res.data.user.userName);
-
+      localStorage.setItem('id',res.data.user._id);
       },
       error:(err)=>{
          this._snackBar.open("an error occurred","",
@@ -49,17 +49,31 @@ export class LoginComponent {
         );
       },
       complete:()=>{
+
+        if(localStorage.getItem('role') == 'admin'){
+
+        this.getCurrentUser(localStorage.getItem("id"));
+
+        }
+      }
+    });
+  }
+
+
+    getCurrentUser(userid:any){
+    this._AuthService.getCurrentUser(userid).subscribe({
+      next:(res)=>{
+          localStorage.setItem('profileImage', res.data.user.profileImage);
+          this._router.navigate(['/dashboard']);
         this._snackBar.open('Login successfully 🎉',"", {
         duration: 3000,
         horizontalPosition: "end",
         verticalPosition: "top",
         panelClass: ['success-snackbar']
         });
-        if(localStorage.getItem('role') == 'admin'){
-          this._router.navigate(["/dashboard"])
-        }
-      }
-    });
+      },
+
+    })
   }
 
 }

@@ -19,9 +19,9 @@ export class NavbarComponent {
   isMobileSize:boolean=false;
   userImg:any;
   ngOnInit(): void {
-    let username= localStorage.getItem("UseName");
+    let username= localStorage.getItem("userName");
     this.userName = username;
-    let imguser = localStorage.getItem("ImagePath");
+    let imguser = localStorage.getItem("profileImage");
     this.userImg = imguser;
     let userEmail = localStorage.getItem("userEmail");
     this.userEmail = userEmail;

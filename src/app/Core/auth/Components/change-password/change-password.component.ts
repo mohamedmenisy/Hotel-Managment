@@ -55,7 +55,7 @@ export class ChangePasswordComponent {
         );
       },
       complete:()=>{
-
+      this._router.navigate(["/dashboard"])
       },
     })
   }
