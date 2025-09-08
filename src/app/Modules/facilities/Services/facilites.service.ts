@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { IApiResponse, IFacilitiesData, IRoot } from '../Interfaces/IFacility';
+import { IApiResponse, IFacilitiesData} from '../Interfaces/IFacility';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -8,10 +8,6 @@ import { Observable } from 'rxjs';
 })
 export class FacilitesService {
   constructor(private _HttpClient: HttpClient) {}
-
-  // getAllFacilites(){
-  //   return this._HttpClient.get('room-facilities');
-  // }
 
   getAllFacilites(
     page: number,
