@@ -1,7 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
 
@@ -14,24 +12,17 @@ export class RoomsService  {
   createRoom(data:any):Observable<any>{
     return this._http.post('rooms',data);
   }
-}
-  constructor(private _HttpClient:HttpClient) { }
-    CreateFacility(data: any): Observable<any> {
-    return this._HttpClient.post("room-facilities", data);
+   deleterooms(id: string): Observable<any> {
+    return this._http.delete(`rooms/${id}`);
   }
-
-
-
-    deleterooms(id: string): Observable<any> {
-    return this._HttpClient.delete(`rooms/${id}`);
-  }
-
-  getAllrooms(
-    page: number,
-    size: number
-  ): Observable<any> {
-    return this._HttpClient.get<any>(
-      `rooms?page=${page}&size=${size}`
+  getAllrooms(page: number,size: number): Observable<any> {
+    return this._http.get<any>(`rooms?page=${page}&size=${size}`
     );
+  }
+  getRoomByid(id:string):Observable<any>{
+    return this._http.get(`rooms/${id}`);
+  }
+  UpdateRoom(id:string,data:any):Observable<any>{
+    return this._http.put(`rooms/${id}`,data);
   }
 }

@@ -2,12 +2,12 @@ import { CommonModule } from '@angular/common';
 import { Component, Inject } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FacilitesService } from '../../Services/facilites.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatIconModule } from '@angular/material/icon';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import { AlertsService } from '../../../../shared/Services/alerts.service';
 @Component({
   selector: 'app-add-edit-facilities',
   standalone: true,
@@ -26,7 +26,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 export class AddEditFacilitiesComponent {
 
   facilityId:any=null;
-  constructor(private _facilities: FacilitesService,@Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<AddEditFacilitiesComponent>, private snack: MatSnackBar) {
+  constructor(private _facilities: FacilitesService,@Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<AddEditFacilitiesComponent>, private alerts: AlertsService) {
     console.log(data);
     if(data.id !=null){
       this.facilityId = data.id;
@@ -43,21 +43,11 @@ SubmitForm(data:FormGroup){
   if(this.facilityId != null){
   this._facilities.EditFacility(this.facilityId,data.value).subscribe({
       next:(res)=>{
-          this.snack.open('Edit successfully 🎉', '', {
-          duration: 3000,
-          horizontalPosition: 'end',
-          verticalPosition: 'top',
-          panelClass: ['success-snackbar'],
-        });
+        this.alerts.SweetalertSuccess("Facility Edit successfully🎉")
         this.onSubmit(true);
       },
       error:(err)=>{
-          this.snack.open('an error occurred', '', {
-          duration: 3000,
-          horizontalPosition: 'end',
-          verticalPosition: 'top',
-          panelClass: ['error-snackbar'],
-        });
+        this.alerts.SweetalertError("An error occurred")
         this.onSubmit(false);
       },
 
@@ -65,22 +55,12 @@ SubmitForm(data:FormGroup){
   }else{
     this._facilities.CreateFacility(data.value).subscribe({
       next:(res)=>{
-            this.snack.open('Added successfully 🎉', '', {
-          duration: 3000,
-          horizontalPosition: 'end',
-          verticalPosition: 'top',
-          panelClass: ['success-snackbar'],
-        });
+        this.alerts.SweetalertSuccess("Facility Created successfully🎉")
         this.onSubmit(true);
       },
       error:(err)=>{
-         this.snack.open('an error occurred', '', {
-          duration: 3000,
-          horizontalPosition: 'end',
-          verticalPosition: 'top',
-          panelClass: ['error-snackbar'],
-        });
-        this.onSubmit(false);
+      this.alerts.SweetalertError("An error occurred")
+      this.onSubmit(false);
       },
 
     });

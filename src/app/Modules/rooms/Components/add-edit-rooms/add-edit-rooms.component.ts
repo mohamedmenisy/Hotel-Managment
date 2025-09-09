@@ -9,9 +9,10 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IFacility } from '../../../facilities/Interfaces/IFacility';
 import { NgFor } from '@angular/common';
+import { AlertsService } from '../../../../shared/Services/alerts.service';
 
 
 @Component({
@@ -25,7 +26,12 @@ export class AddEditRoomsComponent {
     facilites!: IFacility[];
     files: File[] = [];
     imgSrc:any=null;
-    constructor(private _snackBar:MatSnackBar,private _router:Router,private _FacilitesService:FacilitesService,private _roomsService:RoomsService){}
+    roomid:string = '';
+    constructor(private alert:AlertsService,private _router:Router,private active:ActivatedRoute,private _FacilitesService:FacilitesService,private _roomsService:RoomsService){
+    this.roomid = active.snapshot.params['id'];
+    if (this.roomid != '')
+    this.getRoomByid(this.roomid);
+    }
     rooms:FormGroup = new FormGroup({
     roomNumber:new FormControl(null,[Validators.required]),
     price:new FormControl(null,[Validators.required]),
@@ -45,8 +51,14 @@ export class AddEditRoomsComponent {
       })
     }
     submit(rooms:FormGroup){
+      if(this.roomid != ''){
+        this.updateRoom(rooms);
+      }else{
+        this.addRoom(rooms);
+      }
+    }
+  addRoom(rooms:FormGroup){
     const formData = new FormData();
-    // إضافة النصوص
     formData.append('roomNumber', rooms.value.roomNumber);
     formData.append('price', rooms.value.price);
     formData.append('capacity', rooms.value.capacity);
@@ -64,18 +76,66 @@ export class AddEditRoomsComponent {
     });
     this._roomsService.createRoom(formData).subscribe({
     next: (res)=>{
-      console.log(res);
+      this.alert.SweetalertSuccess("Room Created successfully🎉");
     },
     error: (err) => {
-      console.log(err);
+      this.alert.SweetalertError();
     }
     });
-    }
+  }
+  updateRoom(rooms:FormGroup){
+    const formData = new FormData();
+    formData.append('roomNumber', rooms.value.roomNumber);
+    formData.append('price', rooms.value.price);
+    formData.append('capacity', rooms.value.capacity);
+    formData.append('discount', rooms.value.discount);
+    this.files.forEach(file => {
+    formData.append('imgs', file);
+    });
+    const facilities: string[] = Array.isArray(rooms.value.facilities)
+    ? rooms.value.facilities
+    : [rooms.value.facilities];
+    console.log(facilities);
 
+    facilities.forEach((f: string) => {
+      formData.append('facilities[]', f);
+    });
+    this._roomsService.UpdateRoom(this.roomid,formData).subscribe({
+    next: (res)=>{
+    this.alert.SweetalertSuccess("Room Updated successfully🎉");
+    },
+    error: (err) => {
+      this.alert.SweetalertError();
+    }
+    });
+  }
+  getRoomByid(id:string){
+      this._roomsService.getRoomByid(id).subscribe({
+        next:async (res)=>{
+          console.log(res);
+      const room = res.data.room;
+        this.rooms.patchValue({
+        roomNumber: room.roomNumber,
+        price: room.price,
+        capacity:room.capacity,
+        discount: room.discount,
+        facilities: room.facilities.map((f: any) => f._id),
+        imgs: room.images
+      });
+      this.files = [];
+      for (const url of room.images) {
+        const response = await fetch(url);
+        const blob = await response.blob();
+        const fileName = url.split('/').pop() || 'image.jpg';
+        const file = new File([blob], fileName, { type: blob.type });
+        this.files.push(file);
+      }
+      }
+      });
+  }
   onSelect(event:any) {
     this.files.push(...event.addedFiles);
   }
-
   onRemove(file:File) {
     this.files = this.files.filter(f => f !== file);
   }

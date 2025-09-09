@@ -17,7 +17,6 @@ export class HomeComponent {
 
   constructor(private _chart:ChartService){
         Chart.register(...registerables);
-
   }
 
   ngOnInit(): void {
@@ -94,10 +93,9 @@ export class HomeComponent {
       afterDraw(chart) {
         const { ctx } = chart;
         const chartArea = chart.chartArea;
-
         ctx.save();
         ctx.font = 'bold 18px Arial';
-        ctx.fillStyle = '#111827'; // اللون (Tailwind gray-900)
+        ctx.fillStyle = '#111827';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
         ctx.fillText('Users', (chartArea.left + chartArea.right) / 2, (chartArea.top + chartArea.bottom) / 2);

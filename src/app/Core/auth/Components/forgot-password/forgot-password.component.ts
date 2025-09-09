@@ -8,7 +8,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { AuthService } from '../../Services/auth.service';
 import { IforgotPassword } from '../../Interfaces/iforgot-password';
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import {  MatSnackBarModule } from '@angular/material/snack-bar';
+import { AlertsService } from '../../../../shared/Services/alerts.service';
 
 
 @Component({
@@ -29,7 +30,7 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 })
 export class ForgotPasswordComponent {
 
-  constructor(private auth: AuthService, private s: MatSnackBar, private r: Router) { }
+  constructor(private auth: AuthService, private _alert: AlertsService, private r: Router) { }
 
   hideEmail = true;
 
@@ -47,24 +48,11 @@ export class ForgotPasswordComponent {
 
       this.auth.onForget(formValue).subscribe({
         next: (response) => {
-          this.s.open('Check Your Inbox For The Verification Code', "", {
-            duration: 3000,
-            horizontalPosition: "end",
-            verticalPosition: "top",
-            panelClass: ['success-snackbar']
-          });
+          this._alert.succeess('Check Your Inbox For The Verification Code')
           this.Data.push(response);
         },
         error: (error) => {
-          console.error('API Error:', error);
-          this.s.open("an error occurred", "",
-            {
-              duration: 3000,
-              horizontalPosition: "end",
-              verticalPosition: "top",
-              panelClass: ['error-snackbar']
-            }
-          );
+          this._alert.Error()
         },
 
         complete: () => { this.r.navigateByUrl("/auth/reset-password") },

@@ -7,6 +7,7 @@ import {MatButtonModule} from '@angular/material/button';
 import { AuthService } from '../../Services/auth.service';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { AlertsService } from '../../../../shared/Services/alerts.service';
 
 @Component({
   selector: 'app-change-password',
@@ -21,7 +22,7 @@ export class ChangePasswordComponent {
   hide = true;
   hidenewPass = true;
   hideCofirmPass = true;
-  constructor(private _auth:AuthService,private _snackBar:MatSnackBar,private _router:Router){}
+  constructor(private _auth:AuthService,private _alert:AlertsService,private _router:Router){}
   changePasswordForm:FormGroup = new FormGroup({
     oldPassword:new FormControl(null,[Validators.required,Validators.pattern(this.PasswordPattern)]),
     newPassword:new FormControl(null,[Validators.required,Validators.pattern(this.PasswordPattern)]),
@@ -37,22 +38,12 @@ export class ChangePasswordComponent {
   ChangePassowrd(changePasswordForm:FormGroup){
     this._auth.ChangePassword(changePasswordForm.value).subscribe({
       next:(res)=>{
-           this._snackBar.open('Your password has been changed successfully 🎉',"", {
-          duration: 3000,
-          horizontalPosition: "end",
-          verticalPosition: "top",
-          panelClass: ['success-snackbar']
-        });
+          this._alert.succeess("Your password has been changed")
       },
       error:(err)=>{
-      this._snackBar.open("an error occurred","",
-                {
-                  duration: 3000,
-                  horizontalPosition: "end",
-                  verticalPosition: "top",
-                  panelClass: ['error-snackbar']
-                }
-        );
+        console.log(err);
+        
+      this._alert.Error()
       },
       complete:()=>{
       this._router.navigate(["/dashboard"])
