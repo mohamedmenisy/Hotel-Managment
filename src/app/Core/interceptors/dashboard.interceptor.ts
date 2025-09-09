@@ -1,14 +1,14 @@
+import { DashLoaderService } from './../../shared/Services/dash-loader.service';
 import { inject } from '@angular/core';
 import { HttpInterceptorFn } from '@angular/common/http';
 import { Constants } from '../Enviroment/Constants';
 import { finalize } from 'rxjs';
-import { AuthLoaderService } from '../../shared/Services/auth-loader.service';
 
-export const globalInterceptor: HttpInterceptorFn = (req, next) => {
-  const authLoader = inject(AuthLoaderService);
+export const dashboardLoaderInterceptor: HttpInterceptorFn = (req, next) => {
+  const dashLoader = inject(DashLoaderService);
 
-  if (req.url.includes('/auth')) {
-    authLoader.show();
+  if (req.url.includes('/dashboard')) {
+    dashLoader.show();
 
     const isAbsolute = /^https?:\/\//i.test(req.url);
     const url = isAbsolute ? req.url : Constants.baseUrl + req.url;
@@ -20,7 +20,7 @@ export const globalInterceptor: HttpInterceptorFn = (req, next) => {
     });
 
     return next(updated).pipe(
-      finalize(() => authLoader.hide())
+      finalize(() => dashLoader.hide())
     );
   }
 
