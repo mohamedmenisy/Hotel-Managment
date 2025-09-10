@@ -64,12 +64,11 @@ menu:IMenu[]=[
     icon:"meeting_room",
     menuLink:"/dashboard/rooms",
   },
-  // {
-  //   title:"Tasks",
-  //   icon:"checklist",
-  //   menuLink:"/dashboard/manager/tasks",
-  //   isActive:this.isManager(),
-  // }
+  {
+    title:"Ads",
+    icon:"ads_click",
+    menuLink:"/dashboard/ads",
+  }
   // ,
   // {
   //   title:"Projects",

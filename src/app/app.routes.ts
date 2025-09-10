@@ -28,7 +28,12 @@ export const routes: Routes = [
       path: 'rooms',
       loadChildren: () =>
           import('./Modules/rooms/rooms.module').then(m => m.RoomsModule)
-}
+      },
+      {
+      path: 'ads',
+      loadChildren: () =>
+          import('./Modules/ads/ads.module').then(m => m.AdsModule)
+      }
     ],
   },
   { path: '**', component: NotFoundComponent },

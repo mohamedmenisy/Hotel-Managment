@@ -30,7 +30,7 @@ export class AddEditRoomsComponent {
     isloading:boolean=false;
     constructor(private alert:AlertsService,private _router:Router,private active:ActivatedRoute,private _FacilitesService:FacilitesService,private _roomsService:RoomsService){
     this.roomid = active.snapshot.params['id'];
-    if (this.roomid != '')
+    if (this.roomid)
     this.getRoomByid(this.roomid);
     }
     rooms:FormGroup = new FormGroup({
@@ -52,7 +52,7 @@ export class AddEditRoomsComponent {
       })
     }
     submit(rooms:FormGroup){
-      if(this.roomid != ''){
+      if(this.roomid){
         this.updateRoom(rooms);
       }else{
         this.addRoom(rooms);
@@ -82,6 +82,7 @@ export class AddEditRoomsComponent {
       this.isloading=false;
     },
     error: (err) => {
+      console.log(err);
       this.isloading=false;
       this.alert.SweetalertError();
     }
