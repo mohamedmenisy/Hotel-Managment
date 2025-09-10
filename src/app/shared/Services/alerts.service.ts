@@ -1,6 +1,6 @@
+import { Swal } from 'sweetalert2';
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root'
