@@ -91,10 +91,10 @@
           <mat-icon>more_horiz</mat-icon>
         </button>
         <mat-menu #menu="matMenu">
-          <!-- <button mat-menu-item (click)="viewFacility(row)">
+          <button mat-menu-item (click)="viewRoom(row)">
             <mat-icon class="actions-color">visibility</mat-icon>
             <span>View</span>
-          </button> -->
+          </button>
           <button mat-menu-item routerLink="/dashboard/rooms/edit/{{row._id}}">
             <mat-icon class="actions-color">edit_square</mat-icon>
             <span>Edit</span>

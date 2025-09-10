@@ -18,8 +18,6 @@ import {MatIconModule} from '@angular/material/icon';
 export class DeleteModalComponent{
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<DeleteModalComponent>,) {}
 
-
-
    onNoClick(): void {
     this.dialogRef.close();
   }

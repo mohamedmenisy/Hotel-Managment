@@ -18,6 +18,8 @@ import {
 } from '@angular/material/paginator';
 import { RoomsService } from '../../Services/rooms.service';
 import { AlertsService } from '../../../../shared/Services/alerts.service';
+import { Router } from '@angular/router';
+import { RoomViewComponent } from '../room-view/room-view.component';
 
 export interface DialogData {
   animal: 'panda' | 'unicorn' | 'lion';
@@ -42,7 +44,12 @@ export interface DialogData {
   styleUrl: './rooms-list.component.scss',
 })
 export class RoomsListComponent {
-  constructor(public dialog: MatDialog,public _RoomsService: RoomsService,private _alert: AlertsService) {}
+  constructor(
+    public dialog: MatDialog,
+    public _RoomsService: RoomsService,
+    private _alert: AlertsService
+  ) {}
+
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   facilites!: any[];
@@ -61,11 +68,8 @@ export class RoomsListComponent {
   ];
 
   ngOnInit(): void {
-        this.getAllrooms();
+    this.getAllrooms();
   }
-
-
-
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -115,13 +119,25 @@ export class RoomsListComponent {
         console.log(res);
       },
       error: (error) => {
-      this._alert.SweetalertError();
+        this._alert.SweetalertError();
         console.log(error);
       },
       complete: () => {
-        this._alert.SweetalertSuccess("Deleted successfully🎉");
+        this._alert.SweetalertSuccess('Deleted successfully🎉');
         this.getAllrooms();
       },
+    });
+  }
+
+  viewRoom(room: any) {
+    const dialogRef = this.dialog.open(RoomViewComponent, {
+      width: '384px',
+      data: room,
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.deleteRoomFunc(room._id);
+      }
     });
   }
 }
