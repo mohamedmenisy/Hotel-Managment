@@ -27,6 +27,7 @@ export class AddEditRoomsComponent {
     files: File[] = [];
     imgSrc:any=null;
     roomid:string = '';
+    isloading:boolean=false;
     constructor(private alert:AlertsService,private _router:Router,private active:ActivatedRoute,private _FacilitesService:FacilitesService,private _roomsService:RoomsService){
     this.roomid = active.snapshot.params['id'];
     if (this.roomid != '')
@@ -58,6 +59,7 @@ export class AddEditRoomsComponent {
       }
     }
   addRoom(rooms:FormGroup){
+    this.isloading=true;
     const formData = new FormData();
     formData.append('roomNumber', rooms.value.roomNumber);
     formData.append('price', rooms.value.price);
@@ -77,13 +79,16 @@ export class AddEditRoomsComponent {
     this._roomsService.createRoom(formData).subscribe({
     next: (res)=>{
       this.alert.SweetalertSuccess("Room Created successfully🎉");
+      this.isloading=false;
     },
     error: (err) => {
+      this.isloading=false;
       this.alert.SweetalertError();
     }
     });
   }
   updateRoom(rooms:FormGroup){
+    this.isloading=true;
     const formData = new FormData();
     formData.append('roomNumber', rooms.value.roomNumber);
     formData.append('price', rooms.value.price);
@@ -102,9 +107,11 @@ export class AddEditRoomsComponent {
     });
     this._roomsService.UpdateRoom(this.roomid,formData).subscribe({
     next: (res)=>{
+    this.isloading=false;
     this.alert.SweetalertSuccess("Room Updated successfully🎉");
     },
     error: (err) => {
+      this.isloading=false;
       this.alert.SweetalertError();
     }
     });

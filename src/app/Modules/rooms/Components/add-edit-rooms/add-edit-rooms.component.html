@@ -62,7 +62,13 @@
             </ngx-dropzone>
         </div>
         <div class="col-span-12 flex justify-end">
-            <button class="btnSubmit">Submit</button>
+            <button class="btnSubmit">
+               @if(isloading == false){
+                   <span>Submit</span>
+               }@else{
+                <span>...</span>
+               }
+            </button>
         </div>
     </div>
     </form>
