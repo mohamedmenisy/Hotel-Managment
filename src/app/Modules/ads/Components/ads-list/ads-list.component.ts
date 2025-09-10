@@ -1,3 +1,6 @@
+import { DeleteModalComponent } from './../../../../shared/delete-modal/delete-modal.component';
+import { MatDialog } from '@angular/material/dialog';
+import { AddEditAdsComponent } from './../add-edit-ads/add-edit-ads.component';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
@@ -11,6 +14,7 @@ import { MatMenuModule } from '@angular/material/menu';
 
 import { Ad } from '../../Interfaces/ads';
 import { AdsService } from '../../Services/ads.service';
+import { AlertsService } from '../../../../shared/Services/alerts.service';
 
 @Component({
   selector: 'app-ads-list',
@@ -30,7 +34,7 @@ import { AdsService } from '../../Services/ads.service';
   ],
 })
 export class AdsListComponent implements OnInit {
-  
+
   displayedColumns: string[] = [
     'room',
     'price',
@@ -48,7 +52,7 @@ export class AdsListComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private adsService: AdsService) {}
+  constructor(private adsService: AdsService,public dialog: MatDialog ,private _alerts:AlertsService) {}
 
   ngOnInit(): void {
     this.loadAds();
@@ -79,18 +83,69 @@ export class AdsListComponent implements OnInit {
   }
 
   addAd(): void {
-    console.log('Add new ad clicked');
+   const dialogRef = this.dialog.open(AddEditAdsComponent, {
+          width: '640px',
+          data: {
+            title: 'Add ads',
+            modalData:null,
+          },
+        });
+         dialogRef.afterClosed().subscribe((result) => {
+          if (result) {
+            this.loadAds()
+          }
+        });
   }
 
   viewAd(row: Ad): void {
     console.log('View Ad:', row);
   }
 
-  editAd(id: string): void {
-    console.log('Edit Ad with ID:', id);
+  editAd(model: any): void {
+    const dialogRef = this.dialog.open(AddEditAdsComponent, {
+          width: '640px',
+          data: {
+            title: 'Edit ads',
+            modalData:model
+          },
+        });
+         dialogRef.afterClosed().subscribe((result) => {
+          if (result) {
+            this.loadAds();
+          }
+        });
   }
 
-  deleteAd(id: string): void {
-    console.log('Delete Ad with ID:', id);
-  }
+
+   deleteAd(id: string) {
+      const dialogRef = this.dialog.open(DeleteModalComponent, {
+        width: '640px',
+        height: '571px',
+        data: {
+          text: 'Ads',
+        },
+      });
+      dialogRef.afterClosed().subscribe((result) => {
+        if (result) {
+          this.deleteAdsFunc(id);
+        }
+      });
+    }
+
+    deleteAdsFunc(id: string) {
+      this.adsService.DeleteAds(id).subscribe({
+        next: (res) => {
+          console.log(res);
+        },
+        error: (error) => {
+        this._alerts.SweetalertError();
+          console.log(error);
+        },
+        complete: () => {
+          this._alerts.SweetalertSuccess("Deleted successfully🎉");
+          this.loadAds();
+        },
+      });
+    }
+
 }

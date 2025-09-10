@@ -28,11 +28,19 @@ import { RoomsService } from '../../../rooms/Services/rooms.service';
   styleUrl: './add-edit-ads.component.scss'
 })
 export class AddEditAdsComponent {
-  facilityId:any=null;
+  adsModel:any|null=null;
   roomslist:any[]=[];
   constructor(private _AdsService: AdsService,private _rooms:RoomsService,@Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<AddEditAdsComponent>, private alerts: AlertsService) {
-    if(data.id !=null){
-      this.facilityId = data.id;
+    if(data.modalData !=null){
+      this.adsModel = data.modalData;
+      console.log(this.adsModel);
+      console.log(this.adsModel.room.roomNumber);
+
+      this.AdsForm.patchValue({
+        room:this.adsModel.room._id,
+        discount:this.adsModel.room.discount,
+        isActive:this.adsModel.isActive,
+      })
     }
   }
 
@@ -46,13 +54,21 @@ export class AddEditAdsComponent {
     this.getAllRooms();
   }
 SubmitForm(data:FormGroup){
-  if(this.facilityId != null){
-  this._AdsService.EditAds(this.facilityId,data.value).subscribe({
+  if(this.adsModel != null){
+    let mydata = {
+      isActive:data.value.isActive,
+      discount:data.value.discount
+    }
+  this._AdsService.EditAds(this.adsModel._id,mydata).subscribe({
       next:(res)=>{
+        console.log(res);
+
         this.alerts.SweetalertSuccess("Ads Edit successfully🎉")
         this.onSubmit(true);
       },
       error:(err)=>{
+        console.log(err);
+
         this.alerts.SweetalertError("An error occurred")
         this.onSubmit(false);
       },
@@ -65,7 +81,9 @@ SubmitForm(data:FormGroup){
         this.onSubmit(true);
       },
       error:(err)=>{
-      this.alerts.SweetalertError("An error occurred")
+        console.log(err);
+
+      this.alerts.SweetalertError(err.error.message)
       this.onSubmit(false);
       },
 
