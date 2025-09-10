@@ -28,7 +28,7 @@ export class AlertsService {
 
   SweetalertSuccess(message:string){
       Swal.fire({
-        title: message +' successfully',
+        title: message ,
         icon: "success",
         draggable: false
       });
