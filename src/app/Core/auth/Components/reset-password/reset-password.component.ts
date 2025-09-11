@@ -9,6 +9,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { AuthService } from '../../Services/auth.service';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { IresetPassword } from '../../Interfaces/ireset-password';
+import { AlertsService } from '../../../../shared/Services/alerts.service';
 @Component({
   selector: 'app-reset-password',
   standalone: true,
@@ -27,7 +28,7 @@ import { IresetPassword } from '../../Interfaces/ireset-password';
 export class ResetPasswordComponent {
 
 
-  constructor(private auth: AuthService, private s: MatSnackBar, private r: Router) { }
+  constructor(private auth: AuthService, private _alert: AlertsService, private r: Router) { }
   hideNewPassword = true;
   hideConfirmPassword = true;
   PasswordPattern:RegExp =/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{1,10}$/;
@@ -57,24 +58,11 @@ export class ResetPasswordComponent {
         this.auth.onReset(formValue).subscribe({
           next: (response) => {
             console.log('API Success Response:', response);
-            this.s.open('You Can Login With The Updated Password', "", {
-              duration: 3000,
-              horizontalPosition: "end",
-              verticalPosition: "top",
-              panelClass: ['success-snackbar']
-            });
+            this._alert.succeess('You Can Login With The Updated Password')
             this.Data.push(response);
           },
           error: (error) => {
-            console.error('API Error:', error);
-            this.s.open("an error occurred", "",
-              {
-                duration: 3000,
-                horizontalPosition: "end",
-                verticalPosition: "top",
-                panelClass: ['error-snackbar']
-              }
-            );
+            this._alert.Error();
           },
 
           complete: () => { this.r.navigateByUrl("/auth/login") },

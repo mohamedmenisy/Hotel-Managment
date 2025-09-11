@@ -1,13 +1,9 @@
-
-
 import { Component, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { DeleteModalComponent } from '../../../../shared/delete-modal/delete-modal.component';
 import { CommonModule } from '@angular/common';
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
-
-import { DatePipe } from '@angular/common';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -21,7 +17,7 @@ import {
   PageEvent,
 } from '@angular/material/paginator';
 import { RoomsService } from '../../Services/rooms.service';
-import { AddEditRoomsComponent } from '../add-edit-rooms/add-edit-rooms.component';
+import { AlertsService } from '../../../../shared/Services/alerts.service';
 
 export interface DialogData {
   animal: 'panda' | 'unicorn' | 'lion';
@@ -29,7 +25,8 @@ export interface DialogData {
 @Component({
   selector: 'app-rooms-list',
   standalone: true,
-  imports: [   MatFormFieldModule,
+  imports: [
+    MatFormFieldModule,
     MatInputModule,
     MatTableModule,
     MatSortModule,
@@ -38,43 +35,37 @@ export interface DialogData {
     MatMenuModule,
     MatIconModule,
     AuthRoutingModule,
-   CommonModule,
-    MatSnackBarModule,],
+    CommonModule,
+    MatSnackBarModule,
+  ],
   templateUrl: './rooms-list.component.html',
-  styleUrl: './rooms-list.component.scss'
+  styleUrl: './rooms-list.component.scss',
 })
 export class RoomsListComponent {
+  constructor(public dialog: MatDialog,public _RoomsService: RoomsService,private _alert: AlertsService) {}
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+  facilites!: any[];
   totalCount = 0;
   pageSize = 10;
   pageIndex = 0;
-
+  dataSource!: MatTableDataSource<any>;
   displayedColumns: string[] = [
     'roomNumber',
     'images',
     'price',
     'discount',
     'capacity',
-    
     'facilities',
-    'actions'
-    
-    
+    'actions',
   ];
 
-  dataSource!: MatTableDataSource<any>;
-
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
-
-  facilites!: any[];
-
-  constructor(
-    public dialog: MatDialog,
-    public _RoomsService: RoomsService,
-    private _snackBar: MatSnackBar
-  ) {
-    this.getAllrooms();
+  ngOnInit(): void {
+        this.getAllrooms();
   }
+
+
+
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -90,10 +81,9 @@ export class RoomsListComponent {
       next: (res: any) => {
         console.log(res);
         this.dataSource = new MatTableDataSource(res.data.rooms);
-       
-         this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-    this.totalCount = res.data.totalCount;
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+        this.totalCount = res.data.totalCount;
       },
     });
   }
@@ -104,54 +94,7 @@ export class RoomsListComponent {
     this.getAllrooms(this.pageIndex + 1, this.pageSize);
   }
 
-  // viewFacility(row: any) {
-  //    this.dialog.open(, {
-
-  //     data:row,
-        
-      
-  //   });
-  //   // dialogRef.afterClosed().subscribe((result) => {
-  //   //   if (result) {
-  //   //   }
-  //   // });
-  // }
-
-  addFacility() {
-   const dialogRef = this.dialog.open(AddEditRoomsComponent, {
-      width: '640px',
-
-      data: {
-        title: 'Add Facility',
-        name:null,
-        id:null
-      },
-    });
-     dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-
-        this.getAllrooms();
-      }
-    });
-  }
-  editFacility(id: string , name :string) {
-   const dialogRef = this.dialog.open(AddEditRoomsComponent, {
-      width: '640px',
-
-      data: {
-        title: 'Add Facility',
-        name:name,
-        id:id
-      },
-    });
-     dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        this.getAllrooms();
-      }
-    });
-  }
-
-  deleteFacility(id: string) {
+  deleteRoom(id: string) {
     const dialogRef = this.dialog.open(DeleteModalComponent, {
       width: '640px',
       height: '571px',
@@ -161,35 +104,24 @@ export class RoomsListComponent {
     });
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        this.deletefacilitiesFunc(id);
+        this.deleteRoomFunc(id);
       }
     });
   }
 
-  deletefacilitiesFunc(id: string) {
+  deleteRoomFunc(id: string) {
     this._RoomsService.deleterooms(id).subscribe({
       next: (res) => {
         console.log(res);
       },
       error: (error) => {
-        this._snackBar.open('an error occurred', '', {
-          duration: 3000,
-          horizontalPosition: 'end',
-          verticalPosition: 'top',
-          panelClass: ['error-snackbar'],
-        });
+      this._alert.SweetalertError();
         console.log(error);
       },
       complete: () => {
-        this._snackBar.open('Delete successfully 🎉', '', {
-          duration: 3000,
-          horizontalPosition: 'end',
-          verticalPosition: 'top',
-          panelClass: ['success-snackbar'],
-        });
+        this._alert.SweetalertSuccess("Deleted successfully🎉");
         this.getAllrooms();
       },
     });
   }
 }
-

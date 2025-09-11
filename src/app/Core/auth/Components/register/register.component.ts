@@ -11,6 +11,7 @@ import { RouterModule, Router } from '@angular/router';
 import { AuthService } from '../../Services/auth.service';
 import { NgxDropzoneModule } from 'ngx-dropzone';
 import {MatSelectModule} from '@angular/material/select';
+import { AlertsService } from '../../../../shared/Services/alerts.service';
 @Component({
   selector: 'app-register',
   standalone: true,
@@ -30,7 +31,7 @@ import {MatSelectModule} from '@angular/material/select';
   styleUrl: './register.component.scss',
 })
 export class RegisterComponent {
-  constructor(private auth: AuthService, private s: MatSnackBar, private r: Router) {}
+  constructor(private auth: AuthService, private _alert: AlertsService, private r: Router) {}
 
   hideNewPassword = true;
   hideConfirmPassword = true;
@@ -73,21 +74,10 @@ export class RegisterComponent {
 
       this.auth.onRegister(myData).subscribe({
         next: (response) => {
-
-          this.s.open('You Can Now Join Us', '', {
-            duration: 3000,
-            horizontalPosition: 'end',
-            verticalPosition: 'top',
-            panelClass: ['success-snackbar'],
-          });
+          this._alert.succeess('You Can Now Join Us')
         },
         error: (error) => {
-          this.s.open('An error occurred', '', {
-            duration: 3000,
-            horizontalPosition: 'end',
-            verticalPosition: 'top',
-            panelClass: ['error-snackbar'],
-          });
+          this._alert.Error()
         },
         complete: () => {
           this.r.navigateByUrl('/auth/login');

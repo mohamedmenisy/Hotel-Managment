@@ -7,6 +7,7 @@ import {MatButtonModule} from '@angular/material/button';
 import { AuthService } from '../../Services/auth.service';
 import { Router, RouterLink } from '@angular/router';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { AlertsService } from '../../../../shared/Services/alerts.service';
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -18,7 +19,7 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 })
 
 export class LoginComponent {
-  constructor(private _AuthService:AuthService,private _snackBar:MatSnackBar,private _router:Router){}
+  constructor(private _AuthService:AuthService,private _alert:AlertsService,private _router:Router){}
   PasswordPattent:RegExp =/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{1,10}$/;
   passwordError:string="Password must contain uppercase, lowercase, number, symbol (max 10 chars)"
    hide = true;
@@ -39,38 +40,22 @@ export class LoginComponent {
       localStorage.setItem('id',res.data.user._id);
       },
       error:(err)=>{
-         this._snackBar.open("an error occurred","",
-                {
-                  duration: 3000,
-                  horizontalPosition: "end",
-                  verticalPosition: "top",
-                  panelClass: ['error-snackbar']
-              }
-        );
+        this._alert.Error();
       },
       complete:()=>{
-
-        if(localStorage.getItem('role') == 'admin'){
-
         this.getCurrentUser(localStorage.getItem("id"));
-
-        }
       }
     });
   }
 
-
     getCurrentUser(userid:any){
     this._AuthService.getCurrentUser(userid).subscribe({
       next:(res)=>{
-          localStorage.setItem('profileImage', res.data.user.profileImage);
+        localStorage.setItem('profileImage', res.data.user.profileImage);
+        if(localStorage.getItem('role') == 'admin'){
           this._router.navigate(['/dashboard']);
-        this._snackBar.open('Login successfully 🎉',"", {
-        duration: 3000,
-        horizontalPosition: "end",
-        verticalPosition: "top",
-        panelClass: ['success-snackbar']
-        });
+        }
+        this._alert.succeess('Login successfully 🎉')
       },
 
     })

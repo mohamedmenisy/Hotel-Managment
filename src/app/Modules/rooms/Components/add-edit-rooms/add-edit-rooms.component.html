@@ -1,1 +1,76 @@
-<p>add-edit-rooms works!</p>
+<div class="container">
+    <form [formGroup]="rooms" (ngSubmit)="submit(rooms)">
+    <div class="grid grid-cols-12 gap-4">
+        <div class="col-span-12">
+            <mat-label class="block">Enter Room Number</mat-label>
+            <mat-form-field appearance="outline">
+                <input matInput type="text" placeholder="Room Number" formControlName="roomNumber">
+                @if(rooms.get('roomNumber')?.hasError('required') && rooms.get('roomNumber')?.touched){
+                <mat-error >Room Number is required</mat-error>
+                }
+            </mat-form-field>
+        </div>
+        <div class="col-span-6">
+            <mat-label class="block">Price</mat-label>
+            <mat-form-field appearance="outline">
+                <input matInput type="text" placeholder="Price" formControlName="price">
+                @if(rooms.get('price')?.hasError('required') && rooms.get('price')?.touched){
+                    <mat-error >Price is required</mat-error>
+                }
+            </mat-form-field>
+        </div>
+        <div class="col-span-6">
+            <mat-label class="block">Capacity</mat-label>
+            <mat-form-field appearance="outline">
+                <input matInput type="text" placeholder="capacity" formControlName="capacity">
+                @if(rooms.get('capacity')?.hasError('required') && rooms.get('capacity')?.touched){
+                    <mat-error > Capacity is required</mat-error>
+                }
+            </mat-form-field>
+        </div>
+        <div class="col-span-6">
+            <mat-label class="block">Discount</mat-label>
+            <mat-form-field appearance="outline">
+                <input matInput type="text" placeholder="Discount" formControlName="discount">
+                @if(rooms.get('discount')?.hasError('required') && rooms.get('discount')?.touched){
+                    <mat-error >Discount is required</mat-error>
+                }
+            </mat-form-field>
+        </div>
+          <div class="col-span-6">
+            <mat-label class="block">Enter Facilities</mat-label>
+            <mat-form-field appearance="outline" >
+            <mat-select placeholder="select a role" formControlName="facilities" multiple>
+                @for (item of facilites; track $index) {
+                    <mat-option [value]="item._id">{{item.name}}</mat-option>
+                }
+
+            </mat-select>
+            @if(rooms.get('facilities')?.hasError('required') && rooms.get('facilities')?.touched){
+              <mat-error >Facilities is required</mat-error>
+              }
+          </mat-form-field>
+        </div>
+         <div class="col-span-12">
+            <ngx-dropzone (change)="onSelect($event)" class="circle-dropzone">
+            <ngx-dropzone-image-preview
+                *ngFor="let f of files"
+                [file]="f"
+                [removable]="true"
+                (removed)="onRemove(f)">
+            </ngx-dropzone-image-preview>
+            </ngx-dropzone>
+        </div>
+        <div class="col-span-12 flex justify-end">
+            <button class="btnSubmit">
+               @if(isloading == false){
+                   <span>Submit</span>
+               }@else{
+                <span>...</span>
+               }
+            </button>
+        </div>
+    </div>
+    </form>
+
+</div>

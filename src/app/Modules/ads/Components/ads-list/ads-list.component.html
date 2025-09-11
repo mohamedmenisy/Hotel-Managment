@@ -1,0 +1,114 @@
+<div
+  class="ads-header flex justify-between items-center mb-4 bg-white rounded-md"
+>
+  <div class="ads-header__info">
+    <h2 class="ads-header__title text-xl font-semibold text-gray-800">
+      Ads Table Details
+    </h2>
+    <p class="ads-header__description text-sm text-gray-500">
+      Manage your ads information
+    </p>
+  </div>
+  <div class="ads-header__actions">
+    <button
+      class="btn-add px-4 py-2 hover:bg-blue-700 transition"
+      (click)="addAd()"
+    >
+      Add New Ad
+    </button>
+  </div>
+</div>
+
+<mat-form-field class="full-width">
+  <mat-label>Search with any column</mat-label>
+  <input
+    matInput
+    (keyup)="applyFilter($event)"
+    placeholder="Ex. Room Number"
+    #input
+  />
+</mat-form-field>
+
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" matSort>
+
+    <ng-container matColumnDef="room">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Room</th>
+      <td mat-cell *matCellDef="let row">{{ row.room.roomNumber }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="price">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Price</th>
+      <td mat-cell *matCellDef="let row">{{ row.room.price }} $</td>
+    </ng-container>
+
+    <ng-container matColumnDef="discount">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Discount</th>
+      <td mat-cell *matCellDef="let row">{{ row.room.discount }}%</td>
+    </ng-container>
+
+    <ng-container matColumnDef="capacity">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Capacity</th>
+      <td mat-cell *matCellDef="let row">{{ row.room.capacity }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="active">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Active</th>
+      <td mat-cell *matCellDef="let row">
+        <span
+          class="px-2 py-1 text-white rounded"
+          [ngClass]="row.isActive ? 'bg-green-600' : 'bg-red-600'"
+        >
+          {{ row.isActive ? 'Active' : 'Inactive' }}
+        </span>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="category">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Category</th>
+      <td mat-cell *matCellDef="let row">
+        {{ row.room.category || 'N/A' }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let row">
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+          <mat-icon>more_horiz</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="viewAd(row)">
+            <mat-icon class="actions-color">visibility</mat-icon>
+            <span>View</span>
+          </button>
+          <button mat-menu-item (click)="editAd(row)">
+            <mat-icon class="actions-color">edit_square</mat-icon>
+            <span>Edit</span>
+          </button>
+          <button mat-menu-item (click)="deleteAd(row._id)">
+            <mat-icon class="actions-color">delete</mat-icon>
+            <span>Delete</span>
+          </button>
+        </mat-menu>
+      </td>
+    </ng-container>
+
+    <tr class="table-header" mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="7">
+        No ads matching the filter "{{ input.value }}"
+      </td>
+    </tr>
+  </table>
+
+  <mat-paginator
+    [length]="totalCount"
+    [pageSize]="pageSize"
+    [pageSizeOptions]="[5, 10, 25, 50, 100]"
+    (page)="onPageChange($event)"
+    aria-label="Select page of ads"
+  ></mat-paginator>
+</div>

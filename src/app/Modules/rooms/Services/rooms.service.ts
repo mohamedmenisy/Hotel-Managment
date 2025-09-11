@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 
 import { Observable } from 'rxjs';
 
@@ -8,24 +8,24 @@ import { Observable } from 'rxjs';
 })
 export class RoomsService  {
 
-  constructor(private _HttpClient:HttpClient) { }
-    CreateFacility(data: any): Observable<any> {
-    return this._HttpClient.post("room-facilities", data);
+  constructor(private _http:HttpClient) { }
+  createRoom(data:any):Observable<any>{
+    return this._http.post('rooms',data);
   }
-
-
-
-    deleterooms(id: string): Observable<any> {
-    return this._HttpClient.delete(`rooms/${id}`);
+   deleterooms(id: string): Observable<any> {
+    return this._http.delete(`rooms/${id}`);
   }
-
-  getAllrooms(
-    page: number,
-    size: number
-  ): Observable<any> {
-    return this._HttpClient.get<any>(
-      `rooms?page=${page}&size=${size}`
+  getAllrooms(page: number,size: number): Observable<any> {
+    return this._http.get<any>(`rooms?page=${page}&size=${size}`
     );
   }
+  getRoomByid(id:string):Observable<any>{
+    return this._http.get(`rooms/${id}`);
+  }
+  UpdateRoom(id:string,data:any):Observable<any>{
+    return this._http.put(`rooms/${id}`,data);
+  }
+  getrooms(): Observable<any> {
+    return this._http.get<any>(`rooms?page=1&size=10000000000`);
+  }
 }
-

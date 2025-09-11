@@ -4,7 +4,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { DeleteModalComponent } from '../../../../shared/delete-modal/delete-modal.component';
 import { FacilitesService } from '../../Services/facilites.service';
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { ViewFacilityComponent } from '../view-facility/view-facility.component';
 import { DatePipe } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -20,6 +19,7 @@ import {
   PageEvent,
 } from '@angular/material/paginator';
 import { AddEditFacilitiesComponent } from '../add-edit-facilities/add-edit-facilities.component';
+import { AlertsService } from '../../../../shared/Services/alerts.service';
 export interface DialogData {
   animal: 'panda' | 'unicorn' | 'lion';
 }
@@ -37,7 +37,6 @@ export interface DialogData {
     MatIconModule,
     AuthRoutingModule,
     DatePipe,
-    MatSnackBarModule,
   ],
   templateUrl: './facilities-list.component.html',
   styleUrl: './facilities-list.component.scss',
@@ -65,7 +64,7 @@ export class FacilitiesListComponent {
   constructor(
     public dialog: MatDialog,
     public _FacilitesService: FacilitesService,
-    private _snackBar: MatSnackBar
+    private _alerts: AlertsService
   ) {
     this.getAllFacilites();
   }
@@ -98,15 +97,9 @@ export class FacilitiesListComponent {
 
   viewFacility(row: any) {
      this.dialog.open(ViewFacilityComponent, {
-
       data:row,
-        
-      
     });
-    // dialogRef.afterClosed().subscribe((result) => {
-    //   if (result) {
-    //   }
-    // });
+
   }
 
   addFacility() {
@@ -131,7 +124,7 @@ export class FacilitiesListComponent {
       width: '640px',
 
       data: {
-        title: 'Add Facility',
+        title: 'Edit Facility',
         name:name,
         id:id
       },
@@ -164,21 +157,11 @@ export class FacilitiesListComponent {
         console.log(res);
       },
       error: (error) => {
-        this._snackBar.open('an error occurred', '', {
-          duration: 3000,
-          horizontalPosition: 'end',
-          verticalPosition: 'top',
-          panelClass: ['error-snackbar'],
-        });
-        console.log(error);
+        this._alerts.SweetalertError('an error occurred');
+
       },
       complete: () => {
-        this._snackBar.open('Delete successfully 🎉', '', {
-          duration: 3000,
-          horizontalPosition: 'end',
-          verticalPosition: 'top',
-          panelClass: ['success-snackbar'],
-        });
+        this._alerts.SweetalertSuccess("Deleted successfully🎉")
         this.getAllFacilites();
       },
     });

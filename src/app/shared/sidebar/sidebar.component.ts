@@ -56,21 +56,19 @@ menu:IMenu[]=[
   },
     {
     title:"Facilites",
-    icon:"group",
+    icon:"dashboard",
     menuLink:"/dashboard/facilities",
   },
-  //   {
-  //   title:"Projects",
-  //   icon:"dashboard",
-  //   menuLink:"/dashboard/manager/projects/projectsList",
-  //   isActive:this.isManager(),
-  // },
-  // {
-  //   title:"Tasks",
-  //   icon:"checklist",
-  //   menuLink:"/dashboard/manager/tasks",
-  //   isActive:this.isManager(),
-  // }
+    {
+    title:"Rooms",
+    icon:"meeting_room",
+    menuLink:"/dashboard/rooms",
+  },
+  {
+    title:"Ads",
+    icon:"ads_click",
+    menuLink:"/dashboard/ads",
+  }
   // ,
   // {
   //   title:"Projects",
