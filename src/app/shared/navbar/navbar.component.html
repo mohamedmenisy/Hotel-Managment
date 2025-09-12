@@ -32,7 +32,7 @@
                       </div>
                 </button>
                     <mat-menu #menu="matMenu" class="my-custom-menu mt-3">
-                        <a mat-menu-item routerLink="/dashboard/profile">
+                        <a mat-menu-item (click)="Profile()">
                             <mat-icon>account_circle</mat-icon>
                             <span>Profile</span>
                         </a>

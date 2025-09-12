@@ -13,6 +13,7 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import {MatPaginator,MatPaginatorModule,PageEvent} from '@angular/material/paginator';
 import { AlertsService } from '../../../../shared/Services/alerts.service';
 import { UsersService } from '../../Services/users.service';
+import { ProfileComponent } from '../../../../shared/profile/profile.component';
 
 @Component({
   selector: 'app-users-list',
@@ -27,7 +28,6 @@ import { UsersService } from '../../Services/users.service';
         MatMenuModule,
         MatIconModule,
         AuthRoutingModule,
-        DatePipe,
       ],
   templateUrl: './users-list.component.html',
   styleUrl: './users-list.component.scss'
@@ -73,7 +73,16 @@ totalCount = 0;
     this.pageSize = event.pageSize;
     this.getAllUsers(this.pageIndex + 1, this.pageSize);
   }
-  viewUser(data:any){
+ Profile(id:string) {
+    const dialogRef = this.dialog.open(ProfileComponent, {
+      width: '500px',
+      height: '400px',
+      data: {
+        id:id
+      },
+    });
+    dialogRef.afterClosed().subscribe((result) => {
 
+    });
   }
 }

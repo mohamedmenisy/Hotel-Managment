@@ -18,6 +18,7 @@ import {
 } from '@angular/material/paginator';
 import { RoomsService } from '../../Services/rooms.service';
 import { AlertsService } from '../../../../shared/Services/alerts.service';
+import { RoomViewComponent } from '../room-view/room-view.component';
 
 export interface DialogData {
   animal: 'panda' | 'unicorn' | 'lion';
@@ -121,6 +122,14 @@ export class RoomsListComponent {
       complete: () => {
         this._alert.SweetalertSuccess("Deleted successfully🎉");
         this.getAllrooms();
+      },
+    });
+  }
+  viewRoom(roomid:string){
+     const dialogRef = this.dialog.open(RoomViewComponent, {
+      width: '640px',
+      data: {
+        id: roomid,
       },
     });
   }

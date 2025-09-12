@@ -1,0 +1,33 @@
+.modal-head{
+    height: 80px;
+    background-color: #203FC7;
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+    .close{
+        .maticon{
+            color: white;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+}
+
+.modal-data{
+    margin-top: 10px;
+    h2{
+        font-size: 30px;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+    span{
+        text-transform: capitalize;
+    }
+    span:hover{
+        color: #203FC7;
+        cursor: pointer;
+    }
+}
+.mainColor{
+    color: #203FC7;
+}

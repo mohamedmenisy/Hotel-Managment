@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AdsResponse } from '../Interfaces/ads';
+import { adsDetails } from '../Interfaces/ads-details';
 
 @Injectable({
   providedIn: 'root'
@@ -20,5 +21,9 @@ export class AdsService {
   }
    DeleteAds( id:string):Observable<any>{
     return this._http.delete(`ads/${id}`);
+  }
+  getDetails(id:string):Observable<adsDetails>
+  {
+    return this._http.get<adsDetails>(`ads/${id}`);
   }
 }

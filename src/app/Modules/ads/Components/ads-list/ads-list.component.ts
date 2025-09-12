@@ -15,6 +15,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { Ad } from '../../Interfaces/ads';
 import { AdsService } from '../../Services/ads.service';
 import { AlertsService } from '../../../../shared/Services/alerts.service';
+import { AdsViewComponent } from '../ads-view/ads-view.component';
 
 @Component({
   selector: 'app-ads-list',
@@ -97,9 +98,6 @@ export class AdsListComponent implements OnInit {
         });
   }
 
-  viewAd(row: Ad): void {
-    console.log('View Ad:', row);
-  }
 
   editAd(model: any): void {
     const dialogRef = this.dialog.open(AddEditAdsComponent, {
@@ -147,5 +145,12 @@ export class AdsListComponent implements OnInit {
         },
       });
     }
-
+  viewAd(adsid:string){
+     const dialogRef = this.dialog.open(AdsViewComponent, {
+      width: '640px',
+      data: {
+        id: adsid,
+      },
+    });
+  }
 }
