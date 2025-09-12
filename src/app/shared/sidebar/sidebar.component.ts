@@ -68,14 +68,18 @@ menu:IMenu[]=[
     title:"Ads",
     icon:"ads_click",
     menuLink:"/dashboard/ads",
+  },
+  {
+    title:"Booking",
+    icon:"inbox_text_person",
+    menuLink:"/dashboard/booking",
   }
-  // ,
-  // {
-  //   title:"Projects",
-  //   icon:"dashboard",
-  //   menuLink:"/dashboard/employee/projects",
-  //   isActive:this.isEmployee(),
-  // },
+  ,
+  {
+    title:"Users",
+    icon:"group",
+    menuLink:"/dashboard/users",
+  },
   // {
   //   title:"Tasks",
   //   icon:"checklist",

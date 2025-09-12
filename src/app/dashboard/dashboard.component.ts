@@ -3,11 +3,11 @@ import { NavbarComponent } from '../shared/navbar/navbar.component';
 import { SidebarComponent } from '../shared/sidebar/sidebar.component';
 import { RouterOutlet } from '@angular/router';
 import { SideNavService } from '../shared/Services/side-nav.service';
-
+import { LoaderComponent } from '../shared/loader/loader.component';
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [NavbarComponent,SidebarComponent,RouterOutlet],
+  imports: [NavbarComponent,SidebarComponent,RouterOutlet,LoaderComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })
