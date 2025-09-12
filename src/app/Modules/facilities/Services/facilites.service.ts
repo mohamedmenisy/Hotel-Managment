@@ -21,10 +21,7 @@ export class FacilitesService {
     return this._HttpClient.delete(`room-facilities/${id}`);
   }
 
-  getAllFacilites(
-    page: number,
-    size: number
-  ): Observable<IApiResponse<IFacilitiesData>> {
+  getAllFacilites(page: number,size: number): Observable<IApiResponse<IFacilitiesData>> {
     return this._HttpClient.get<IApiResponse<IFacilitiesData>>(
       `room-facilities?page=${page}&size=${size}`
     );

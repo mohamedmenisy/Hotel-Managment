@@ -1,26 +1,16 @@
-<div
-  class="facilities-header flex justify-between items-center mb-4 bg-white rounded-md"
->
-  <div class="facilities-header__info">
-    <h2 class="facilities-header__title text-xl font-semibold text-gray-800">
-      Facilities Table Details
+<div class="Booking-header flex justify-between items-center mb-4 bg-white rounded-md">
+  <div class="Booking-header__info">
+    <h2 class="Booking-header__title text-xl font-semibold text-gray-800">
+      Booking Table Details
     </h2>
-    <p class="facilities-header__description text-sm text-gray-500">
+    <p class="Booking-header__description text-sm text-gray-500">
       You can check all details
     </p>
-  </div>
-  <div class="facilities-header__actions">
-    <button
-      class="btn-add px-4 py-2 hover:bg-blue-700 transition"
-      (click)="addFacility()"
-    >
-      Add New Facility
-    </button>
   </div>
 </div>
 
 <mat-form-field class="full-width">
-  <mat-label>Search ...</mat-label>
+  <mat-label>Search ... </mat-label>
   <input
     matInput
     (keyup)="applyFilter($event)"
@@ -32,30 +22,36 @@
 <div class="mat-elevation-z8">
   <table mat-table [dataSource]="dataSource" matSort>
     <!-- Name Column -->
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
-      <td mat-cell *matCellDef="let row">{{ row.name }}</td>
+    <ng-container matColumnDef="Room.N">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Room.N</th>
+      <td mat-cell *matCellDef="let row">{{ row.room.roomNumber}}</td>
     </ng-container>
 
     <!-- Created By Column -->
-    <ng-container matColumnDef="createdBy">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Created By</th>
-      <td mat-cell *matCellDef="let row">{{ row.createdBy.userName }}</td>
+    <ng-container matColumnDef="Client Name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Client Name</th>
+      <td mat-cell *matCellDef="let row">{{ row.user.userName }}</td>
+    </ng-container>
+    <!-- Created By Column -->
+    <ng-container matColumnDef="Price">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Price</th>
+      <td mat-cell *matCellDef="let row">{{ row.totalPrice }}</td>
     </ng-container>
 
+
     <!-- Created At Column -->
-    <ng-container matColumnDef="createdAt">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Created At</th>
+    <ng-container matColumnDef="Start Date">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Start Date</th>
       <td mat-cell *matCellDef="let row">
-        {{ row.createdAt | date : "dd/MM/yyyy" }}
+        {{ row.startDate | date : "dd/MM/yyyy" }}
       </td>
     </ng-container>
 
     <!-- Updated At Column -->
-    <ng-container matColumnDef="updatedAt">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Updated At</th>
+    <ng-container matColumnDef="End Date">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>End Date</th>
       <td mat-cell *matCellDef="let row">
-        {{ row.updatedAt | date : "dd/MM/yyyy" }}
+        {{ row.endDate | date : "dd/MM/yyyy" }}
       </td>
     </ng-container>
 
@@ -71,15 +67,11 @@
           <mat-icon>more_horiz</mat-icon>
         </button>
         <mat-menu #menu="matMenu">
-          <button mat-menu-item (click)="viewFacility(row)">
+          <button mat-menu-item (click)="viewBooking(row)">
             <mat-icon class="actions-color">visibility</mat-icon>
             <span>View</span>
           </button>
-          <button mat-menu-item (click)="editFacility(row._id,row.name)">
-            <mat-icon class="actions-color">edit_square</mat-icon>
-            <span>Edit</span>
-          </button>
-          <button mat-menu-item (click)="deleteFacility(row._id)">
+          <button mat-menu-item (click)="deleteModal(row._id)">
             <mat-icon class="actions-color">delete</mat-icon>
             <span>Delete</span>
           </button>
