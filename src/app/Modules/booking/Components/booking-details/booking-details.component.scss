@@ -1,0 +1,72 @@
+/* Popup container */
+.popup-box {
+  background: linear-gradient(135deg, #1a237e, #3949ab, #5c6bc0);
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  animation: popupFadeIn 0.3s ease-in-out;
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* Fade-in animation */
+@keyframes popupFadeIn {
+  0% {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Close button */
+.popup-box mat-icon {
+  font-size: 28px;
+  color: #fff;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.popup-box mat-icon:hover {
+  color: #ff5252;
+  transform: rotate(90deg);
+}
+
+/* Title */
+.popup-box h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+  letter-spacing: 1px;
+}
+
+/* Booking detail container */
+.popup-box .booking-detail {
+  background: rgba(255, 255, 255, 0.08);
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  display: flex;
+  justify-content: space-between;
+  color: #f5f5f5;
+  font-size: 0.95rem;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.popup-box .booking-detail:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-2px);
+}
+
+/* Labels */
+.popup-box .booking-detail span:first-child {
+  font-weight: 600;
+  color: #bbdefb;
+}
+
+/* Price highlight */
+.popup-box .booking-detail.price span:last-child {
+  font-weight: bold;
+  color: #ffcc80;
+}

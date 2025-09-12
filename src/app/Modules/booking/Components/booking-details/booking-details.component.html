@@ -1,0 +1,40 @@
+<div class="fixed inset-0 bg-opacity-100 flex items-center justify-center z-50">
+  <div class="popup-box relative rounded-xl shadow-xl w-96 max-w-full p-6 overflow-hidden">
+
+    <!-- زرار الإغلاق -->
+    <div class="flex justify-end p-2">
+      <mat-icon class="cursor-pointer text-white" (click)="onClose()">close</mat-icon>
+    </div>
+
+    <!-- عنوان -->
+    <h2 class="text-xl font-bold text-center text-white mb-6">Booking Details</h2>
+
+    <!-- بيانات البوكينج -->
+    <div class="space-y-3 text-white">
+      <div class="flex justify-between bg-white bg-opacity-20 p-3 rounded-lg border border-white border-opacity-30">
+        <span class="font-semibold">Room Number</span>
+        <span>{{ data?.room?.number }}</span>
+      </div>
+
+      <div class="flex justify-between bg-white bg-opacity-20 p-3 rounded-lg border border-white border-opacity-30">
+        <span class="font-semibold">Client Name</span>
+        <span>{{ data?.client?.name }}</span>
+      </div>
+
+      <div class="flex justify-between bg-white bg-opacity-20 p-3 rounded-lg border border-white border-opacity-30">
+        <span class="font-semibold">Price</span>
+        <span>{{ data?.price }} EGP</span>
+      </div>
+
+      <div class="flex justify-between bg-white bg-opacity-20 p-3 rounded-lg border border-white border-opacity-30">
+        <span class="font-semibold">Start Date</span>
+        <span>{{ data?.startDate | date: 'dd/MM/yyyy' }}</span>
+      </div>
+
+      <div class="flex justify-between bg-white bg-opacity-20 p-3 rounded-lg border border-white border-opacity-30">
+        <span class="font-semibold">End Date</span>
+        <span>{{ data?.endDate | date: 'dd/MM/yyyy' }}</span>
+      </div>
+    </div>
+  </div>
+</div>
