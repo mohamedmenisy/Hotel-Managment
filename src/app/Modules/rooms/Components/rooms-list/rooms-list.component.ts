@@ -128,16 +128,4 @@ export class RoomsListComponent {
       },
     });
   }
-
-  viewRoom(room: any) {
-    const dialogRef = this.dialog.open(RoomViewComponent, {
-      width: '384px',
-      data: room,
-    });
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        this.deleteRoomFunc(room._id);
-      }
-    });
-  }
 }

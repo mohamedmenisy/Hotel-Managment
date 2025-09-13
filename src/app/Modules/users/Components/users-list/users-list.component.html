@@ -1,0 +1,94 @@
+<div class="Users-header flex justify-between items-center mb-4 bg-white rounded-md">
+  <div class="Users-header__info">
+    <h2 class="Users-header__title text-xl font-semibold text-gray-800">
+      Users Table Details
+    </h2>
+    <p class="Users-header__description text-sm text-gray-500">
+      You can check all details
+    </p>
+  </div>
+</div>
+
+<mat-form-field class="full-width">
+  <mat-label>Search ... </mat-label>
+  <input
+    matInput
+    (keyup)="applyFilter($event)"
+    placeholder="Ex. LAMPADA"
+    #input
+  />
+</mat-form-field>
+
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" matSort>
+    <!-- Name Column -->
+    <ng-container matColumnDef="profileImage">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Profile Image</th>
+      <td mat-cell *matCellDef="let row">
+        <img src="{{row.profileImage}}" class="userimage" alt="">
+      </td>
+    </ng-container>
+     <!-- Created By Column -->
+    <ng-container matColumnDef="phoneNumber">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Phone</th>
+      <td mat-cell *matCellDef="let row">{{ row.phoneNumber }}</td>
+    </ng-container>
+    <!-- Created By Column -->
+    <ng-container matColumnDef="userName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+      <td mat-cell *matCellDef="let row">{{ row.userName }}</td>
+    </ng-container>
+
+
+    <!-- Updated At Column -->
+    <ng-container matColumnDef="role">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Role</th>
+      <td mat-cell *matCellDef="let row">
+        {{ row.role}}
+      </td>
+    </ng-container>
+
+    <!-- Actions Column -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+      <td mat-cell *matCellDef="let row">
+        <button
+          mat-icon-button
+          [matMenuTriggerFor]="menu"
+          aria-label="Example icon-button with a menu"
+        >
+          <mat-icon>more_horiz</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="Profile(row._id)">
+            <mat-icon class="actions-color">visibility</mat-icon>
+            <span>View</span>
+          </button>
+
+        </mat-menu>
+      </td>
+    </ng-container>
+
+    <tr
+      class="table-header"
+      mat-header-row
+      *matHeaderRowDef="displayedColumns"
+    ></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+    <!-- Row shown when there is no matching data. -->
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4">
+        No data matching the filter "{{ input.value }}"
+      </td>
+    </tr>
+  </table>
+
+  <mat-paginator
+    [length]="totalCount"
+    [pageSize]="pageSize"
+    [pageSizeOptions]="[5, 10, 25, 50, 100]"
+    (page)="onPageChange($event)"
+    aria-label="Select page of facilities"
+  ></mat-paginator>
+</div>

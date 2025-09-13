@@ -1,0 +1,23 @@
+<div class="modal-head">
+    <button class="close" (click)="onNoClick()">
+        <mat-icon class="maticon">close_small</mat-icon>
+    </button>
+</div>
+<div class="modal-image">
+    <div class="user-image">
+        <img src="{{userData.profileImage}}" alt="" @zoomInOut>
+    </div>
+</div>
+<div class="modal-data grid grid-cols-12 gap-1 px-4 items-center">
+    <div class="col-span-12">
+        <h2>{{userData.userName}}</h2>
+    </div>
+    <div class="col-span-1"><mat-icon class="mainColor">drafts</mat-icon></div>
+    <div class="col-span-11"><span>{{userData.email}} </span></div>
+    <div class="col-span-1"><mat-icon class="mainColor">phone_in_talk</mat-icon></div>
+    <div class="col-span-11"><span>{{userData.phoneNumber}}</span></div>
+    <div class="col-span-1"><mat-icon class="mainColor">location_on</mat-icon></div>
+    <div class="col-span-11"><span>{{userData.country}}</span></div>
+    <div class="col-span-1"><mat-icon class="mainColor">assignment_ind</mat-icon></div>
+    <div class="col-span-11"><span>{{userData.role}}</span></div>
+</div>

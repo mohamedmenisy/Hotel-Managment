@@ -41,46 +41,44 @@ import { AlertsService } from '../../../../shared/Services/alerts.service';
   styleUrl: './add-edit-rooms.component.scss',
 })
 export class AddEditRoomsComponent {
-  facilites!: IFacility[];
-  files: File[] = [];
-  imgSrc: any = null;
-  roomid: string = '';
-  constructor(
-    private alert: AlertsService,
-    private _router: Router,
-    private active: ActivatedRoute,
-    private _FacilitesService: FacilitesService,
-    private _roomsService: RoomsService
-  ) {
+  
+    facilites!: IFacility[];
+    files: File[] = [];
+    imgSrc:any=null;
+    roomid:string = '';
+    isloading:boolean=false;
+    constructor(private alert:AlertsService,private _router:Router,private active:ActivatedRoute,private _FacilitesService:FacilitesService,private _roomsService:RoomsService){
     this.roomid = active.snapshot.params['id'];
-    if (this.roomid != '') this.getRoomByid(this.roomid);
-  }
-  rooms: FormGroup = new FormGroup({
-    roomNumber: new FormControl(null, [Validators.required]),
-    price: new FormControl(null, [Validators.required]),
-    capacity: new FormControl(null, [Validators.required]),
-    facilities: new FormControl(null, [Validators.required]),
-    imgs: new FormControl(null, [Validators.required]),
-    discount: new FormControl(null, [Validators.required]),
-  });
-  ngOnInit(): void {
-    this.getFacilities();
-  }
-  getFacilities() {
-    this._FacilitesService.getAllFacilites(1, 100000000).subscribe({
-      next: (res) => {
-        this.facilites = res.data.facilities;
-      },
-    });
-  }
-  submit(rooms: FormGroup) {
-    if (this.roomid != '') {
-      this.updateRoom(rooms);
-    } else {
-      this.addRoom(rooms);
+    if (this.roomid)
+    this.getRoomByid(this.roomid);
     }
-  }
-  addRoom(rooms: FormGroup) {
+    rooms:FormGroup = new FormGroup({
+    roomNumber:new FormControl(null,[Validators.required]),
+    price:new FormControl(null,[Validators.required]),
+    capacity:new FormControl(null,[Validators.required]),
+    facilities:new FormControl(null,[Validators.required]),
+    imgs:new FormControl(null,[Validators.required]),
+    discount:new FormControl(null,[Validators.required]),
+    });
+    ngOnInit(): void {
+      this.getFacilities();
+    }
+    getFacilities(){
+      this._FacilitesService.getAllFacilites(1,100000000).subscribe({
+        next:(res)=>{
+          this.facilites = res.data.facilities;
+        }
+      })
+    }
+    submit(rooms:FormGroup){
+      if(this.roomid){
+        this.updateRoom(rooms);
+      }else{
+        this.addRoom(rooms);
+      }
+    }
+  addRoom(rooms:FormGroup){
+    this.isloading=true;
     const formData = new FormData();
     formData.append('roomNumber', rooms.value.roomNumber);
     formData.append('price', rooms.value.price);
@@ -98,15 +96,20 @@ export class AddEditRoomsComponent {
       formData.append('facilities[]', f);
     });
     this._roomsService.createRoom(formData).subscribe({
-      next: (res) => {
-        this.alert.SweetalertSuccess('Room Created successfully🎉');
-      },
-      error: (err) => {
-        this.alert.SweetalertError();
-      },
+
+    next: (res)=>{
+      this.alert.SweetalertSuccess("Room Created successfully🎉");
+      this.isloading=false;
+    },
+    error: (err) => {
+      console.log(err);
+      this.isloading=false;
+      this.alert.SweetalertError();
+    }
     });
   }
-  updateRoom(rooms: FormGroup) {
+  updateRoom(rooms:FormGroup){
+    this.isloading=true;
     const formData = new FormData();
     formData.append('roomNumber', rooms.value.roomNumber);
     formData.append('price', rooms.value.price);
@@ -123,13 +126,16 @@ export class AddEditRoomsComponent {
     facilities.forEach((f: string) => {
       formData.append('facilities[]', f);
     });
-    this._roomsService.UpdateRoom(this.roomid, formData).subscribe({
-      next: (res) => {
-        this.alert.SweetalertSuccess('Room Updated successfully🎉');
-      },
-      error: (err) => {
-        this.alert.SweetalertError();
-      },
+
+    this._roomsService.UpdateRoom(this.roomid,formData).subscribe({
+    next: (res)=>{
+    this.isloading=false;
+    this.alert.SweetalertSuccess("Room Updated successfully🎉");
+    },
+    error: (err) => {
+      this.isloading=false;
+      this.alert.SweetalertError();
+    }
     });
   }
   getRoomByid(id: string) {

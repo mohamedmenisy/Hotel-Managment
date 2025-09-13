@@ -13,16 +13,10 @@ import { MatMenuModule } from '@angular/material/menu';
 import { AuthRoutingModule } from '../../../../Core/auth/auth-routing.module';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import {
-  MatPaginator,
-  MatPaginatorModule,
-  PageEvent,
-} from '@angular/material/paginator';
+import {MatPaginator,MatPaginatorModule,PageEvent} from '@angular/material/paginator';
 import { AddEditFacilitiesComponent } from '../add-edit-facilities/add-edit-facilities.component';
 import { AlertsService } from '../../../../shared/Services/alerts.service';
-export interface DialogData {
-  animal: 'panda' | 'unicorn' | 'lion';
-}
+
 @Component({
   selector: 'app-facilities-list',
   standalone: true,
@@ -45,7 +39,6 @@ export class FacilitiesListComponent {
   totalCount = 0;
   pageSize = 10;
   pageIndex = 0;
-
   displayedColumns: string[] = [
     'name',
     'createdBy',
@@ -53,19 +46,13 @@ export class FacilitiesListComponent {
     'updatedAt',
     'actions',
   ];
-
   dataSource!: MatTableDataSource<IFacility>;
-
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-
   facilites!: IFacility[];
 
-  constructor(
-    public dialog: MatDialog,
-    public _FacilitesService: FacilitesService,
-    private _alerts: AlertsService
-  ) {
+  constructor(public dialog: MatDialog,public _FacilitesService: FacilitesService,private _alerts: AlertsService)
+  {
     this.getAllFacilites();
   }
 
@@ -98,6 +85,7 @@ export class FacilitiesListComponent {
   viewFacility(row: any) {
      this.dialog.open(ViewFacilityComponent, {
       data:row,
+      width:'500px'
     });
 
   }

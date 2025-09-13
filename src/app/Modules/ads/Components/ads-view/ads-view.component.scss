@@ -1,0 +1,48 @@
+:host ::ng-deep .owl-stage-outer {
+  min-height: 200px;
+  overflow: hidden !important;
+}
+
+:host ::ng-deep .owl-item {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+}
+
+:host ::ng-deep .owl-item img {
+  width: 100% !important;
+  height: 200px !important;
+  object-fit: cover !important;
+  display: block !important;
+  border-radius: 0;
+}
+:host ::ng-deep .owl-prev,
+:host ::ng-deep .owl-next {
+  background: #203FC7 !important;
+  font-size: 2rem !important;
+}
+.details{
+    padding: 10px;
+    border-radius: 3px;
+    p{
+        margin: 30px 0px;
+    }
+}
+.modal-head{
+    height: 80px;
+    background-color: #203FC7;
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+    .close{
+        .maticon{
+            color: white;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+}
+.default{
+    height: 200px;
+    width: 100%;
+}

@@ -1,0 +1,104 @@
+<div class="Booking-header flex justify-between items-center mb-4 bg-white rounded-md">
+  <div class="Booking-header__info">
+    <h2 class="Booking-header__title text-xl font-semibold text-gray-800">
+      Booking Table Details
+    </h2>
+    <p class="Booking-header__description text-sm text-gray-500">
+      You can check all details
+    </p>
+  </div>
+</div>
+
+<mat-form-field class="full-width">
+  <mat-label>Search ... </mat-label>
+  <input
+    matInput
+    (keyup)="applyFilter($event)"
+    placeholder="Ex. LAMPADA"
+    #input
+  />
+</mat-form-field>
+
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" matSort>
+    <!-- Name Column -->
+    <ng-container matColumnDef="Room.N">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Room.N</th>
+      <td mat-cell *matCellDef="let row">{{ row.room.roomNumber}}</td>
+    </ng-container>
+
+    <!-- Created By Column -->
+    <ng-container matColumnDef="Client Name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Client Name</th>
+      <td mat-cell *matCellDef="let row">{{ row.user.userName }}</td>
+    </ng-container>
+    <!-- Created By Column -->
+    <ng-container matColumnDef="Price">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Price</th>
+      <td mat-cell *matCellDef="let row">{{ row.totalPrice }}</td>
+    </ng-container>
+
+
+    <!-- Created At Column -->
+    <ng-container matColumnDef="Start Date">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Start Date</th>
+      <td mat-cell *matCellDef="let row">
+        {{ row.startDate | date : "dd/MM/yyyy" }}
+      </td>
+    </ng-container>
+
+    <!-- Updated At Column -->
+    <ng-container matColumnDef="End Date">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>End Date</th>
+      <td mat-cell *matCellDef="let row">
+        {{ row.endDate | date : "dd/MM/yyyy" }}
+      </td>
+    </ng-container>
+
+    <!-- Actions Column -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+      <td mat-cell *matCellDef="let row">
+        <button
+          mat-icon-button
+          [matMenuTriggerFor]="menu"
+          aria-label="Example icon-button with a menu"
+        >
+          <mat-icon>more_horiz</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="viewBooking(row)">
+            <mat-icon class="actions-color">visibility</mat-icon>
+            <span>View</span>
+          </button>
+          <button mat-menu-item (click)="deleteModal(row._id)">
+            <mat-icon class="actions-color">delete</mat-icon>
+            <span>Delete</span>
+          </button>
+        </mat-menu>
+      </td>
+    </ng-container>
+
+    <tr
+      class="table-header"
+      mat-header-row
+      *matHeaderRowDef="displayedColumns"
+    ></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+    <!-- Row shown when there is no matching data. -->
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4">
+        No data matching the filter "{{ input.value }}"
+      </td>
+    </tr>
+  </table>
+
+  <mat-paginator
+    [length]="totalCount"
+    [pageSize]="pageSize"
+    [pageSizeOptions]="[5, 10, 25, 50, 100]"
+    (page)="onPageChange($event)"
+    aria-label="Select page of facilities"
+  ></mat-paginator>
+</div>

@@ -1,0 +1,14 @@
+<div class="modal-head px-2 py-2 bg-green-100">
+    <h3 class="text-white">Booking Details</h3>
+    <button class="close" (click)="onNoClick()">
+        <mat-icon class="maticon">close_small</mat-icon>
+    </button>
+</div>
+  <div class="modal-data grid grid-cols-12 gap-4 p-4">
+    <div class="col-span-6"><span>Room # : {{data?.room.roomNumber}}</span></div>
+    <div class="col-span-6"><span>Client Name : {{data.user.userName}}</span></div>
+    <div class="col-span-6"><span>Price : {{ data.totalPrice | currency}}</span></div>
+    <div class="col-span-6"><span>Status : {{ data.status}}</span></div>
+    <div class="col-span-6"><span>Strat Date : {{data.startDate| date : "dd/MM/yyyy" }}</span></div>
+    <div class="col-span-6"><span>End Date : {{ data.endDate | date : "dd/MM/yyyy" }}</span></div>
+</div>

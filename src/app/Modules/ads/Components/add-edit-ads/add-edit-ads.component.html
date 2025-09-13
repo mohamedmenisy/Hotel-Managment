@@ -1,0 +1,46 @@
+<div class="flex items-center justify-between p-4">
+  <span>{{data.title}}</span>
+  <mat-icon class="closeicon" (click)="onNoClick()">close</mat-icon>
+</div>
+
+<div class="form-group">
+  <form [formGroup]="AdsForm" (ngSubmit)="SubmitForm(AdsForm)">
+    <div class="input-form p-4">
+            <mat-label class="block">Room Name</mat-label>
+            <mat-form-field appearance="outline" >
+            <mat-select placeholder="select a role" formControlName="room">
+                @for (item of roomslist; track $index) {
+                <mat-option [value]="item._id">{{item.roomNumber}}</mat-option>
+                }
+            </mat-select>
+            @if(AdsForm.get('room')?.hasError('required') && AdsForm.get('room')?.touched){
+              <mat-error >Room is required</mat-error>
+              }
+          </mat-form-field>
+    </div>
+      <div class="input-form p-4">
+            <mat-label class="block">Discount</mat-label>
+             <mat-form-field appearance="outline">
+                <input matInput type="number" formControlName="discount">
+                @if(AdsForm.get('discount')?.hasError('required') && AdsForm.get('discount')?.touched){
+                    <mat-error >Discount is required</mat-error>
+                }
+            </mat-form-field>
+    </div>
+        <div class="input-form p-4">
+            <mat-label class="block">Active</mat-label>
+            <mat-form-field appearance="outline" >
+            <mat-select placeholder="select a role" formControlName="isActive">
+                <mat-option [value]="true">Active</mat-option>
+                <mat-option [value]="false">Not Active</mat-option>
+            </mat-select>
+            @if(AdsForm.get('isActive')?.hasError('required') && AdsForm.get('isActive')?.touched){
+              <mat-error >Active is required</mat-error>
+              }
+          </mat-form-field>
+    </div>
+    <div class="flex items-center justify-end p-4 ">
+      <button type="submit" class="submitBtn">{{adsModel != null?"Edit":"Add"}}</button>
+    </div>
+  </form>
+</div>
