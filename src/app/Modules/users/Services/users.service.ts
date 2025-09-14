@@ -8,9 +8,9 @@ import { Observable } from 'rxjs';
 export class UsersService {
     constructor(private _http:HttpClient) { }
     getAllUsers(page: number,size: number): Observable<any> {
-       return this._http.get<any>(`users?page=${page}&size=${size}`);
+       return this._http.get<any>(`admin/users?page=${page}&size=${size}`);
     }
     getUserProfile(id:any):Observable<any> {
-       return this._http.get(`users/${id}`);
+       return this._http.get(`admin/users/${id}`);
     }
 }
