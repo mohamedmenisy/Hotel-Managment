@@ -16,7 +16,7 @@ export const routes: Routes = [
   {
     path: 'master',component:MasterComponent,children:[
       {path:'',component:LandingPageComponent,title:'Staycation-Home'},
-      {path:'details',component:DetailsComponent,title:'Room Details'},
+      {path:'details/:id',component:DetailsComponent,title:'Room Details'},
       {path:'explore',component:ExploreComponent,title:'Staycation-Explore'},
     ]
   },
