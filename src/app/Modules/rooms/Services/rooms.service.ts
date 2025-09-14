@@ -11,22 +11,22 @@ export class RoomsService  {
 
   constructor(private _http:HttpClient) { }
   createRoom(data:any):Observable<any>{
-    return this._http.post('rooms',data);
+    return this._http.post('admin/rooms',data);
   }
    deleterooms(id: string): Observable<any> {
-    return this._http.delete(`rooms/${id}`);
+    return this._http.delete(`admin/rooms/${id}`);
   }
   getAllrooms(page: number,size: number): Observable<any> {
-    return this._http.get<any>(`rooms?page=${page}&size=${size}`
+    return this._http.get<any>(`admin/rooms?page=${page}&size=${size}`
     );
   }
   getRoomByid(id:any):Observable<RoomResponse>{
-    return this._http.get<RoomResponse>(`rooms/${id}`);
+    return this._http.get<RoomResponse>(`admin/rooms/${id}`);
   }
   UpdateRoom(id:string,data:any):Observable<any>{
-    return this._http.put(`rooms/${id}`,data);
+    return this._http.put(`admin/rooms/${id}`,data);
   }
   getrooms(): Observable<any> {
-    return this._http.get<any>(`rooms?page=1&size=10000000000`);
+    return this._http.get<any>(`admin/rooms?page=1&size=10000000000`);
   }
 }
