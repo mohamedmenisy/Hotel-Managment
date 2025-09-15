@@ -1,1 +1,35 @@
-<p>room-view works!</p>
+<div class="modal-head px-2 py-2 ">
+    <h3 class="text-white">Room Details</h3>
+    <button class="close" (click)="onNoClick()">
+        <mat-icon class="maticon">close_small</mat-icon>
+    </button>
+</div>
+<div class="grid grid-cols-12 gap-4 grid-Parent">
+
+  <div class="col-span-12 ">
+   <owl-carousel-o *ngIf="response?.data?.room?.images" [options]="customOptions">
+  <ng-container *ngFor="let slide of response.data.room.images; let i = index">
+    <ng-template carouselSlide [id]="i.toString()">
+      <img [src]="slide" alt="room"  class="block w-full h-64 object-cover rounded-lg"/>
+    </ng-template>
+  </ng-container>
+</owl-carousel-o>
+<img *ngIf="response?.data?.room?.images?.length == 0" src="../../../../../assets/Images/Writing room.gif" class="default" @zoomInOut alt="">
+  </div>
+  <div class="col-span-12 ">
+    <div class="details">
+        <h3>Room : # {{response.data.room.roomNumber}}</h3>
+        <p>- Price : {{response.data.room.price}}</p>
+        <p>- Capacity : {{response.data.room.capacity}}</p>
+        <p>- Discount : {{response.data.room.discount}}</p>
+        <p>- Facilities :
+       @for (item of response.data.room.facilities; track $index) {
+        <span>
+            {{ item.name }}@if (!$last) { , }
+        </span>
+        }
+    </p>
+    </div>
+
+  </div>
+</div>

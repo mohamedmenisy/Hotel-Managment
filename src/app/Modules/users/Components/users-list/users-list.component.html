@@ -1,9 +1,9 @@
-<div class="Booking-header flex justify-between items-center mb-4 bg-white rounded-md">
-  <div class="Booking-header__info">
-    <h2 class="Booking-header__title text-xl font-semibold text-gray-800">
-      Booking Table Details
+<div class="Users-header flex justify-between items-center mb-4 bg-white rounded-md">
+  <div class="Users-header__info">
+    <h2 class="Users-header__title text-xl font-semibold text-gray-800">
+      Users Table Details
     </h2>
-    <p class="Booking-header__description text-sm text-gray-500">
+    <p class="Users-header__description text-sm text-gray-500">
       You can check all details
     </p>
   </div>
@@ -60,7 +60,7 @@
           <mat-icon>more_horiz</mat-icon>
         </button>
         <mat-menu #menu="matMenu">
-          <button mat-menu-item (click)="viewUser(row)">
+          <button mat-menu-item (click)="Profile(row._id)">
             <mat-icon class="actions-color">visibility</mat-icon>
             <span>View</span>
           </button>

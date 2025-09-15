@@ -13,6 +13,7 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import {MatPaginator,MatPaginatorModule,PageEvent} from '@angular/material/paginator';
 import { AlertsService } from '../../../../shared/Services/alerts.service';
 import { BookingService } from '../../Services/booking.service';
+import { BookingDetailsComponent } from '../booking-details/booking-details.component';
 @Component({
   selector: 'app-booking-list',
   standalone: true,
@@ -73,7 +74,11 @@ export class BookingListComponent {
     this.pageSize = event.pageSize;
     this.getAllBooking(this.pageIndex + 1, this.pageSize);
   }
-viewBooking(data:any){
+viewBooking(bookingdata:any){
+     this.dialog.open(BookingDetailsComponent, {
+      data:bookingdata,
+      width:'500px'
+    });
 
 }
 
@@ -107,4 +112,5 @@ viewBooking(data:any){
       },
     });
   }
+
 }

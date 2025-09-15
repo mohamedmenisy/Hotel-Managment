@@ -1,1 +1,22 @@
-<p>ads-view works!</p>
+<div class="modal-head px-2 py-2 ">
+    <h3 class="text-white">Ads Details</h3>
+    <button class="close" (click)="onNoClick()">
+        <mat-icon class="maticon">close_small</mat-icon>
+    </button>
+</div>
+<div class="grid grid-cols-12 gap-4 grid-Parent">
+
+  <div class="col-span-12 ">
+    <img  src="{{response.data.ads.room.images[0]}}" class="default" @zoomInOut alt="">
+  </div>
+  <div class="col-span-12 ">
+    <div class="details">
+        <h3>Room : # {{response.data.ads.room.roomNumber}}</h3>
+        <p>- Active : {{response.data.ads.isActive == true?'Yes':'No'}}</p>
+        <p>- Price : {{response.data.ads.room.price}}</p>
+        <p>- Capacity : {{response.data.ads.room.capacity}}</p>
+        <p>- Discount : {{response.data.ads.room.discount}}</p>
+    </div>
+
+  </div>
+</div>

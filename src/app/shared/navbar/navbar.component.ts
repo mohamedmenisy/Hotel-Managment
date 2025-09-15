@@ -1,3 +1,4 @@
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Component } from '@angular/core';
 import { SideNavService } from '../Services/side-nav.service';
@@ -6,6 +7,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatButtonModule} from '@angular/material/button';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ProfileComponent } from '../profile/profile.component';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -14,7 +16,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   imports:[MatIconModule,MatMenuModule,MatButtonModule,FormsModule]
 })
 export class NavbarComponent {
-  constructor(private sidnav:SideNavService,private _auth:AuthService,private Router:Router) {}
+  constructor(private sidnav:SideNavService,private _auth:AuthService,private Router:Router,public dialog: MatDialog) {}
   searchValue:string=''
   userName:string | null=null;
   userEmail:string | null=null;
@@ -47,5 +49,16 @@ logout(){
     this.Router.navigate(['/auth/login'])
 
 }
+ Profile() {
+    const dialogRef = this.dialog.open(ProfileComponent, {
+      width: '500px',
+      height: '400px',
+      data: {
+        id:localStorage.getItem("id")
+      },
+    });
+    dialogRef.afterClosed().subscribe((result) => {
 
+    });
+  }
 }

@@ -85,6 +85,7 @@ export class FacilitiesListComponent {
   viewFacility(row: any) {
      this.dialog.open(ViewFacilityComponent, {
       data:row,
+      width:'500px'
     });
 
   }
