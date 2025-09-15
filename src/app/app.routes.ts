@@ -6,9 +6,20 @@ import { NotFoundComponent } from './shared/not-found/not-found.component';
 import { authGuard } from './Core/Guards/auth.guard';
 import { adminGuard } from './Core/Guards/admin.guard';
 import { AddEditFacilitiesComponent } from './Modules/facilities/Components/add-edit-facilities/add-edit-facilities.component';
+import { MasterComponent } from './master-layout/components/master/master.component';
+import { LandingPageComponent } from './master-layout/components/landing-page/landing-page.component';
+import { DetailsComponent } from './master-layout/components/details/details.component';
+import { ExploreComponent } from './master-layout/components/explore/explore.component';
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'auth', pathMatch: 'full' },
+  { path: '', redirectTo: 'master', pathMatch: 'full' },
+  {
+    path: 'master',component:MasterComponent,children:[
+      {path:'',component:LandingPageComponent,title:'Staycation-Home'},
+      {path:'details/:id',component:DetailsComponent,title:'Room Details'},
+      {path:'explore',component:ExploreComponent,title:'Staycation-Explore'},
+    ]
+  },
   {
     path: 'auth',
     loadChildren: () =>
