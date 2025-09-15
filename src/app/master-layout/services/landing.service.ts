@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -7,4 +8,8 @@ import { Injectable } from '@angular/core';
 export class LandingService {
 
   constructor(private _http:HttpClient) { }
+
+  gitallroomsexplore(page: number,size: number):Observable<any>{
+    return this._http.get(`portal/rooms/available?page=${page}&size=${size}`)
+  }
 }
