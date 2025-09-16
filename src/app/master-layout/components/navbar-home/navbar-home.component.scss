@@ -1,0 +1,58 @@
+nav{
+    padding: 10px 10px 9px 10px;
+    margin: auto;
+    border-bottom: 2px solid #f6f6f6;
+    .navmain{
+        width: 90%;
+    }
+.logo{
+    font-size: 20px;
+    font-weight: 500;
+}
+ul{
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    gap: 20px;
+    li{
+        a{
+            &:hover{
+                color: #3252DF;
+            }
+        }
+    }
+}
+}
+.active{
+    color: #3252DF;
+}
+
+
+.maticon{
+background-color: transparent;
+border: none;
+// margin: 0px 0px 0px 20px;
+}
+
+.start-100{
+    left: 75% !important;
+}
+::ng-deep .my-custom-menu .mat-mdc-menu-content {
+  padding: 8px;
+  width: 260px !important;
+  list-style-type: none;
+}
+.userImg{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+.auth-button{
+    display: block;
+    width: 100px !important;
+    text-align: center;
+    padding: 8px 15px !important;
+    background-color: #3252DF;
+    color: white;
+    margin: 0px 10px ;
+}

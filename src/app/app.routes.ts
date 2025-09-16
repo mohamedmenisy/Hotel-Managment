@@ -15,7 +15,8 @@ export const routes: Routes = [
   { path: '', redirectTo: 'master', pathMatch: 'full' },
   {
     path: 'master',component:MasterComponent,children:[
-      {path:'',component:LandingPageComponent,title:'Staycation-Home'},
+      {path:'',redirectTo:'home', pathMatch:'full',title:'Staycation-Home'},
+      {path:'home',component:LandingPageComponent,title:'Staycation-Home'},
       {path:'details/:id',component:DetailsComponent,title:'Room Details'},
       {path:'explore',component:ExploreComponent,title:'Staycation-Explore'},
     ]

@@ -54,6 +54,8 @@ export class LoginComponent {
         localStorage.setItem('profileImage', res.data.user.profileImage);
         if(localStorage.getItem('role') == 'admin'){
           this._router.navigate(['/dashboard']);
+        }else{
+           this._router.navigate(['/master']);
         }
         this._alert.succeess('Login successfully 🎉')
       },

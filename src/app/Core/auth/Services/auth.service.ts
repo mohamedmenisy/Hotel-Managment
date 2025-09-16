@@ -13,25 +13,25 @@ export class AuthService {
   constructor(private _http:HttpClient){}
 
   onForget(d: any): Observable<IforgotPassword> {
-    return this._http.post<IforgotPassword>('users/forgot-password', d)
+    return this._http.post<IforgotPassword>('admin/users/forgot-password', d)
   }
 
   onReset(d: any): Observable<IresetPassword> {
-    return this._http.post<IresetPassword>('users/reset-password', d)
+    return this._http.post<IresetPassword>('admin/users/reset-password', d)
   }
 
 
   ChangePassword(data:IChangePasswordData):Observable<IchangePasswordResponse>{
-   return this._http.post<IchangePasswordResponse>("users/change-password",data);
+   return this._http.post<IchangePasswordResponse>("admin/users/change-password",data);
   }
 
     login(data:any):Observable<any>{
-    return this._http.post('users/login',data)
+    return this._http.post('admin/users/login',data)
   }
 
 
     onRegister(data:any):Observable<Iregister>{
-    return this._http.post<Iregister>('users',data)
+    return this._http.post<Iregister>('admin/users',data)
   }
 
   logout(){
@@ -40,6 +40,6 @@ export class AuthService {
     localStorage.removeItem("userName");
   }
  getCurrentUser(id:any): Observable<any>{
-  return this._http.get(`users/${id}`);
+  return this._http.get(`admin/users/${id}`);
   }
 }

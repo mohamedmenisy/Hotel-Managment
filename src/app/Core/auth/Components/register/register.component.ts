@@ -78,6 +78,8 @@ export class RegisterComponent {
         },
         error: (error) => {
           this._alert.Error()
+          console.log(error);
+          
         },
         complete: () => {
           this.r.navigateByUrl('/auth/login');

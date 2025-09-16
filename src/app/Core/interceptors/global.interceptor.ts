@@ -3,7 +3,7 @@ import { Constants } from '../Enviroment/Constants';
 
 export const globalInterceptor: HttpInterceptorFn = (req, next) => {
   const isAbsolute = /^https?:\/\//i.test(req.url);
-  const url = isAbsolute ? req.url : Constants.baseUrl + req.url;
+  const url = isAbsolute || req.url.includes('assets') ? req.url : Constants.baseUrl + req.url;
   const token = localStorage.getItem('token');
 
   const updated = req.clone({

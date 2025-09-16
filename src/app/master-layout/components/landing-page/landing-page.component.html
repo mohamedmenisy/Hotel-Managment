@@ -1,1 +1,157 @@
-<p>landing-page works!</p>
+<div class="grid grid-cols-12 items-center " style="margin-top: 40px;">
+    <div class="col-span-12 md:col-span-6 order-2 md:order-1">
+        <h2 style="color: #152C5B; font-weight: bold; font-size: 40px; line-height: 100%;">
+            Forget Busy Work,<br>
+            Start Next Vacation
+        </h2>
+        <p style="color: #B0B0B0;">We provide what you need to enjoy your holiday with family. <br> Time to make another memorable moments.</p>
+        <div class="mt-4">
+            <h3 >Start Booking</h3>
+            <span >Pick a Date</span>
+            <div class="home-filter">
+                <input type="date"  name="dateAdded">
+            </div>
+            <span class="block mb-0 mt-2 ">{{'home.capacity'|translate}}</span>
+            <div class="capacity-filter">
+                    <div class="input-group">
+                        <mat-icon class="icon add" (click)="Add()">add</mat-icon>
+                        <input name="capacity" type="text" [(ngModel)]="value">
+                        <mat-icon class="icon remove" (click)="remove()">remove</mat-icon>
+                    </div>
+            </div>
+            <div class="explore">
+            <button>Explore</button>
+            </div>
+        </div>
+    </div>
+    <div class="col-span-12 md:col-span-6 order-1 md:order-2">
+        <div class="image-wrapper">
+            <img src="../../../../assets/Images/home-section.png" alt="">
+        </div>
+    </div>
+</div>
+
+<div class="grid grid-cols-12 gap-4 items-center mt-10">
+    <div class="col-span-12">
+        <h3 style="color: #152C5B; font-weight: bold; text-transform: capitalize; font-size: 25px;">Most popular ads</h3>
+    </div>
+    <div class="col-span-12 md:col-span-4">
+        <div class="card main-card">
+            <span class="badg">{{Response[0]?.discount}}$</span>
+            <img [src]="Response[0]?.images[0]" alt="">
+            <div class="description">
+              <h3>
+                  {{Response[0]?.roomNumber}}
+            </h3>
+            <p >Lorem ipsum dolor sit.</p>
+            </div>
+            <div class="layer">
+                <mat-icon class="layer-icon">favorite</mat-icon>
+                <mat-icon class="layer-icon">visibility</mat-icon>
+            </div>
+        </div>
+    </div>
+    <div class="col-span-12 md:col-span-8 grid grid-cols-12 gap-4">
+        @for (item of Response; track $index) {
+            @if ($index > 0) {
+            <div class="col-span-12 md:col-span-6">
+            <div class="card ">
+            <span class="badg">{{item.discount}}$</span>
+            <img [src]="item.images[0]" alt="">
+            <div class="description">
+                <h3>
+                    {{item.roomNumber}}
+                </h3>
+                <p>Lorem ipsum dolor sit.</p>
+            </div>
+            <div class="layer">
+                <mat-icon class="layer-icon">favorite</mat-icon>
+                <mat-icon class="layer-icon">visibility</mat-icon>
+            </div>
+        </div>
+        </div>
+            }
+        }
+    </div>
+</div>
+
+<div class="grid grid-cols-12 gap-4 items-center mt-10">
+   <div class="col-span-12">
+        <h3 style="color: #152C5B; font-weight: bold; text-transform: capitalize; font-size: 25px;">Houses with beauty backyard</h3>
+    </div>
+    @for (item of Response; track $index) {
+            @if ($index > 0) {
+            <div class="col-span-12 md:col-span-3">
+            <div class="card ">
+            <span class="badg">{{item.discount}}$</span>
+            <img [src]="item.images[0]" alt="">
+
+            <div class="layer">
+                <mat-icon class="layer-icon">favorite</mat-icon>
+                <mat-icon class="layer-icon">visibility</mat-icon>
+            </div>
+        </div>
+          <div class="description-bottom ps-3">
+                <h3 style="color: #152C5B; margin: 0; font-weight: bold;">
+                    {{item.roomNumber}}
+                </h3>
+                <p style="color: #152C5B;">Lorem ipsum dolor sit.</p>
+            </div>
+        </div>
+            }
+        }
+</div>
+<div class="grid grid-cols-12 gap-4 items-center mt-10">
+   <div class="col-span-12">
+        <h3 style="color: #152C5B; font-weight: bold; text-transform: capitalize; font-size: 25px;">Ads</h3>
+    </div>
+    @for (item of Response; track $index) {
+            @if ($index > 0) {
+            <div class="col-span-12 md:col-span-3">
+            <div class="card ">
+            <span class="badg">{{item.discount}}$</span>
+            <img [src]="item.images[0]" alt="">
+
+            <div class="layer">
+                <mat-icon class="layer-icon">favorite</mat-icon>
+                <mat-icon class="layer-icon">visibility</mat-icon>
+            </div>
+        </div>
+          <div class="description-bottom ps-3">
+                <h3 style="color: #152C5B; margin: 0; font-weight: bold;">
+                    {{item.roomNumber}}
+                </h3>
+                <p style="color: #152C5B;">Lorem ipsum dolor sit.</p>
+            </div>
+        </div>
+            }
+        }
+</div>
+
+<div class="grid grid-cols-12 items-center gap-10 " style="margin-top: 40px;">
+    <div class="col-span-12 md:col-span-4 ">
+        <div class="cursor-wrapper">
+            <img src="../../../../assets/Images/family.png" alt="">
+        </div>
+    </div>
+    <div class="col-span-12 md:col-span-8">
+        <h2 style="color: #152C5B; font-weight: bold; font-size: 40px; line-height: 100%;">
+         Happy Family
+        </h2>
+        <div class="flex my-3">
+            <mat-icon style="color: #FFCC47;">star</mat-icon>
+            <mat-icon style="color: #FFCC47;">star</mat-icon>
+            <mat-icon style="color: #FFCC47;">star</mat-icon>
+            <mat-icon style="color: #FFCC47;">star</mat-icon>
+            <mat-icon style="color: #FFCC47;">star</mat-icon>
+        </div>
+        <p style="color: #152C5B; font-size: 32px; line-height: 100%;">What a great trip with my family and <br>
+                I should try again next time soon ...
+        </p>
+        <p style="color: #B0B0B0;">Angga, Product Designer</p>
+        <div class="arrows">
+            <mat-icon class="arrow-icon">arrow_circle_left</mat-icon>
+            <mat-icon class="arrow-icon">arrow_circle_right</mat-icon>
+        </div>
+    </div>
+</div>

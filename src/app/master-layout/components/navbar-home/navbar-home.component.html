@@ -1,1 +1,73 @@
-<p>navbar-home works!</p>
+<nav class="bg-white">
+  <div class="navmain flex flex-wrap items-center justify-between mx-auto">
+    <a routerLink="home" class="flex items-center space-x-3 rtl:space-x-reverse">
+      <p class="logo"><span class="mainColor">Stay</span>cation.</p>
+    </a>
+    <div>
+    </div>
+    <button (click)="ShowNav()" data-collapse-toggle="navbar-dropdown" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-dropdown" aria-expanded="false">
+        <span class="sr-only">Open main menu</span>
+        <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
+        </svg>
+    </button>
+    <div class="hidden w-full md:block md:w-auto " id="navbar-dropdown" #dorpdown>
+      <ul class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+        <li>
+          <a routerLink="home" routerLinkActive="active" class="block">Home</a>
+        </li>
+        <li>
+          <a routerLink="explore" routerLinkActive="active" class="block">Explore</a>
+        </li>
+        @if (token !=null) {
+          <li>
+          <a routerLink="reviews" routerLinkActive="active" class="block">Reviews</a>
+        </li>
+        <li>
+          <a routerLink="favorites" routerLinkActive="active" class="block">Favorites</a>
+        </li>
+        <li>
+            <button class="maticon" matIconButton [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+              <div class="flex items-center justify-evenly">
+                @if (userImg != null) {
+                <img src="{{userImg}}" class="userImg" alt="">
+                }@else{
+
+                <img src="/assets/Images/Profile.svg" class="userImg" alt="">
+                }
+                @if (isMobileSize) {
+                <div class="text-start">
+                  <span class="ms-2 me-4  lead block">{{userName?userName : 'mohamed'}}</span>
+                </div>
+                <div>
+                  <mat-icon class="flex items-center">keyboard_arrow_down</mat-icon>
+                </div>
+                }
+              </div>
+            </button>
+            <mat-menu #menu="matMenu" class="my-custom-menu mt-3">
+              <a mat-menu-item >
+                <mat-icon>account_circle</mat-icon>
+                <span>Profile</span>
+              </a>
+              <button mat-menu-item >
+                <mat-icon>key</mat-icon>
+                <span>Change Password</span>
+              </button>
+              <button mat-menu-item >
+                <mat-icon>logout</mat-icon>
+                <span>logout</span>
+              </button>
+            </mat-menu>
+
+        </li>
+        }@else {
+          <li class="flex">
+          <a routerLink="/auth/register" class="auth-button">Register</a>
+          <a routerLink="/auth/login" class="auth-button">Login</a>
+        </li>
+        }
+      </ul>
+    </div>
+  </div>
+</nav>
