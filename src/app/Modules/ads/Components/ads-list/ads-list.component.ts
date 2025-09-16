@@ -31,11 +31,10 @@ import { AdsViewComponent } from '../ads-view/ads-view.component';
     MatInputModule,
     MatButtonModule,
     MatIconModule,
-    MatMenuModule
+    MatMenuModule,
   ],
 })
 export class AdsListComponent implements OnInit {
-
   displayedColumns: string[] = [
     'room',
     'price',
@@ -53,7 +52,11 @@ export class AdsListComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private adsService: AdsService,public dialog: MatDialog ,private _alerts:AlertsService) {}
+  constructor(
+    private adsService: AdsService,
+    public dialog: MatDialog,
+    private _alerts: AlertsService
+  ) {}
 
   ngOnInit(): void {
     this.loadAds();
@@ -75,7 +78,9 @@ export class AdsListComponent implements OnInit {
   }
 
   applyFilter(event: Event): void {
-    const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
+    const filterValue = (event.target as HTMLInputElement).value
+      .trim()
+      .toLowerCase();
     this.dataSource.filter = filterValue;
   }
 
@@ -84,69 +89,67 @@ export class AdsListComponent implements OnInit {
   }
 
   addAd(): void {
-   const dialogRef = this.dialog.open(AddEditAdsComponent, {
-          width: '640px',
-          data: {
-            title: 'Add ads',
-            modalData:null,
-          },
-        });
-         dialogRef.afterClosed().subscribe((result) => {
-          if (result) {
-            this.loadAds()
-          }
-        });
+    const dialogRef = this.dialog.open(AddEditAdsComponent, {
+      width: '640px',
+      data: {
+        title: 'Add ads',
+        modalData: null,
+      },
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.loadAds();
+      }
+    });
   }
-
 
   editAd(model: any): void {
     const dialogRef = this.dialog.open(AddEditAdsComponent, {
-          width: '640px',
-          data: {
-            title: 'Edit ads',
-            modalData:model
-          },
-        });
-         dialogRef.afterClosed().subscribe((result) => {
-          if (result) {
-            this.loadAds();
-          }
-        });
+      width: '640px',
+      data: {
+        title: 'Edit ads',
+        modalData: model,
+      },
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.loadAds();
+      }
+    });
   }
 
+  deleteAd(id: string) {
+    const dialogRef = this.dialog.open(DeleteModalComponent, {
+      width: '640px',
+      height: '571px',
+      data: {
+        text: 'Ads',
+      },
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.deleteAdsFunc(id);
+      }
+    });
+  }
 
-   deleteAd(id: string) {
-      const dialogRef = this.dialog.open(DeleteModalComponent, {
-        width: '640px',
-        height: '571px',
-        data: {
-          text: 'Ads',
-        },
-      });
-      dialogRef.afterClosed().subscribe((result) => {
-        if (result) {
-          this.deleteAdsFunc(id);
-        }
-      });
-    }
-
-    deleteAdsFunc(id: string) {
-      this.adsService.DeleteAds(id).subscribe({
-        next: (res) => {
-          console.log(res);
-        },
-        error: (error) => {
+  deleteAdsFunc(id: string) {
+    this.adsService.DeleteAds(id).subscribe({
+      next: (res) => {
+        console.log(res);
+      },
+      error: (error) => {
         this._alerts.SweetalertError();
-          console.log(error);
-        },
-        complete: () => {
-          this._alerts.SweetalertSuccess("Deleted successfully🎉");
-          this.loadAds();
-        },
-      });
-    }
-  viewAd(adsid:string){
-     const dialogRef = this.dialog.open(AdsViewComponent, {
+        console.log(error);
+      },
+      complete: () => {
+        this._alerts.SweetalertSuccess('Deleted successfully🎉');
+        this.loadAds();
+      },
+    });
+  }
+  viewAd(adsid: string) {
+    const dialogRef = this.dialog.open(AdsViewComponent, {
       width: '640px',
       data: {
         id: adsid,

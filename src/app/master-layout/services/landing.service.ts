@@ -8,6 +8,10 @@ import { Observable } from 'rxjs';
 export class LandingService {
 
   constructor(private _http:HttpClient) { }
+
+  gitallroomsexplore(page: number,size: number):Observable<any>{
+    return this._http.get(`portal/rooms/available?page=${page}&size=${size}`)
+  }
   getRooms():Observable<any>{
     return this._http.get('portal/rooms/available',{
       params:{
