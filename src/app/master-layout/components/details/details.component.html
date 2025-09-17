@@ -1,1 +1,159 @@
-<p>details works!</p>
+<div class="container" *ngIf="roomDetails; else isLoading">
+  <!-- Breadcrumb -->
+  <div class="breadcrumb">
+    <a routerLink="/master">Home</a> /
+    <span class="active">{{ roomDetails.roomNumber || 'Room Details' }}</span>
+  </div>  
+
+  <!-- Room Header -->
+  <div class="room-header">
+    <h1 class="room-title"> {{ roomDetails.roomNumber }}</h1>
+    <div class="room-location">
+      <i class="fas fa-users"></i>
+      <span>Capacity: {{ roomDetails.capacity }} people</span>
+    </div>
+  </div>
+
+  <!-- Room Images Section -->
+  <div class="room-images" *ngIf="roomDetails.images && roomDetails.images.length > 0; else noImages">
+    <div class="images-grid">
+      <!-- Main large image -->
+      <div class="main-image">
+        <img [src]="roomDetails.images[0]" alt="Main Room Image" />
+      </div>
+
+      <!-- Two smaller stacked images -->
+      <div class="side-images">
+        <div class="side-image" *ngIf="roomDetails.images[1]">
+          <img [src]="roomDetails.images[1]" alt="Side Image 1" />
+        </div>
+        <div class="side-image" *ngIf="roomDetails.images[2]">
+          <img [src]="roomDetails.images[2]" alt="Side Image 2" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- No Images Template -->
+  <ng-template #noImages>
+    <div class="no-images">
+      <p>No images available for this room.</p>
+    </div>
+  </ng-template>
+
+  <!-- Room Content -->
+  <div class="room-content">
+    <!-- Description Section -->
+    <div class="room-description">
+
+      <div class="layout-a">
+        <p>Minimal techno is a minimalist subgenre of techno music.
+          It is characterized by a stripped-down aesthetic that exploits the use of repetition and understated
+          development.
+          Minimal techno is thought to have been originally developed in the early 1990s by Detroit-based producers
+          Robert Hood and Daniel Bell.</p>
+      </div>
+
+      <div class="layout-b">
+        <p>Such trends saw the demise of the soul-infused techno that typified the original Detroit sound.
+          Robert Hood has noted that he and Daniel Bell both realized something was missing from techno in the post-rave
+          era..</p>
+      </div>
+
+      <div class="layout-c">
+        <p>Design is a plan or specification for the construction of an object or system or for the implementation of an
+          activity or process, or the result of that plan or specification in the form of a prototype, product or
+          process. The national agency for design: enabling Singapore to use design for economic growth and to make
+          lives better.</p>
+      </div>
+
+      <!-- Icons Grid -->
+      <div class="iconImg">
+        <div class="icon-grid">
+          <div class="icon-item" *ngFor="let icon of icons">
+            <div class="icon-image">
+              <img [src]="icon.img" [alt]="icon.label" />
+            </div>
+            <p class="icon-number">{{ icon.number }} {{ icon.label }}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Rating Section -->
+      <div class="rating-section">
+        <label class="section-title">Rate</label>
+        <div class="stars">
+          <i
+            class="fa-star"
+            *ngFor="let star of stars; let i = index"
+            [ngClass]="i < rating ? 'fas filled' : 'far'"
+            (click)="setRating(i + 1)">
+          </i>
+        </div>
+      </div>
+
+      <!-- Single Message Section -->
+      <div class="message-section">
+        <label class="section-title">Message</label>
+        <textarea
+          [(ngModel)]="message"
+          placeholder="Write your feedback..."
+          class="message-input">
+        </textarea>
+
+        <!-- Submit Button -->
+        <div class="rate-button-wrapper">
+          <button class="rate-button" (click)="submitRating()">Rate</button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Booking Card -->
+    <div class="booking-card">
+      <!-- Upper Part -->
+      <div class="card-upper">
+        <h3 class="card-title">Start Booking</h3>
+
+        <!-- Price Section -->
+        <div class="price-section">
+          <span class="price">${{ roomDetails.price }}</span>
+          <span class="per-night">per night</span>
+        </div>
+
+        <!-- Discount -->
+        <div class="discount" *ngIf="roomDetails.discount !== null && roomDetails.discount !== undefined">
+          Discount {{ roomDetails.discount }}% Off
+        </div>
+
+        <!-- Date Section -->
+        <div class="date-section">
+          <h4 class="section-title">Pick a Date</h4>
+          <mat-date-range-input [rangePicker]="picker" class="date-input">
+            <input matStartDate placeholder="Check-in" class="date-field" />
+            <input matEndDate placeholder="Check-out" class="date-field" />
+            <i class="fas fa-calendar-alt" (click)="picker.open()"></i>
+          </mat-date-range-input>
+          <mat-date-range-picker #picker></mat-date-range-picker>
+        </div>
+      </div>
+
+      <!-- Lower Part -->
+      <div class="card-lower">
+        <p class="payment-note">
+          You will pay <strong>${{ getTotalCost() }} USD</strong> per
+          <strong>{{ roomDetails.capacity }} Person</strong>
+        </p>
+
+        <button class="book-button">Continue Book</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Loader -->
+<ng-template #isLoading>
+  <div class="loading-state">
+    <p>Loading room details...</p>
+  </div>
+</ng-template>
