@@ -4,15 +4,19 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
+import { TranslatePipe } from '@ngx-translate/core';
+import { LanguageService } from '../../../shared/Services/language.service';
 
 @Component({
   selector: 'app-navbar-home',
   standalone: true,
-  imports: [AdsRoutingModule,RouterLink,RouterLinkActive,MatIconModule,MatMenuModule,MatButtonModule],
+  imports: [AdsRoutingModule,RouterLink,RouterLinkActive,MatIconModule,MatMenuModule,MatButtonModule,TranslatePipe],
   templateUrl: './navbar-home.component.html',
   styleUrl: './navbar-home.component.scss',
 })
 export class NavbarHomeComponent {
+  constructor(private langService: LanguageService) {}
+
 @ViewChild ("dorpdown") dropdown!:ElementRef;
 isMobileSize:boolean=false;
 userImg:any;
@@ -38,5 +42,7 @@ ShowNav(){
       dropdownEl.style.display = 'block';
     }
 }
-
+setLanguage(lang:string) {
+  this.langService.setLang(lang);
+}
 }

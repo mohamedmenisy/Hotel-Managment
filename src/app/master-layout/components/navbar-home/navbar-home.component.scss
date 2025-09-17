@@ -39,7 +39,7 @@ border: none;
 }
 ::ng-deep .my-custom-menu .mat-mdc-menu-content {
   padding: 8px;
-  width: 260px !important;
+//   width: 260px !important;
   list-style-type: none;
 }
 .userImg{
@@ -55,4 +55,7 @@ border: none;
     background-color: #3252DF;
     color: white;
     margin: 0px 10px ;
+}
+.translate{
+    color: #3252DF !important;
 }

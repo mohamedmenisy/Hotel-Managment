@@ -1,41 +1,24 @@
 <section>
   <div class="text-center">
-    <h1>Explore ALL Rooms</h1>
+    <h1>{{"explore.ExploreAllRooms"|translate}}</h1>
   </div>
   <div class="container mx-auto">
-    <h3>All Rooms</h3>
-    <div class="bg-gray-100 flex items-center justify-center">
+    <h3>{{"explore.AllRooms"|translate}}</h3>
+    <div class="flex items-center justify-center">
       <div class="grid grid-cols-4 gap-6">
-        <div
-          *ngFor="let item of rooms"
-          class="relative rounded-xl overflow-hidden shadow-lg mb-6"
-        >
-          <div class="relative w-full h-60">
+        <div *ngFor="let item of rooms" class="relative rounded-xl overflow-hidden shadow-lg mb-6 maincard">
+          <div class=" w-full h-60 ">
             <ng-container
-              *ngIf="formatImages(item.images).length > 0; else noImage"
-            >
+              *ngIf="formatImages(item.images).length > 0; else noImage">
               <img
                 [src]="formatImages(item.images)[getCurrentIndex(item._id)]"
                 alt="room image"
                 class="w-full h-60 object-cover"
                 (error)="(emptyImig)"
               />
-
-              <button
-                (click)="prevImage(item._id, formatImages(item.images))"
-                class="absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full"
-              >
-                ‹
-              </button>
-              <button
-                (click)="nextImage(item._id, formatImages(item.images))"
-                class="absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full"
-              >
-                ›
-              </button>
             </ng-container>
             <div
-              class="absolute top-3 right-3 bg-pink-500 text-white text-sm font-semibold px-3 py-1 rounded-full"
+              class="badge absolute top-0 right-0 bg-pink-500 text-white text-sm font-semibold px-3 py-1 "
             >
               {{ item.price }} $ / night
             </div>
@@ -49,16 +32,13 @@
             </ng-template>
           </div>
 
-          <div class="absolute bottom-3 left-3 text-white">
-            <h3 class="text-lg font-bold">{{ item.roomNumber }}</h3>
-
-            <p class="text-sm">
-              {{
-                item.facilities && item.facilities.length > 0
-                  ? item.facilities[0].name
-                  : "No facilities"
-              }}
-            </p>
+          <div class="details  text-white">
+            <div>
+               <div class="layer">
+                <mat-icon class="layer-icon" >favorite</mat-icon>
+                <mat-icon class="layer-icon" routerLink="/master/details/{{item._id}}">visibility</mat-icon>
+            </div>
+            </div>
           </div>
         </div>
       </div>

@@ -6,10 +6,11 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { LandingService } from '../../services/landing.service';
 import { TranslatePipe } from '@ngx-translate/core';
+import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-landing-page',
   standalone: true,
-  imports: [MatIcon,FormsModule,MatDatepickerModule,MatFormFieldModule,TranslatePipe],
+  imports: [MatIcon,FormsModule,MatDatepickerModule,MatFormFieldModule,TranslatePipe,RouterLink],
   templateUrl: './landing-page.component.html',
   styleUrl: './landing-page.component.scss',
   providers:[provideNativeDateAdapter()]

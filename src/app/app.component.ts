@@ -6,10 +6,11 @@ import {
     TranslatePipe,
     TranslateDirective
 } from "@ngx-translate/core";
+import { BidiModule } from "@angular/cdk/bidi";
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, LoaderComponent],
+  imports: [RouterOutlet, LoaderComponent, BidiModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

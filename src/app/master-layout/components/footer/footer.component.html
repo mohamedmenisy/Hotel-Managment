@@ -1,33 +1,42 @@
 <footer>
-    <div class="mainFooter">
-        <div class="grid grid-cols-12 gap-4">
-            <div class="col-span-12 md:col-span-3">
-            <p class="logo"><span class="mainColor">Stay</span>cation.</p>
-            <p style="color: #B0B0B0;">We kaboom your beauty holiday
-            <br>instantly and memorable.</p>
-            </div>
-            <div class="col-span-12 md:col-span-3">
-            <p class="mainColor font-medium">For Beginners</p>
-            <p style="color: #B0B0B0;">New Account</p>
-            <p style="color: #B0B0B0;">Start Booking a Room</p>
-            <p style="color: #B0B0B0;">Use Payments</p>
-            </div>
-            <div class="col-span-12 md:col-span-3">
-            <p class="mainColor font-medium">Explore Us</p>
-            <p style="color: #B0B0B0;">Our Careers</p>
-            <p style="color: #B0B0B0;">Privacy</p>
-            <p style="color: #B0B0B0;">Terms & Conditions</p>
-            </div>
-            <div class="col-span-12 md:col-span-3">
-            <p class="mainColor font-medium">Connect Us</p>
-            <p style="color: #B0B0B0;">support{{'@'}}staycation.id</p>
-            <p style="color: #B0B0B0;">021 - 2208 - 1996</p>
-            <p style="color: #B0B0B0;">Staycation, Kemang, Jakarta</p>
-            </div>
-            <div class="col-span-12 text-center mt-6">
-            <p style="color: #B0B0B0;">Copyright 2019 • All rights reserved • Staycation</p>
-            </div>
-        </div>
+  <div class="mainFooter">
+    <div class="grid grid-cols-12 gap-4">
+      <!-- Logo & slogan -->
+      <div class="col-span-12 md:col-span-3">
+        <p class="logo"><span class="mainColor">Stay</span>cation.</p>
+        <p style="color: #B0B0B0;">{{ "footer.slogan" | translate }}</p>
+      </div>
 
+      <!-- For Beginners -->
+      <div class="col-span-12 md:col-span-3">
+        <p class="mainColor font-medium">{{ "footer.ForBeginners" | translate }}</p>
+        <p style="color: #B0B0B0;">{{ "footer.NewAccount" | translate }}</p>
+        <p style="color: #B0B0B0;">{{ "footer.StartBookingRoom" | translate }}</p>
+        <p style="color: #B0B0B0;">{{ "footer.UsePayments" | translate }}</p>
+      </div>
+
+      <!-- Explore Us -->
+      <div class="col-span-12 md:col-span-3">
+        <p class="mainColor font-medium">{{ "footer.ExploreUs" | translate }}</p>
+        <p style="color: #B0B0B0;">{{ "footer.OurCareers" | translate }}</p>
+        <p style="color: #B0B0B0;">{{ "footer.Privacy" | translate }}</p>
+        <p style="color: #B0B0B0;">{{ "footer.TermsConditions" | translate }}</p>
+      </div>
+
+      <!-- Connect Us -->
+      <div class="col-span-12 md:col-span-3">
+        <p class="mainColor font-medium">{{ "footer.ConnectUs" | translate }}</p>
+        <p style="color: #B0B0B0;">{{ "footer.email" | translate }}</p>
+        <p style="color: #B0B0B0;">{{ "footer.phone" | translate }}</p>
+        <p style="color: #B0B0B0;">{{ "footer.address" | translate }}</p>
+      </div>
+
+      <!-- Copyright -->
+      <div class="col-span-12 text-center mt-6">
+        <p style="color: #B0B0B0;">
+          © 2019 • {{ "footer.AllRights" | translate }} • Staycation
+        </p>
+      </div>
     </div>
+  </div>
 </footer>

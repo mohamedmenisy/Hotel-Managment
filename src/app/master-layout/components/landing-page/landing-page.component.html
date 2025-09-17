@@ -1,13 +1,12 @@
 <div class="grid grid-cols-12 items-center " style="margin-top: 40px;">
     <div class="col-span-12 md:col-span-6 order-2 md:order-1">
         <h2 style="color: #152C5B; font-weight: bold; font-size: 40px; line-height: 100%;">
-            Forget Busy Work,<br>
-            Start Next Vacation
+            {{'home.title'|translate}}
         </h2>
-        <p style="color: #B0B0B0;">We provide what you need to enjoy your holiday with family. <br> Time to make another memorable moments.</p>
+        <p style="color: #B0B0B0;">{{"home.content"|translate}}</p>
         <div class="mt-4">
-            <h3 >Start Booking</h3>
-            <span >Pick a Date</span>
+            <h3 >{{"home.StartBooking"|translate}}</h3>
+            <span >{{"home.PickaDate"|translate}}</span>
             <div class="home-filter">
                 <input type="date"  name="dateAdded">
             </div>
@@ -20,7 +19,7 @@
                     </div>
             </div>
             <div class="explore">
-            <button>Explore</button>
+            <button>{{'home.Explore'|translate}}</button>
             </div>
         </div>
     </div>
@@ -33,7 +32,7 @@
 
 <div class="grid grid-cols-12 gap-4 items-center mt-10">
     <div class="col-span-12">
-        <h3 style="color: #152C5B; font-weight: bold; text-transform: capitalize; font-size: 25px;">Most popular ads</h3>
+        <h3 style="color: #152C5B; font-weight: bold; text-transform: capitalize; font-size: 25px;">{{'home.MostPopularAds'|translate}}</h3>
     </div>
     <div class="col-span-12 md:col-span-4">
         <div class="card main-card">
@@ -77,7 +76,7 @@
 
 <div class="grid grid-cols-12 gap-4 items-center mt-10">
    <div class="col-span-12">
-        <h3 style="color: #152C5B; font-weight: bold; text-transform: capitalize; font-size: 25px;">Houses with beauty backyard</h3>
+        <h3 style="color: #152C5B; font-weight: bold; text-transform: capitalize; font-size: 25px;">{{'home.HousesWithBeautyBackyard'|translate}}</h3>
     </div>
     @for (item of Response; track $index) {
             @if ($index > 0) {
@@ -103,7 +102,7 @@
 </div>
 <div class="grid grid-cols-12 gap-4 items-center mt-10">
    <div class="col-span-12">
-        <h3 style="color: #152C5B; font-weight: bold; text-transform: capitalize; font-size: 25px;">Ads</h3>
+        <h3 style="color: #152C5B; font-weight: bold; text-transform: capitalize; font-size: 25px;">{{'home.Ads'|translate}}</h3>
     </div>
     @for (item of Response; track $index) {
             @if ($index > 0) {
@@ -114,7 +113,7 @@
 
             <div class="layer">
                 <mat-icon class="layer-icon">favorite</mat-icon>
-                <mat-icon class="layer-icon">visibility</mat-icon>
+                <mat-icon class="layer-icon" routerLink="/master/details/{{item._id}}">visibility</mat-icon>
             </div>
         </div>
           <div class="description-bottom ps-3">
@@ -136,7 +135,7 @@
     </div>
     <div class="col-span-12 md:col-span-8">
         <h2 style="color: #152C5B; font-weight: bold; font-size: 40px; line-height: 100%;">
-         Happy Family
+        {{'home.HappyFamily'|translate}}
         </h2>
         <div class="flex my-3">
             <mat-icon style="color: #FFCC47;">star</mat-icon>
@@ -145,10 +144,9 @@
             <mat-icon style="color: #FFCC47;">star</mat-icon>
             <mat-icon style="color: #FFCC47;">star</mat-icon>
         </div>
-        <p style="color: #152C5B; font-size: 32px; line-height: 100%;">What a great trip with my family and <br>
-                I should try again next time soon ...
+        <p style="color: #152C5B; font-size: 32px; line-height: 100%;">{{'home.contentCarusal'|translate}}
         </p>
-        <p style="color: #B0B0B0;">Angga, Product Designer</p>
+        <p style="color: #B0B0B0;">{{'home.nameDesigner'|translate}}</p>
         <div class="arrows">
             <mat-icon class="arrow-icon">arrow_circle_left</mat-icon>
             <mat-icon class="arrow-icon">arrow_circle_right</mat-icon>

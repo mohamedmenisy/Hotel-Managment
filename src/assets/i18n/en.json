@@ -1,6 +1,48 @@
 {
     "home":{
-        "title":"Forget Busy Work,<br> Start Next Vacation.",
-        "capacity":"capacity"
-    }
+        "title":"Forget Busy Work,Start Next Vacation.",
+        "capacity":"capacity",
+        "content":"We provide what you need to enjoy your holiday with family.Time to make another memorable moments.",
+        "StartBooking":"Start Booking",
+        "PickaDate":"Pick a Date",
+        "MostPopularAds":"Most Popular Ads",
+        "HousesWithBeautyBackyard":"Houses with beauty backyard",
+        "Ads":"Ads",
+        "HappyFamily":"Happy Family",
+        "contentCarusal":"What a great trip with my family and I should try again next time soon ..",
+        "nameDesigner":"Angga, Product Designer",
+        "Explore":"Explore"
+    },
+  "footer": {
+  "slogan": "We kaboom your beauty holiday instantly and make it memorable.",
+  "ForBeginners": "For Beginners",
+  "NewAccount": "New Account",
+  "StartBookingRoom": "Start Booking a Room",
+  "UsePayments": "Use Payments",
+  "ExploreUs": "Explore Us",
+  "OurCareers": "Our Careers",
+  "Privacy": "Privacy",
+  "TermsConditions": "Terms & Conditions",
+  "ConnectUs": "Connect Us",
+  "email": "support@staycation.id",
+  "phone": "021 - 2208 - 1996",
+  "address": "Staycation, Kemang, Jakarta",
+  "AllRights": "All rights reserved"
+
+},
+"navbar": {
+  "Home": "Home",
+  "Explore": "Explore",
+  "Reviews": "Reviews",
+  "Favorites": "Favorites",
+   "Profile": "Profile",
+  "ChangePassword": "Change Password",
+  "Logout": "Logout",
+  "en":"English",
+  "ar":"Arabic"
+},
+"explore": {
+  "AllRooms": "All Rooms",
+  "ExploreAllRooms": "Explore All Rooms"
+}
 }
