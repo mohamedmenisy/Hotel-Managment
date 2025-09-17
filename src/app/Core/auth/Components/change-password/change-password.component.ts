@@ -42,7 +42,7 @@ export class ChangePasswordComponent {
       },
       error:(err)=>{
         console.log(err);
-        
+
       this._alert.Error()
       },
       complete:()=>{
@@ -51,6 +51,10 @@ export class ChangePasswordComponent {
     })
   }
   back(){
-    this._router.navigate(["/dashboard"])
+    if (localStorage.getItem('role')=='user') {
+      this._router.navigate(["/master"])
+    }else{
+      this._router.navigate(["/dashboard"])
+    }
   }
 }

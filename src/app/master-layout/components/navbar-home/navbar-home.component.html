@@ -46,15 +46,15 @@
               </div>
             </button>
             <mat-menu #menu="matMenu" class="my-custom-menu mt-3">
-              <a mat-menu-item >
+              <a mat-menu-item (click)="Profile()">
                 <mat-icon>account_circle</mat-icon>
                 <span>{{"navbar.Profile"|translate}}</span>
               </a>
-              <button mat-menu-item >
+              <button mat-menu-item routerLink="/auth/change-password">
                 <mat-icon>key</mat-icon>
                 <span>{{"navbar.ChangePassword"|translate}}</span>
               </button>
-              <button mat-menu-item >
+              <button mat-menu-item (click)="logout()">
                 <mat-icon>logout</mat-icon>
                 <span>{{"navbar.Logout"|translate}}</span>
               </button>
