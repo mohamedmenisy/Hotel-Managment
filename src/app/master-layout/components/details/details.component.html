@@ -3,7 +3,7 @@
   <div class="breadcrumb">
     <a routerLink="/master">Home</a> /
     <span class="active">{{ roomDetails.roomNumber || 'Room Details' }}</span>
-  </div>  
+  </div>
 
   <!-- Room Header -->
   <div class="room-header">
@@ -24,11 +24,11 @@
 
       <!-- Two smaller stacked images -->
       <div class="side-images">
-        <div class="side-image" *ngIf="roomDetails.images[1]">
-          <img [src]="roomDetails.images[1]" alt="Side Image 1" />
+        <div class="side-image" >
+          <img [src]="roomDetails.images[1]?roomDetails.images[1]:dimage1" alt="Side Image 1" />
         </div>
-        <div class="side-image" *ngIf="roomDetails.images[2]">
-          <img [src]="roomDetails.images[2]" alt="Side Image 2" />
+        <div class="side-image" >
+          <img [src]="roomDetails.images[2]?roomDetails.images[2]:dimage2" alt="Side Image 2" />
         </div>
       </div>
     </div>
@@ -79,33 +79,6 @@
         </div>
       </div>
 
-      <!-- Rating Section -->
-      <div class="rating-section">
-        <label class="section-title">Rate</label>
-        <div class="stars">
-          <i
-            class="fa-star"
-            *ngFor="let star of stars; let i = index"
-            [ngClass]="i < rating ? 'fas filled' : 'far'"
-            (click)="setRating(i + 1)">
-          </i>
-        </div>
-      </div>
-
-      <!-- Single Message Section -->
-      <div class="message-section">
-        <label class="section-title">Message</label>
-        <textarea
-          [(ngModel)]="message"
-          placeholder="Write your feedback..."
-          class="message-input">
-        </textarea>
-
-        <!-- Submit Button -->
-        <div class="rate-button-wrapper">
-          <button class="rate-button" (click)="submitRating()">Rate</button>
-        </div>
-      </div>
 
     </div>
 
@@ -151,6 +124,70 @@
   </div>
 </div>
 
+<div class="container">
+  <div class="grid grid-cols-12 gap-4">
+    <div class="col-span-6">
+
+      <!-- Rating Section -->
+      <div class="rating-section">
+        <label class="section-title">Rate</label>
+        <div class="stars">
+          <i
+            class="fa-star"
+            *ngFor="let star of stars; let i = index"
+            [ngClass]="i < rating ? 'fas filled' : 'far'"
+            (click)="setRating(i + 1)">
+          </i>
+        </div>
+      </div>
+
+      <!-- Single Message Section -->
+      <div class="message-section">
+        <label class="section-title">Message</label>
+        <textarea
+          [(ngModel)]="message"
+          placeholder="Write your feedback..."
+          class="message-input">
+        </textarea>
+
+        <!-- Submit Button -->
+        <div class="rate-button-wrapper">
+          <button class="rate-button" (click)="submitRating()">Rate</button>
+        </div>
+      </div>
+    </div>
+    <div class="col-span-6">
+
+      <!-- Rating Section -->
+      <div class="rating-section">
+        <label class="section-title">Add your Comment</label>
+        <div class="stars" style="visibility: hidden;">
+          <i
+            class="fa-star"
+            *ngFor="let star of stars; let i = index"
+            [ngClass]="i < rating ? 'fas filled' : 'far'"
+            (click)="setRating(i + 1)">
+          </i>
+        </div>
+      </div>
+
+      <!-- Single Message Section -->
+      <div class="message-section">
+        <label class="section-title">Message</label>
+        <textarea
+          [(ngModel)]="comment"
+          placeholder="Write your feedback..."
+          class="message-input">
+        </textarea>
+
+        <!-- Submit Button -->
+        <div class="rate-button-wrapper">
+          <button class="rate-button" (click)="submitComment()">Send</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 <!-- Loader -->
 <ng-template #isLoading>
   <div class="loading-state">

@@ -16,6 +16,13 @@ Detailed(id: string): Observable<RoomResponse> {
   return this.http.get<RoomResponse>(`portal/rooms/${id}`);
 }
 
+CreateComment(data:any):Observable<any>{
+ return this.http.post('portal/room-comments',data);
+}
+
+RateRoom(data:any):Observable<any>{
+ return this.http.post('portal/room-reviews',data);
+}
 
 
 

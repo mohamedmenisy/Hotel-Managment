@@ -26,7 +26,6 @@
   max-width: 1200px;
   margin: auto;
   padding: 20px;
-  background: #f9f9f9;
   border-radius: 12px;
 }
 
@@ -215,88 +214,7 @@
   /* ===============================
     Rating Section
     =============================== */
-  .rating-section {
-    margin-top: 25px;
 
-    .section-title {
-      display: block;
-      font-weight: 600;
-      color: #0a2c63;
-      margin-bottom: 8px;
-    }
-
-    .stars {
-      display: flex;
-      gap: 8px;
-
-      i {
-        font-size: 28px;
-        color: #ccc;
-        cursor: pointer;
-        transition: color 0.3s ease;
-
-        &.filled {
-          color: #f1c40f;
-        }
-
-        &:hover {
-          color: #f39c12;
-        }
-      }
-    }
-  }
-
-  /* ===============================
-    Single Message Section
-    =============================== */
-  .message-section {
-    margin-top: 25px;
-    display: flex;
-    flex-direction: column;
-
-    .section-title {
-      font-weight: 600;
-      color: #0a2c63;
-      margin-bottom: 8px;
-    }
-
-    .message-input {
-      width: 100%;
-      min-height: 100px;
-      border: 1px solid #3a5bd9;
-      border-radius: 8px;
-      padding: 10px;
-      font-size: 14px;
-      resize: none;
-      outline: none;
-
-      &:focus {
-        border-color: #2c4bc9;
-        box-shadow: 0 0 4px rgba(44, 75, 201, 0.5);
-      }
-    }
-
-    .rate-button-wrapper {
-      margin-top: 15px;
-
-      .rate-button {
-        background-color: #1a2e75;
-        color: white;
-        font-size: 16px;
-        width: 210px;
-        height: 50px;
-        padding: 8px 20px;
-        border: none;
-        border-radius: 6px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-
-        &:hover {
-          background-color: #273b84;
-        }
-      }
-    }
-  }
 
   /* ===============================
     Booking Card
@@ -486,3 +404,85 @@
     }
   }
 }
+  .rating-section {
+    margin-top: 25px;
+
+    .section-title {
+      display: block;
+      font-weight: 600;
+      color: #0a2c63;
+      margin-bottom: 8px;
+    }
+
+    .stars {
+      display: flex;
+      gap: 8px;
+
+      i {
+        font-size: 28px;
+        color: #ccc;
+        cursor: pointer;
+        transition: color 0.3s ease;
+
+        &.filled {
+          color: #f1c40f;
+        }
+
+        &:hover {
+          color: #f39c12;
+        }
+      }
+    }
+  }
+
+  /* ===============================
+    Single Message Section
+    =============================== */
+  .message-section {
+    margin-top: 25px;
+    display: flex;
+    flex-direction: column;
+
+    .section-title {
+      font-weight: 600;
+      color: #0a2c63;
+      margin-bottom: 8px;
+    }
+
+    .message-input {
+      width: 100%;
+      min-height: 100px;
+      border: 1px solid #3a5bd9;
+      border-radius: 8px;
+      padding: 10px;
+      font-size: 14px;
+      resize: none;
+      outline: none;
+
+      &:focus {
+        border-color: #2c4bc9;
+        box-shadow: 0 0 4px rgba(44, 75, 201, 0.5);
+      }
+    }
+
+    .rate-button-wrapper {
+      margin-top: 15px;
+
+      .rate-button {
+        background-color: #1a2e75;
+        color: white;
+        font-size: 16px;
+        width: 210px;
+        height: 50px;
+        padding: 8px 20px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+
+        &:hover {
+          background-color: #273b84;
+        }
+      }
+    }
+  }
