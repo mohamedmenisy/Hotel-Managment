@@ -1,16 +1,12 @@
 <div class="container" *ngIf="roomDetails; else isLoading">
-  <!-- Breadcrumb -->
-  <div class="breadcrumb">
-    <a routerLink="/master">Home</a> /
-    <span class="active">{{ roomDetails.roomNumber || 'Room Details' }}</span>
-  </div>
 
-  <!-- Room Header -->
-  <div class="room-header">
-    <h1 class="room-title"> {{ roomDetails.roomNumber }}</h1>
-    <div class="room-location">
-      <i class="fas fa-users"></i>
-      <span>Capacity: {{ roomDetails.capacity }} people</span>
+    <div class="grid grid-cols-12 items-center">
+    <div class="col-span-4">
+      <p><a routerLink="/master" class="text-gray-400">Home</a><span class="text-gray-400 mx-2">/</span><a routerLink="/master/details/{{this.roomid}}" class="text-gray-400">Roop Details</a><span class="text-gray-400 mx-2">/</span><a routerLink="/master/details/{{this.roomid}}">{{ roomDetails.roomNumber || 'Details'}}</a></p>
+    </div>
+    <div class="col-span-4 text-center">
+        <h1 class="room-title"> {{ roomDetails.roomNumber }}</h1>
+        <span class="text-gray-400">Capacity {{ roomDetails.capacity}} people</span>
     </div>
   </div>
 
