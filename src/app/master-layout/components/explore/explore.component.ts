@@ -8,7 +8,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { LandingService } from '../../services/landing.service';
 import { CommonModule } from '@angular/common';
 import { TranslatePipe } from '@ngx-translate/core';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 CommonModule
 @Component({
   selector: 'app-explore',
@@ -30,7 +30,7 @@ export class ExploreComponent {
   currentIndexes: Record<string, number> = {};
   emptyImig: string = '../../../../assets/Images/Register.png';
    @ViewChild(MatPaginator) paginator!: MatPaginator;
-   constructor(private _LandingService:LandingService){}
+   constructor(private _LandingService:LandingService,private route: ActivatedRoute){}
   onPageChange(event: any): void {
     console.log('Page changed:', event);
   }
@@ -39,9 +39,24 @@ export class ExploreComponent {
   this.getAllrooms()
  }
     getAllrooms() {
+       const start = this.route.snapshot.queryParamMap.get('start');
+       const end = this.route.snapshot.queryParamMap.get('end');
+       let data={
+        start:start,
+        end:end
+       }
+       if(start && end){
+      this._LandingService.gitallroomsexplore(this.pageNumber, this.pageSize,data).subscribe({
+              next: (res) => {
+                console.log(res);
 
+                  this.rooms = res.data.rooms
+                  this.totalCount = res.data.totalCount;
 
-       this._LandingService.gitallroomsexplore(this.pageNumber, this.pageSize).subscribe({
+              },
+            });
+       }else{
+        this._LandingService.gitallroomsexplore(this.pageNumber, this.pageSize,null).subscribe({
          next: (res) => {
           console.log(res);
 
@@ -50,6 +65,9 @@ export class ExploreComponent {
 
          },
        });
+       }
+
+
      }
 
 

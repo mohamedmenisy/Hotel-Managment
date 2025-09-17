@@ -1,15 +1,24 @@
 <div class="grid grid-cols-12 items-center " style="margin-top: 40px;">
     <div class="col-span-12 md:col-span-6 order-2 md:order-1">
-        <h2 style="color: #152C5B; font-weight: bold; font-size: 40px; line-height: 100%;">
+        <h2 style="color: #152C5B; font-weight: bold; font-size: 40px; line-height: 100%; width: 80%;">
             {{'home.title'|translate}}
         </h2>
-        <p style="color: #B0B0B0;">{{"home.content"|translate}}</p>
+        <p style="color: #B0B0B0; width: 50%;">{{"home.content"|translate}}</p>
         <div class="mt-4">
             <h3 >{{"home.StartBooking"|translate}}</h3>
             <span >{{"home.PickaDate"|translate}}</span>
-            <div class="home-filter">
-                <input type="date"  name="dateAdded">
+        <form [formGroup]="range" >
+               <div class="home-filter">
+                <mat-form-field class="small-w">
+                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-date-range-input  [rangePicker]="picker">
+                        <input matStartDate formControlName="start"  placeholder="Start date">
+                        <input matEndDate formControlName="end"  placeholder="End date">
+                    </mat-date-range-input>
+                    <mat-date-range-picker #picker></mat-date-range-picker>
+                    </mat-form-field>
             </div>
+            </form>
             <span class="block mb-0 mt-2 ">{{'home.capacity'|translate}}</span>
             <div class="capacity-filter">
                     <div class="input-group">
@@ -19,8 +28,9 @@
                     </div>
             </div>
             <div class="explore">
-            <button>{{'home.Explore'|translate}}</button>
+            <button (click)="Search()">{{'home.Explore'|translate}}</button>
             </div>
+
         </div>
     </div>
     <div class="col-span-12 md:col-span-6 order-1 md:order-2">
@@ -144,7 +154,7 @@
             <mat-icon style="color: #FFCC47;">star</mat-icon>
             <mat-icon style="color: #FFCC47;">star</mat-icon>
         </div>
-        <p style="color: #152C5B; font-size: 32px; line-height: 100%;">{{'home.contentCarusal'|translate}}
+        <p style="color: #152C5B; font-size: 32px; line-height: 100%; width: 90%;">{{'home.contentCarusal'|translate}}
         </p>
         <p style="color: #B0B0B0;">{{'home.nameDesigner'|translate}}</p>
         <div class="arrows">

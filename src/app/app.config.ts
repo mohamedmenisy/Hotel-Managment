@@ -1,4 +1,4 @@
-import { ApplicationConfig } from '@angular/core';
+import { ApplicationConfig, importProvidersFrom } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
@@ -17,11 +17,11 @@ export const appConfig: ApplicationConfig = {
     ),
      provideTranslateService({
       loader: provideTranslateHttpLoader({
-        prefix: './assets/i18n/',  // مكان ملفات الترجمة
-        suffix: '.json'            // الامتداد
+        prefix: './assets/i18n/',
+        suffix: '.json'
       }),
-      lang: 'en',                  // اللغة الافتراضية
-      fallbackLang: 'en'           // اللغة البديلة
-    })
+      lang: 'en',
+      fallbackLang: 'en'
+    }),
   ]
 };
