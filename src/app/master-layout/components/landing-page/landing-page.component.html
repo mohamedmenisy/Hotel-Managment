@@ -12,8 +12,8 @@
                 <mat-form-field class="small-w">
                     <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-date-range-input  [rangePicker]="picker">
-                        <input matStartDate formControlName="start"  placeholder="Start date">
-                        <input matEndDate formControlName="end"  placeholder="End date">
+                        <input matStartDate formControlName="start"  placeholder="{{'global.startDate' | translate}}">
+                        <input matEndDate formControlName="end"  placeholder="{{'global.endDate' | translate}}">
                     </mat-date-range-input>
                     <mat-date-range-picker #picker></mat-date-range-picker>
                     </mat-form-field>
@@ -158,8 +158,13 @@
         </p>
         <p style="color: #B0B0B0;">{{'home.nameDesigner'|translate}}</p>
         <div class="arrows">
-            <mat-icon class="arrow-icon">arrow_circle_left</mat-icon>
-            <mat-icon class="arrow-icon">arrow_circle_right</mat-icon>
+            @if(language == 'ar'){
+                <mat-icon class="arrow-icon">arrow_circle_right</mat-icon>
+                <mat-icon class="arrow-icon">arrow_circle_left</mat-icon>
+            }@else {
+                <mat-icon class="arrow-icon">arrow_circle_left</mat-icon>
+                <mat-icon class="arrow-icon">arrow_circle_right</mat-icon>
+            }
         </div>
     </div>
 </div>

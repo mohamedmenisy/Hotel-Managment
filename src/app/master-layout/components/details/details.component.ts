@@ -15,7 +15,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule } from '@angular/material/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
-
+import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
+import { LanguageService } from '../../../shared/Services/language.service';
+import { TranslatePipe } from '@ngx-translate/core';
 @Component({
   selector: 'app-details',
   standalone: true,
@@ -29,7 +31,9 @@ import { MatIconModule } from '@angular/material/icon';
     MatInputModule,
     MatIconModule,
     FormsModule,
+    CarouselModule,
     ReactiveFormsModule,
+    TranslatePipe
   ],
   templateUrl: './details.component.html',
   styleUrls: ['./details.component.scss'],
@@ -41,19 +45,20 @@ export class DetailsComponent implements OnInit {
   nights = 2;
   dimage1: string = '../../../../assets/Images/d1.jpg';
   dimage2: string = '../../../../assets/Images/d2.jpg';
-  icons = [
-    // Row 1
-    { img: 'assets/icons/bedroom.png', label: 'Bedroom', number: 5 },
-    { img: 'assets/icons/living-room.png', label: 'Living Room', number: 1 },
-    { img: 'assets/icons/bathroom.png', label: 'Bathroom', number: 3 },
-    { img: 'assets/icons/dining-room.png', label: 'Dining Room', number: 1 },
+ icons = [
+  // Row 1
+  { img: 'assets/icons/bedroom.png', label: 'Bedroom', arlable: 'غرفة نوم', number: 5 },
+  { img: 'assets/icons/living-room.png', label: 'Living Room', arlable: 'غرفة معيشة', number: 1 },
+  { img: 'assets/icons/bathroom.png', label: 'Bathroom', arlable: 'حمام', number: 3 },
+  { img: 'assets/icons/dining-room.png', label: 'Dining Room', arlable: 'غرفة طعام', number: 1 },
 
-    // Row 2
-    { img: 'assets/icons/mbps.png', label: 'Mbps/s', number: 10 },
-    { img: 'assets/icons/unit-ready.png', label: 'unit-ready', number: 7 },
-    { img: 'assets/icons/refrigerator.png', label: 'Refrigerator', number: 2 },
-    { img: 'assets/icons/television.png', label: 'Television', number: 4 },
-  ];
+  // Row 2
+  { img: 'assets/icons/mbps.png', label: 'Mbps/s', arlable: 'ميغابت/ثانية', number: 10 },
+  { img: 'assets/icons/unit-ready.png', label: 'Unit Ready', arlable: 'وحدة جاهزة', number: 7 },
+  { img: 'assets/icons/refrigerator.png', label: 'Refrigerator', arlable: 'ثلاجة', number: 2 },
+  { img: 'assets/icons/television.png', label: 'Television', arlable: 'تلفزيون', number: 4 },
+];
+  language:string="en";
   rating = 0;
   stars = [1, 2, 3, 4, 5];
   message = '';
@@ -63,9 +68,10 @@ export class DetailsComponent implements OnInit {
     private detailsService: DetailsService,
     private route: ActivatedRoute,
     private snackBar: MatSnackBar,
-    private _alert: AlertsService
+    private _alert: AlertsService,
+    private lang:LanguageService
   ) {}
-  ngOnInit(): void {
+ ngOnInit(): void {
     this.roomid = this.route.snapshot.paramMap.get('id');
     console.log('Captured Room ID:', this.roomid);
 
@@ -75,8 +81,44 @@ export class DetailsComponent implements OnInit {
       this.isLoading = false;
       this.showErrorSnackBar('No room ID provided!');
     }
+    this.lang.currentLang$.subscribe({
+      next:(res)=>{
+        this.language=res;
+        if(res == 'ar'){
+          this.refreshOwl(true);
+        }else{
+          this.refreshOwl(false);
+        }
+      }
+    })
   }
-  
+  customOptions: OwlOptions = {
+  loop: true,
+  autoplay: true,
+  autoplayTimeout: 3000,
+  autoplayHoverPause: true,
+  smartSpeed: 700,
+  items: 1,
+  dots: true,
+  nav: false,
+  rtl:false,
+  navText: ['',''],
+  center: true,
+  mouseDrag: false,
+  touchDrag: false,
+  pullDrag: false,
+  autoHeight: false,
+  responsive: {
+    0: { items: 1 },
+    768: { items: 1 },
+    1024: { items: 1 }
+  }
+};
+refreshOwl(value:boolean){
+ this.customOptions = { ...this.customOptions, rtl: value };
+}
+
+
   private fetchRoomDetails(id: string): void {
     this.isLoading = true;
     this.detailsService.Detailed(id).subscribe({
@@ -87,11 +129,9 @@ export class DetailsComponent implements OnInit {
         this.facilitiesList = this.roomDetails.facilities || [];
 
         this.isLoading = false;
-        console.log('Room Details Fetched:', this.roomDetails);
       },
       error: (err) => {
         this.isLoading = false;
-        console.error('Error fetching room details:', err);
         this.showErrorSnackBar('Failed to load room details');
       },
     });
@@ -122,7 +162,7 @@ export class DetailsComponent implements OnInit {
         rating: this.rating,
         review: this.message,
       };
-      //'Thank you for your feedback!'
+
       this.detailsService.RateRoom(data).subscribe({
         next: (res) => {
           console.log(res);

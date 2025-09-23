@@ -7,6 +7,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import { LandingService } from '../../services/landing.service';
 import { TranslatePipe } from '@ngx-translate/core';
 import { Router, RouterLink } from '@angular/router';
+import { LanguageService } from '../../../shared/Services/language.service';
 
 @Component({
   selector: 'app-landing-page',
@@ -20,17 +21,25 @@ export class LandingPageComponent {
   value:any="1 Persone";
   counter:number=1;
   Response:any[]=[];
+  language:string|null='';
    range = new FormGroup({
     start: new FormControl<Date | null>(null),
     end: new FormControl<Date | null>(null),
   });
-  constructor(private _landing:LandingService,private router: Router){}
+  constructor(private _landing:LandingService,private router: Router ,private lang:LanguageService){}
   ngOnInit(): void {
+    this.lang.currentLang$.subscribe({
+      next:(res)=>{
+        this.language=res;
+      }
+    })
     this.Explore();
+
   }
+
 Add(){
   this.counter++;
-  this.value= this.counter +' '+ 'Persone';
+  this.value= this.counter +' '+ (this.language=='en'?'Persone':'اشخاص');
 
 }
 remove(){
@@ -39,13 +48,12 @@ remove(){
   }else{
     this.counter = 1;
   }
-  this.value= this.counter + ' ' + 'Persone';
+  this.value= this.counter + ' ' + (this.language=='en'?'Persone':'اشخاص');
 }
 Explore(){
   this._landing.getRooms().subscribe({
     next:(res)=>{
-      this.Response = res.data.rooms;
-
+      this.Response = res.data.rooms.filter((room:any)=>room.images).slice(-5);
     }
   })
 }

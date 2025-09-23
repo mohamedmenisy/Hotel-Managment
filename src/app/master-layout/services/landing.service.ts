@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -23,10 +23,10 @@ export class LandingService {
     })
   }
   getRooms():Observable<any>{
-    return this._http.get('portal/rooms/available',{
+    return this._http.get<any>('portal/rooms/available',{
       params:{
-        page:3,
-        size:5,
+        page:1,
+        size:100000000000000,
       }
     })
   }

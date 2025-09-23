@@ -1,41 +1,35 @@
 <div class="container" *ngIf="roomDetails; else isLoading">
 
     <div class="grid grid-cols-12 items-center">
-    <div class="col-span-4">
-      <p><a routerLink="/master" class="text-gray-400">Home</a><span class="text-gray-400 mx-2">/</span><a routerLink="/master/details/{{this.roomid}}" class="text-gray-400">Roop Details</a><span class="text-gray-400 mx-2">/</span><a routerLink="/master/details/{{this.roomid}}">{{ roomDetails.roomNumber || 'Details'}}</a></p>
+    <div class="col-span-12">
+      <p><a routerLink="/master" class="text-gray-400">{{'global.home'|translate}}</a><span class="text-gray-400 mx-2">/</span><a routerLink="/master/details/{{this.roomid}}" class="text-gray-400">{{'roomDetails.details'|translate}}</a><span class="text-gray-400 mx-2">/</span><a routerLink="/master/details/{{this.roomid}}">{{ roomDetails.roomNumber || 'Details'}}</a></p>
     </div>
-    <div class="col-span-4 text-center">
+    <div class="col-span-12 text-center">
         <h1 class="room-title"> {{ roomDetails.roomNumber }}</h1>
-        <span class="text-gray-400">Capacity {{ roomDetails.capacity}} people</span>
+        <span class="text-gray-400">{{'roomDetails.capacity'|translate}} {{ roomDetails.capacity}} {{'roomDetails.people'|translate}}</span>
     </div>
   </div>
 
   <!-- Room Images Section -->
-  <div class="room-images" *ngIf="roomDetails.images && roomDetails.images.length > 0; else noImages">
-    <div class="images-grid">
-      <!-- Main large image -->
-      <div class="main-image">
-        <img [src]="roomDetails.images[0]" alt="Main Room Image" />
-      </div>
+   <owl-carousel-o *ngIf="(roomDetails?.images?.length ?? 0) > 0; else defaultImage" [options]="customOptions" class="owl">
+  <ng-container *ngFor="let slide of roomDetails?.images; let i = index">
+    <ng-template carouselSlide [id]="i.toString()">
+      <img [src]="slide" alt="room"  class="block w-full h-64 object-cover rounded-lg"/>
+    </ng-template>
+  </ng-container>
 
-      <!-- Two smaller stacked images -->
-      <div class="side-images">
-        <div class="side-image" >
-          <img [src]="roomDetails.images[1]?roomDetails.images[1]:dimage1" alt="Side Image 1" />
-        </div>
-        <div class="side-image" >
-          <img [src]="roomDetails.images[2]?roomDetails.images[2]:dimage2" alt="Side Image 2" />
-        </div>
-      </div>
-    </div>
-  </div>
-
+</owl-carousel-o>
+  <ng-template #defaultImage>
+    <ng-template carouselSlide>
+      <img [src]="dimage1" alt="default room" class="block w-full h-64 object-cover rounded-lg"/>
+    </ng-template>
+  </ng-template>
   <!-- No Images Template -->
-  <ng-template #noImages>
+  <!-- <ng-template #noImages>
     <div class="no-images">
       <p>No images available for this room.</p>
     </div>
-  </ng-template>
+  </ng-template> -->
 
   <!-- Room Content -->
   <div class="room-content">
@@ -43,24 +37,15 @@
     <div class="room-description">
 
       <div class="layout-a">
-        <p>Minimal techno is a minimalist subgenre of techno music.
-          It is characterized by a stripped-down aesthetic that exploits the use of repetition and understated
-          development.
-          Minimal techno is thought to have been originally developed in the early 1990s by Detroit-based producers
-          Robert Hood and Daniel Bell.</p>
+        <p>{{'roomDetails.Details1'|translate}}</p>
       </div>
 
       <div class="layout-b">
-        <p>Such trends saw the demise of the soul-infused techno that typified the original Detroit sound.
-          Robert Hood has noted that he and Daniel Bell both realized something was missing from techno in the post-rave
-          era..</p>
+     <p>{{'roomDetails.Details2'|translate}}</p>
       </div>
 
       <div class="layout-c">
-        <p>Design is a plan or specification for the construction of an object or system or for the implementation of an
-          activity or process, or the result of that plan or specification in the form of a prototype, product or
-          process. The national agency for design: enabling Singapore to use design for economic growth and to make
-          lives better.</p>
+       <p>{{'roomDetails.Details3'|translate}}</p>
       </div>
 
       <!-- Icons Grid -->
@@ -70,7 +55,7 @@
             <div class="icon-image">
               <img [src]="icon.img" [alt]="icon.label" />
             </div>
-            <p class="icon-number">{{ icon.number }} {{ icon.label }}</p>
+            <p class="icon-number"> {{ icon.number }} <span>{{ language == 'en'? icon.label  : icon.arlable}}</span></p>
           </div>
         </div>
       </div>
@@ -82,39 +67,41 @@
     <div class="booking-card">
       <!-- Upper Part -->
       <div class="card-upper">
-        <h3 class="card-title">Start Booking</h3>
+        <h3 class="card-title">{{'roomDetails.startBooking'|translate}}</h3>
 
         <!-- Price Section -->
         <div class="price-section">
           <span class="price">${{ roomDetails.price }}</span>
-          <span class="per-night">per night</span>
+          <span class="per-night">{{'roomDetails.perNight'|translate}}</span>
         </div>
 
         <!-- Discount -->
         <div class="discount" *ngIf="roomDetails.discount !== null && roomDetails.discount !== undefined">
-          Discount {{ roomDetails.discount }}% Off
+          {{'roomDetails.discount'|translate}} {{ roomDetails.discount }}%
         </div>
 
         <!-- Date Section -->
         <div class="date-section">
-          <h4 class="section-title">Pick a Date</h4>
-          <mat-date-range-input [rangePicker]="picker" class="date-input">
-            <input matStartDate placeholder="Check-in" class="date-field" />
-            <input matEndDate placeholder="Check-out" class="date-field" />
-            <i class="fas fa-calendar-alt" (click)="picker.open()"></i>
-          </mat-date-range-input>
-          <mat-date-range-picker #picker></mat-date-range-picker>
+          <h4 class="section-title">{{'roomDetails.pickDate'|translate}}</h4>
+            <mat-form-field class="small-w">
+                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-date-range-input  [rangePicker]="picker">
+                        <input matStartDate formControlName="start"  placeholder="{{'global.startDate' | translate}}">
+                        <input matEndDate formControlName="end"  placeholder="{{'global.endDate' | translate}}">
+                    </mat-date-range-input>
+                    <mat-date-range-picker #picker></mat-date-range-picker>
+                    </mat-form-field>
         </div>
       </div>
 
       <!-- Lower Part -->
       <div class="card-lower">
         <p class="payment-note">
-          You will pay <strong>${{ getTotalCost() }} USD</strong> per
-          <strong>{{ roomDetails.capacity }} Person</strong>
+          {{'roomDetails.youWillPay'|translate}} <strong>${{ getTotalCost() }} USD</strong> {{'roomDetails.per'|translate}}
+          <strong>{{ roomDetails.capacity }} {{'roomDetails.Person'|translate}}</strong>
         </p>
 
-        <button class="book-button">Continue Book</button>
+        <button class="book-button">{{'roomDetails.ContinueBook'|translate}}</button>
       </div>
     </div>
   </div>
@@ -126,7 +113,7 @@
 
       <!-- Rating Section -->
       <div class="rating-section">
-        <label class="section-title">Rate</label>
+        <label class="section-title">{{'roomDetails.Rate'|translate}}</label>
         <div class="stars">
           <i
             class="fa-star"
@@ -139,16 +126,16 @@
 
       <!-- Single Message Section -->
       <div class="message-section">
-        <label class="section-title">Message</label>
+        <label class="section-title">{{'roomDetails.Message'|translate}}</label>
         <textarea
           [(ngModel)]="message"
-          placeholder="Write your feedback..."
+          placeholder="{{'roomDetails.WriteReviewPlaceholder'|translate}}"
           class="message-input">
         </textarea>
 
         <!-- Submit Button -->
         <div class="rate-button-wrapper">
-          <button class="rate-button" (click)="submitRating()">Rate</button>
+          <button class="rate-button" (click)="submitRating()">{{'roomDetails.Rate'|translate}}</button>
         </div>
       </div>
     </div>
@@ -156,7 +143,7 @@
 
       <!-- Rating Section -->
       <div class="rating-section">
-        <label class="section-title">Add your Comment</label>
+        <label class="section-title">{{'roomDetails.AddYourComment'|translate}}</label>
         <div class="stars" style="visibility: hidden;">
           <i
             class="fa-star"
@@ -169,16 +156,16 @@
 
       <!-- Single Message Section -->
       <div class="message-section">
-        <label class="section-title">Message</label>
+        <label class="section-title">{{'roomDetails.Message'|translate}}</label>
         <textarea
           [(ngModel)]="comment"
-          placeholder="Write your feedback..."
+          placeholder="{{'roomDetails.WriteCommentPlaceholder'|translate}}"
           class="message-input">
         </textarea>
 
         <!-- Submit Button -->
         <div class="rate-button-wrapper">
-          <button class="rate-button" (click)="submitComment()">Send</button>
+          <button class="rate-button" (click)="submitComment()">{{'roomDetails.Send'|translate}}</button>
         </div>
       </div>
     </div>

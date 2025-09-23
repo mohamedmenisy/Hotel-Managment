@@ -50,6 +50,7 @@ setLanguage(lang:string) {
 }
 logout(){
   this._auth.logout();
+  
 }
  Profile() {
     const dialogRef = this.dialog.open(ProfileComponent, {

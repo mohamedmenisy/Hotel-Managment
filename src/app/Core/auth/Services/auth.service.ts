@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -10,14 +11,14 @@ import { Iregister } from '../Interfaces/iregister';
 })
 export class AuthService {
 
-  constructor(private _http:HttpClient){}
+  constructor(private _http:HttpClient,private Router:Router){}
 
-  onForget(d: any): Observable<IforgotPassword> {
-    return this._http.post<IforgotPassword>('admin/users/forgot-password', d)
+  onForget(data: any): Observable<IforgotPassword> {
+    return this._http.post<IforgotPassword>('admin/users/forgot-password', data)
   }
 
-  onReset(d: any): Observable<IresetPassword> {
-    return this._http.post<IresetPassword>('admin/users/reset-password', d)
+  onReset(data: any): Observable<IresetPassword> {
+    return this._http.post<IresetPassword>('admin/users/reset-password', data)
   }
 
 
@@ -38,6 +39,7 @@ export class AuthService {
     localStorage.removeItem("token");
     localStorage.removeItem("role");
     localStorage.removeItem("userName");
+    this.Router.navigate(['/auth/login']);
   }
  getCurrentUser(id:any): Observable<any>{
   return this._http.get(`admin/users/${id}`);

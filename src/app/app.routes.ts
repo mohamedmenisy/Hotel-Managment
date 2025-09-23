@@ -10,6 +10,7 @@ import { MasterComponent } from './master-layout/components/master/master.compon
 import { LandingPageComponent } from './master-layout/components/landing-page/landing-page.component';
 import { DetailsComponent } from './master-layout/components/details/details.component';
 import { ExploreComponent } from './master-layout/components/explore/explore.component';
+import { PaymentComponent } from './master-layout/components/payment/payment.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'master', pathMatch: 'full' },
@@ -19,6 +20,7 @@ export const routes: Routes = [
       {path:'home',component:LandingPageComponent,title:'Staycation-Home'},
       {path:'details/:id',component:DetailsComponent,title:'Room Details'},
       {path:'explore',component:ExploreComponent,title:'Staycation-Explore'},
+      {path:'payment',component:PaymentComponent,title:'Staycation-Payment'},
     ]
   },
   {
