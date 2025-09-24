@@ -1,1 +1,81 @@
-<p>payment works!</p>
+
+<mat-stepper #stepper [linear]="true">
+
+  <mat-step [stepControl]="checkoutForm" >
+     <ng-template matStepLabel>
+      {{'payment.step1'|translate}}
+    </ng-template>
+    <div class="text-center my-10">
+        <h2 style="color: rgba(21, 44, 91, 1);font-size: 25px;"> {{'payment.title'|translate}}</h2>
+        <p style="color: rgba(176, 176, 176, 1);">{{'payment.subtitle'|translate}}</p>
+    </div>
+    <div class="grid grid-cols-12 items-center justify-center">
+        <div class="col-span-5">
+            <h2><span style="color: rgba(21, 44, 91, 1);">{{'payment.room'|translate}}</span> {{bookingDetails?.room?.roomNumber}}</h2>
+            <p>{{'payment.transfer'|translate}}:</p>
+            <p>{{'payment.tax'|translate}}:</p>
+            <p>{{'payment.subtotal'|translate}}: <span style="color: rgba(176, 176, 176, 1);">{{bookingDetails?.totalPrice |currency}}</span></p>
+            <p>{{'payment.total'|translate}}: <span style="color: rgba(176, 176, 176, 1);">{{getTotal(bookingDetails?.totalPrice) | currency}}</span></p>
+        </div>
+        <div class="col-span-2">
+            <div class="flex items-center justify-center">
+                <mat-divider vertical></mat-divider>
+            </div>
+        </div>
+        <div class="col-span-5">
+            <div [formGroup]="checkoutForm">
+            <mat-form-field class="example-full-width" appearance="outline">
+                <input matInput placeholder="{{'payment.name'|translate}}" formControlName="name" />
+                 @if (checkoutForm.get('name')?.hasError('required') && checkoutForm.get('name')?.touched) {
+              <mat-error>{{'payment.nameRequired'|translate}}</mat-error>
+            }
+            </mat-form-field>
+            <mat-form-field class="example-full-width" appearance="outline">
+                <input matInput placeholder="{{'payment.email'|translate}}" type="email" formControlName="email" />
+                 @if (checkoutForm.get('email')?.hasError('required') && checkoutForm.get('email')?.touched) {
+              <mat-error>{{'payment.emailRequired'|translate}}</mat-error>
+            }
+            @if (checkoutForm.get('email')?.hasError('email') && checkoutForm.get('email')?.touched) {
+              <mat-error>{{'payment.emailInvalid'|translate}}</mat-error>
+            }
+            </mat-form-field>
+            <div class="mt-2">
+                      <ngx-stripe-elements
+                [stripe]="stripe"
+                [elementsOptions]="elementsOptions"
+
+            >
+                <ngx-stripe-card [options]="cardOptions" />
+            </ngx-stripe-elements>
+            </div>
+
+            </div>
+
+        </div>
+        <div class="col-span-12 mt-10">
+        <div class="text-center">
+        <button class="paybutton" (click)="createToken()">{{'payment.payButton'|translate}}</button>
+        </div>
+        <div class="text-center">
+        <button class="backbutton" routerLink="/master/home">{{'payment.cancelButton'|translate}}</button>
+        </div>
+        </div>
+    </div>
+
+  </mat-step>
+
+  <mat-step>
+    <ng-template matStepLabel>{{'payment.step2'|translate}}</ng-template>
+       <div class="text-center my-10 content">
+        <h2 style="color: rgba(21, 44, 91, 1);font-size: 25px;">{{'payment.doneTitle'|translate}}</h2>
+        <div class="img-wrapper">
+            <img src="assets/Images/5f55d09f18aadee9cb62e55adf11ff1b4186dc1d.png" class="w-100" alt="">
+        </div>
+        <p style="color: rgba(176, 176, 176, 1);">{{'payment.doneMessage1'|translate}}</p>
+        <p style="color: rgba(176, 176, 176, 1);">{{'payment.doneMessage2'|translate}}</p>
+        <div class="mt-10">
+                    <button class="paybutton" routerLink="/master/home">{{'payment.backToHome'|translate}}</button>
+        </div>
+    </div>
+  </mat-step>
+</mat-stepper>

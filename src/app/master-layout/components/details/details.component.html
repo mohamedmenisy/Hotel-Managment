@@ -83,14 +83,16 @@
         <!-- Date Section -->
         <div class="date-section">
           <h4 class="section-title">{{'roomDetails.pickDate'|translate}}</h4>
-            <mat-form-field class="small-w">
+           <form [formGroup]="CreateBookingForm">
+             <mat-form-field class="small-w">
                     <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-date-range-input  [rangePicker]="picker">
-                        <input matStartDate formControlName="start"  placeholder="{{'global.startDate' | translate}}">
-                        <input matEndDate formControlName="end"  placeholder="{{'global.endDate' | translate}}">
+                        <input matStartDate formControlName="startDate"  placeholder="{{'global.startDate' | translate}}">
+                        <input matEndDate formControlName="endDate"  placeholder="{{'global.endDate' | translate}}">
                     </mat-date-range-input>
                     <mat-date-range-picker #picker></mat-date-range-picker>
                     </mat-form-field>
+           </form>
         </div>
       </div>
 
@@ -101,7 +103,7 @@
           <strong>{{ roomDetails.capacity }} {{'roomDetails.Person'|translate}}</strong>
         </p>
 
-        <button class="book-button">{{'roomDetails.ContinueBook'|translate}}</button>
+        <button class="book-button" (click)="createBooking(roomDetails)">{{'roomDetails.ContinueBook'|translate}}</button>
       </div>
     </div>
   </div>

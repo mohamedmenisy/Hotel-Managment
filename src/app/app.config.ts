@@ -7,10 +7,12 @@ import { globalInterceptor } from './Core/interceptors/global.interceptor';
 import { loaderInterceptor } from './Core/interceptors/loader.interceptor';
 import {provideTranslateService} from "@ngx-translate/core";
 import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
+import { provideNgxStripe } from 'ngx-stripe';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
+    provideNgxStripe(),
     provideAnimationsAsync(),
     provideHttpClient(
       withInterceptors([globalInterceptor,loaderInterceptor])

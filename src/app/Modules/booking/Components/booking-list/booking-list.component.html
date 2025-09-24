@@ -24,7 +24,7 @@
     <!-- Name Column -->
     <ng-container matColumnDef="Room.N">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Room.N</th>
-      <td mat-cell *matCellDef="let row">{{ row.room.roomNumber}}</td>
+      <td mat-cell *matCellDef="let row">{{ row.room?.roomNumber}}</td>
     </ng-container>
 
     <!-- Created By Column -->

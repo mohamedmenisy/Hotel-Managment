@@ -82,5 +82,29 @@
     "WriteReviewPlaceholder": "Write your review here...",
     "Stars": "Stars",
     "Person": "Person"
+  },
+   "payment": {
+    "step1": "Complete payment details",
+    "step2": "Done",
+    "title": "Payment",
+    "subtitle": "Kindly follow the instructions below",
+    "room": "Room #",
+    "transfer": "Transfer Payment",
+    "tax": "Tax: 10%",
+    "subtotal": "Sub total",
+    "total": "Total",
+    "name": "name",
+    "email": "Email",
+    "cardNumber": "Card number",
+    "cvc": "CVC",
+    "payButton": "Pay",
+    "cancelButton": "Cancel",
+    "doneTitle": "Yay! Completed",
+    "doneMessage1": "We will inform you via email later",
+    "doneMessage2": "once the transaction has been accepted",
+    "backToHome": "Back To Home",
+    "nameRequired": "User name is required",
+      "emailRequired": "Email is required",
+      "emailInvalid": "Please enter a valid email"
   }
 }

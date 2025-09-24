@@ -24,7 +24,7 @@ CommonModule
 })
 export class ExploreComponent {
   totalCount = 0;
-  pageSize: number = 12;
+  pageSize: number = 10;
   pageNumber: number = 1;
   rooms!: any[];
   currentIndexes: Record<string, number> = {};

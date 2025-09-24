@@ -31,6 +31,6 @@ export class ChartService {
   constructor(private _http:HttpClient) { }
 
   getChartData():Observable<ApiResponse>{
-    return this._http.get<ApiResponse>('dashboard');
+    return this._http.get<ApiResponse>('admin/dashboard');
   }
 }

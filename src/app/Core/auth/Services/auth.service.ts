@@ -41,6 +41,7 @@ export class AuthService {
     localStorage.removeItem("userName");
     this.Router.navigate(['/auth/login']);
   }
+
  getCurrentUser(id:any): Observable<any>{
   return this._http.get(`admin/users/${id}`);
   }

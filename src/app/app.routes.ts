@@ -20,7 +20,7 @@ export const routes: Routes = [
       {path:'home',component:LandingPageComponent,title:'Staycation-Home'},
       {path:'details/:id',component:DetailsComponent,title:'Room Details'},
       {path:'explore',component:ExploreComponent,title:'Staycation-Explore'},
-      {path:'payment',component:PaymentComponent,title:'Staycation-Payment'},
+      {path:'payment/:id',component:PaymentComponent,title:'Staycation-Payment'},
     ]
   },
   {
